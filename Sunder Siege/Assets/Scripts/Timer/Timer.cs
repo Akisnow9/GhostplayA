@@ -17,6 +17,7 @@ public class Timer : MonoBehaviour
     // Eg: Once 'm_timeLimit' reaches 'm_eventTriggerTime' there will be 'm_numberOfEvents' 
     // over the next 'm_eventTriggerTime'
     //*************************************************************************************
+    public List<Player> m_playerList;
 
     [SerializeField] private float m_timeLimit = 60; // The timer will count down from this point. Set from Unity Editor.
     [SerializeField] private float m_timeBeforeFail = 15; // Once a problem has activated how long before the player loses a life.
@@ -28,21 +29,23 @@ public class Timer : MonoBehaviour
     private float m_timeScale = 1; // This can be used to modify the rate of seconds passing also movement speed and animation. Useful if people want to include a slowdown effect but needs to be included in everything that is effected. Eg movement/ animation will need to be multiplied by this all the time.
 
 
-    private int m_numOfInactiveProblems; // The amount of problems in the list that are inactive. Easier then checking every inactive amounts in list.
+    [SerializeField] private int m_numOfInactiveProblems; // The amount of problems in the list that are inactive. Easier then checking every inactive amounts in list.
 
    
     public List<Events> m_pendingEventList; // The event list. Events are added from the editor.
-
     public List<Problem> m_problemList; // List of problems. Problems added to this list will be randomly selected.
 
 
-    public List<Player> m_playerList;
 
     private static Timer instance = null;
 
     private void Awake()
     {
         instance = this;
+
+		// GameObject newObject = Instantiate();
+		// GameObject.AddComponent<Events>();
+		
     }
 
     // Start is called before the first frame update
@@ -89,7 +92,7 @@ public class Timer : MonoBehaviour
             {
                 if (m_pendingEventList[i] == null) // A safety check to make sure the list isn't full of nothing. Will get stuck in an endless loop otherwise.
                 {
-                    m_pendingEventList.Remove(m_pendingEventList[i]); // Changes the event time.
+                    m_pendingEventList.Remove(m_pendingEventList[i]); // Remove blank events.
                     --amountOfEvents;
                     --i;
                 }
@@ -119,30 +122,34 @@ public class Timer : MonoBehaviour
             }
         }
     }
-    
 
-    bool CheckProblems()
-    {
+
+	bool CheckProblems()
+	{
         // The function will handle all the swapping of states. Will return true if something on the active list 
         // has expired. Need to deduct lives here only. Version that uses a List of problems.
         // It will also check to see if a problem has completed its 'pending' animation
 
-        for(int i = 0; i < m_problemList.Count; i++ )
+        for (int i = 0; i < m_problemList.Count; i++)
         //foreach (Problem problem in m_problemList) -- Due to the way i'm modifying the 'm_problemlist' I can't use for each loops. It seems to get information about the loop at some other point rather then say the count in the above for loop.
         {
-            if (m_problemList[i].CheckActive(m_timeLimit)) // Checks if a problem has expired. -- Can probably be used more efficently now that list sorts active
+            if (m_problemList[i].CheckActive(m_timeLimit) && !m_problemList[i].GetPending()) // Checks if a problem has expired. -- Can probably be used more efficently now that list sorts active
             {
+                m_problemList[i].Deactivate();
                 m_numberofLives--; // Subtract a life.
                 Problem addToFront = m_problemList[i]; // Copies itself.
-                m_problemList.Insert(0, addToFront); // Puts problem to the front of the list.    --    This will be skipped if the problem has a permanent broken state.
                 m_problemList.Remove(m_problemList[i]); // Removes itself.
+                m_problemList.Insert(0, addToFront); // Puts problem to the front of the list.    --    This will be skipped if the problem has a permanent broken state.
                 m_numOfInactiveProblems++;
             }
-            //else if (m_problemList[i].CheckPending())                         // Once a pending animation 
-            //    m_problemList[i].Activate(m_timeLimit - m_timeBeforeFail);
+            else if (m_problemList[i].GetPending())                          // If active will now check pending status.
+                if (m_problemList[i].CheckPending())
+                {
+                    m_problemList[i].Activate(m_timeLimit - m_timeBeforeFail);
+                }
         }
-        return (m_numberofLives <= 0 || m_timeLimit <= 0.0f);
-    }
+		return (m_numberofLives <= 0 || m_timeLimit <= 0.0f);
+	}
 
 
 
@@ -159,13 +166,16 @@ public class Timer : MonoBehaviour
 
     void TriggerProblem(Events a_events)
     {
-        int position = Random.Range(0, m_numOfInactiveProblems);
-        // m_problemList[position].Pending();
-        m_problemList[position].Activate(m_timeLimit - m_timeBeforeFail);           // May need to be changed to pending -- The rest just makes sure it is not rolled again.
-        Problem addtoback = m_problemList[position];                                // Copies what is in the now activated location.
-        m_problemList.Remove(m_problemList[position]);                              // Removes the original problem from the list.
-        m_problemList.Insert(m_problemList.Count, addtoback);                       // Adds the copied data to the end of the list.
-        m_numOfInactiveProblems--;                                                  // Variable keeping track of inactive problems is adjusted.
+        if (m_numOfInactiveProblems > 0)
+        {
+            int position = Random.Range(0, m_numOfInactiveProblems);
+            m_numOfInactiveProblems--;                                                  // Variable keeping track of inactive problems is adjusted.
+            m_problemList[position].Pending();
+            // m_problemList[position].Activate(m_timeLimit - m_timeBeforeFail);           // May need to be changed to pending -- The rest just makes sure it is not rolled again.
+            Problem addtoback = m_problemList[position];                                // Copies what is in the now activated location.
+            m_problemList.Remove(m_problemList[position]);                              // Removes the original problem from the list.
+            m_problemList.Insert(m_problemList.Count, addtoback);
+        }                                                                               // Adds the copied data to the end of the list.
     }
 
 
@@ -177,6 +187,13 @@ public class Timer : MonoBehaviour
     {
         m_timeBeforeFail = a_timeBeforeFail;
     }
+
+    public static void SolvedProblem()
+    {
+        // Once a player fixes a problem the number of inactive problems increases.
+        instance.m_numOfInactiveProblems++;
+    }
+
 }
 
 

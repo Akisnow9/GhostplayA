@@ -18,152 +18,169 @@ using XboxCtrlrInput;
 public class Item : MonoBehaviour
 {
 	/* Variables that store Player base data */
-	[SerializeField] private Animator m_swingAnim;              // Swinging arm animation -- Needs to be changed to an enum of the animation that is stored within the player. When input is
-    public List<Player> m_playerList;                           // Get what player is doing the actions -- FOR SOME REASON YOU CAN NO LONGER ADD TO THIS LIST!? I've changed all the m_playerLists to insert at count... works fine... for now.
-                                      
+	public List<Player> m_playerList;                           // Get what player is doing the actions -- FOR SOME REASON YOU CAN NO LONGER ADD TO THIS LIST!? I've changed all the m_playerLists to insert at count... works fine... for now.
+	//SerializeField] private Animator m_swingAnim;              // Swinging arm animation -- Needs to be changed to an enum of the animation that is stored within the player. When input is
 
-    /* Variables that store Item base data */
-    [SerializeField] private float m_throwForce = 1;            // How much force will be applied to the item when thrown
+
+	/* Variables that store Item base data */
+	[SerializeField] private float m_throwForce = 1;            // How much force will be applied to the item when thrown
 	[SerializeField] private List<BoxCollider> m_model;         // The models of the item to turn off so player can walk over unhindered -- Can probably turn this into a tag detection that makes the item ignore players for detection.
 	private Rigidbody m_rigidbody;                              // The rigid body on the item so it reacts to gravity. Needs to be made kinematic to stop the item from falling through the world -- If above can be done this may not be needed.
 	[SerializeField] private Vector3 m_raycastOffset;
 	private Vector3 m_hitLocation;
-	private bool m_isThrown;
+	private bool m_isThrown = false;
 	private Vector3 m_lastPosition;
 	private Vector3 m_currentPosition;
 
 
 	private Vector3 m_lastPos;                                  // Store the items previous position    
-    private Player m_playerHolding = null;                      // The player holding the item.
+	private Player m_playerHolding = null;                      // The player holding the item.
 
-    [SerializeField] private Vector3 m_itemOffset;              // Where the item is held relative to the player once picked up.
-	//[SerializeField] private Vector3 lowerCastOffset;
+	[SerializeField] private Vector3 m_itemOffset;              // Where the item is held relative to the player once picked up.
+																//[SerializeField] private Vector3 lowerCastOffset;
 
-    /* Variables that store if the item is reuseable */
-    [SerializeField] private bool m_refillable = false;         // Tells if the player needs to go to a place to refill.
-    [SerializeField] private int m_maxCharges;			        // How many time the item can be used before it needs to refilled.
-    [SerializeField] private bool m_losesChargesOnThrow = false;// Does the item lose charges if it is thrown.
+	/* Variables that store if the item is reuseable */
+	[SerializeField] private bool m_refillable = false;         // Tells if the player needs to go to a place to refill.
+	[SerializeField] private int m_maxCharges;                  // How many time the item can be used before it needs to refilled.
+	[SerializeField] private bool m_losesChargesOnThrow = false;// Does the item lose charges if it is thrown.
+    [SerializeField] private bool m_oneTimeUse = false;         // Will be destroyed upon use.
     private int m_charges;                                      // How many time the item can be used before it needs to refilled.
-    private bool m_wasRefilled = false;
+	private bool m_wasRefilled = false;
+    private Source m_spawner;                                   // Upon spawn will assaign the item to a spawner so it knows who needs to destroy it.
 
-    /* Misc varaibles */
-    public List<E_Quality> m_fixableQuality; // Holds what the item can fix and if it can fix more then 1 type of problem eg; it is both a hammer and a bucket.
+	/* Misc varaibles */
+	public List<E_Quality> m_fixableQuality; // Holds what the item can fix and if it can fix more then 1 type of problem eg; it is both a hammer and a bucket.
 
 
 
 
-    // @brief Runs at the start of the games launch.
-    //		  sets to details of the rigidbody varaible.
-    private void Start()
-    {
-        m_rigidbody = GetComponent<Rigidbody>();
-        m_charges = m_maxCharges;
-    }
+	// @brief Runs at the start of the games launch.
+	//		  sets to details of the rigidbody varaible.
+	private void Start()
+	{
+		m_rigidbody = GetComponent<Rigidbody>();
+		m_charges = m_maxCharges;
+	}
 
-    // @brief Update is called once per frame.
-    //		  Makes sure there is a player in range before checking any actions
-    void Update()
-    {
+	// @brief Update is called once per frame.
+	//		  Makes sure there is a player in range before checking any actions
+	void Update()
+	{
+
 		if (m_isThrown)
 		{
-			MoveTowards();
+			if (m_playerHolding == false)
+				MoveTowards();
 		}
 
 		if (m_playerList != null)
 		{
-            if (m_playerList.Count > 0)
-            {
-                Actions();
-            }
+			if (m_playerList.Count > 0)
+			{
+				Actions();
+			}
+		}
+		m_wasRefilled = false;
+	}
+
+	// @brief Checks when another collider has entered the trigger area
+	//		  Depending on the name of the collider, we can tell what
+	//		  player is within range of the item
+	private void OnTriggerEnter(Collider other)
+	{
+		// Switching depending on the colliders name
+		int count = m_playerList.Count;
+		switch (other.name)
+		{
+			// Each case is the players triggerbox string
+			case "Player1":
+				m_playerList.Insert(count, Timer.PlayerGet(0)); // Add the correct player to the playerList
+				break;
+			case "Player2":
+				m_playerList.Insert(count, Timer.PlayerGet(1));
+				break;
+			case "Player3":
+				m_playerList.Insert(count, Timer.PlayerGet(2));
+				break;
+			case "Player4":
+				m_playerList.Insert(count, Timer.PlayerGet(3));
+				break;
+			default:
+				break;
 		}
 
-        m_wasRefilled = false;
-    }
+		if (m_playerList != null)
+			if (m_playerList.Count > 0)
+			{
+				// Make kinematic and turn off box colliders on shaft and head. With whole models this will be easier.
+				// Item will not fall through world or cause player to walk on it.
+				m_rigidbody.isKinematic = true;
+				foreach (BoxCollider collider in m_model)
+				{
+					collider.enabled = false;
+				}
+			}
+		if (m_isThrown == false)
+			foreach (Player player in m_playerList)
+				if (player.GetItem() == null)
+				{
+					m_rigidbody.isKinematic = true;
+					foreach (BoxCollider collider in m_model)
+					{
+						collider.enabled = false;
+					}
+				}
+	}
 
-    // @brief Checks when another collider has entered the trigger area
-    //		  Depending on the name of the collider, we can tell what
-    //		  player is within range of the item
-    private void OnTriggerEnter(Collider other)
-    {
-        // Switching depending on the colliders name
-        int count = m_playerList.Count;
-        switch (other.name)
-        {
-            // Each case is the players triggerbox string
-            case "Player1":
-                m_playerList.Insert(count, Timer.PlayerGet(0)); // Add the correct player to the playerList
-                break;
-            case "Player2":
-                m_playerList.Insert(count, Timer.PlayerGet(1));
-                break;
-            case "Player3":
-                m_playerList.Insert(count, Timer.PlayerGet(2));
-                break;
-            case "Player4":
-                m_playerList.Insert(count, Timer.PlayerGet(3));
-                break;
-            default:
-                break;
-        }
-        if (m_playerList != null)
-            if (m_playerList.Count > 0)
-            {
-                // Make kinematic and turn off box colliders on shaft and head. With whole models this will be easier.
-                // Item will not fall through world or cause player to walk on it.
-                m_rigidbody.isKinematic = true;
-                foreach (BoxCollider collider in m_model)
-                {
-                    collider.enabled = false;
-                }
-            }
-    }
+	// @brief Checks when another collider has exited the trigger area
+	//		  Depending on the name of the collider, we can tell what
+	//		  player is out of range of the item
+	private void OnTriggerExit(Collider other)
+	{
+		// Switching depending on the colliders name
+		switch (other.name)
+		{
+			// Each case is the players triggerbox string
+			case "Player1":
+				m_playerList.Remove(Timer.PlayerGet(0)); // remove the correct player from the playerList
+				break;
+			case "Player2":
+				m_playerList.Remove(Timer.PlayerGet(1));
+				break;
+			case "Player3":
+				m_playerList.Remove(Timer.PlayerGet(2));
+				break;
+			case "Player4":
+				m_playerList.Remove(Timer.PlayerGet(3));
+				break;
+			default:
+				break;
+		}
+		if (m_playerList.Count == 0)
+		{
+			// Item will not fall through world or cause player to walk on it.
+			m_rigidbody.isKinematic = false; // No lnger kinematic and turn on box colliders of models with multiple peices. Eg: shaft and head of hammer. 
+			foreach (BoxCollider collider in m_model)
+			{
+				collider.enabled = true;
+			}
+		}
+	}
 
-    // @brief Checks when another collider has exited the trigger area
-    //		  Depending on the name of the collider, we can tell what
-    //		  player is out of range of the item
-    private void OnTriggerExit(Collider other)
-    {
-        // Switching depending on the colliders name
-        switch (other.name)
-        {
-            // Each case is the players triggerbox string
-            case "Player1":
-                m_playerList.Remove(Timer.PlayerGet(0)); // remove the correct player from the playerList
-                break;
-            case "Player2":
-                m_playerList.Remove(Timer.PlayerGet(1));
-                break;
-            case "Player3":
-                m_playerList.Remove(Timer.PlayerGet(2));
-                break;
-            case "Player4":
-                m_playerList.Remove(Timer.PlayerGet(3));
-                break;
-            default:
-                break;
-        }
-        if (m_playerList.Count == 0)
-        {
-            // Item will not fall through world or cause player to walk on it.
-            m_rigidbody.isKinematic = false; // No lnger kinematic and turn on box colliders of models with multiple peices. Eg: shaft and head of hammer. 
-            foreach (BoxCollider collider in m_model)
-            {
-                collider.enabled = true;
-            }
-        }
-    }
+	// @brief Handles the different inputs the player can press.
+	//		  Depending on the input, the item can be picked up,
+	//		  dropped, thrown, and swung.
+	public void Actions()
+	{
+		XboxController controller;
+		if (m_playerHolding != null && m_isThrown == true) // A check to make sure player can't hold a thrown item.
+			m_isThrown = false;
 
-    // @brief Handles the different inputs the player can press.
-    //		  Depending on the input, the item can be picked up,
-    //		  dropped, thrown, and swung.
-    public void Actions()
-    {
-        XboxController controller;
-        if (m_playerHolding == null)
-        {
-            for (int i = 0; i < m_playerList.Count; i++)
-            //foreach (Player player in m_playerList)
-            {
+		if (m_playerHolding == null)
+		{
+			for (int i = 0; i < m_playerList.Count; i++)
+			//foreach (Player player in m_playerList)
+			{
 				if (!m_isThrown)
 				{
 					controller = m_playerList[i].controller;
@@ -172,58 +189,61 @@ public class Item : MonoBehaviour
 					// otherwise go into picking up logic.
 					if (XCI.GetButtonDown(XboxButton.A, controller) && m_playerList[i].GetItem() == null)
 					{
-						m_playerHolding = m_playerList[i]; // Just some quick math to turn the controller input to the corresponding player on the list.
-						Pickup();
+						Pickup(m_playerList[i]); // Player will pick it up.
 					}
 				}
 				else
 				{
-					m_playerHolding = m_playerList[i];
-					Pickup();
+					if (m_playerList[i].GetItem() == null)
+					{
+						//m_playerHolding = m_playerList[i];    // Moved into pickupfunction           
+						Pickup(m_playerList[i]);
+					}
 				}
 			}
-        }
-		//else if (m_isThrown)
-		//{
-		//	MoveTowards();
-		//}
-		else
-        {
-            controller = m_playerHolding.controller;
-            if (XCI.GetButtonDown(XboxButton.A, controller))
-            {
-                SwingTrue();
-            }
-            // If the item is in the players hand then handle dropping the item when 'B' is pressed
-            if (XCI.GetButtonDown(XboxButton.B, controller))
-            //if(Input.GetKeyDown(KeyCode.A)) // Just so you can pick up with keyboard
-            {
-                Drop();
-                //Needs to get
-            }
-            // If the item is in the players hand then handle throwing the item when 'Y' is pressed
-            if (XCI.GetButtonDown(XboxButton.Y, controller))
-            {
-                Throw();
-            }
-        }
-    }
+		}
+        //else if (m_isThrown)
+        //{
+        //    MoveTowards();
+        //}
+        else 
+		{
+			controller = m_playerHolding.controller;
+			//if (XCI.GetButtonDown(XboxButton.A, controller))
+			//{
+			//	SwingTrue();
+			//}
+			// If the item is in the players hand then handle dropping the item when 'B' is pressed
+			if (XCI.GetButtonDown(XboxButton.B, controller))
+			//if(Input.GetKeyDown(KeyCode.A)) // Just so you can pick up with keyboard
+			{
+				Drop();
+				//Needs to get
+			}
+			// If the item is in the players hand then handle throwing the item when 'Y' is pressed
+			if (XCI.GetButtonDown(XboxButton.Y, controller))
+			{
+				Throw();
+			}
+		}
+	}
 
-    void Pickup()
-    {
+	public void Pickup(Player a_player)
+	{
         // Refer to player class for Pickup
+        m_playerHolding = a_player;
         m_playerHolding.PickUpItem(this);
-    }
+	}
 
-    void Drop()
-    {
-        // Refer to player class for drop
-        m_playerHolding.DropItem();
-        m_playerHolding = null;
-    }
+	void Drop()
+	{
+		// Refer to player class for drop
+		m_playerHolding.DropItem();
+		m_playerHolding = null;
+	}
 
-    void Throw()
-    {
+	void Throw()
+	{
 		// Work out where the throw will go. (Raycast). Will need to make a tag that players will able to throw over. The ray cast will simply ignore them.
 		RaycastHit vision = new RaycastHit();
 
@@ -258,10 +278,10 @@ public class Item : MonoBehaviour
 		}
 
 		if (m_losesChargesOnThrow)
-        {
-            m_charges = 0;
-        }
-    }
+		{
+			m_charges = 0;
+		}
+	}
 
 	void MoveTowards()
 	{
@@ -269,72 +289,79 @@ public class Item : MonoBehaviour
 
 		transform.position = Vector3.MoveTowards(transform.position, m_hitLocation, m_throwForce);
 		m_currentPosition = transform.position;
+		float tiltAroundZ = this.transform.position.y * -500f;
+		Quaternion target = Quaternion.Euler(0, 0, tiltAroundZ);
+		transform.rotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * 50.0f);
 
 		if (m_lastPosition == m_currentPosition)
 		{
 			m_isThrown = false;
+			m_rigidbody.isKinematic = false; // No lnger kinematic and turn on box colliders of models with multiple peices. Eg: shaft and head of hammer. 
+			m_rigidbody.useGravity = true;
+			foreach (BoxCollider collider in m_model)
+			{
+				collider.enabled = true;
+			}
 		}
 
-		float tiltAroundZ = this.transform.position.y * -500f;
-		Quaternion target = Quaternion.Euler(0, 0, tiltAroundZ);
-		transform.rotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * 50.0f);
 	}
 
-	public void SwingTrue()
-    {
-        // Not quite sure why this exists or what it does.
-        if (m_charges <= 0)
-        {
-            return;
-        }
-        else
-        {
-            m_swingAnim.SetBool("isSwinging", true);
-
-            if (m_fixableQuality[0] == E_Quality.Bucket && !m_wasRefilled)
-            {
-                if (m_charges <= 0)
-                {
-                    m_charges = 0;
-                }
-                else
-                {
-                    m_charges--;
-                }
-            }
-        }
-    }
 
 
-    public Vector3 GetOffset()
-    {
-        // The postion offset. This is used to place the item at a certain point on the player without parenting it to a place. Once modesl are in game and not scaled parenting will be a better choice
-        return m_itemOffset;
-    }
+
+	public Vector3 GetOffset()
+	{
+		// The postion offset. This is used to place the item at a certain point on the player without parenting it to a place. Once modesl are in game and not scaled parenting will be a better choice
+		return m_itemOffset;
+	}
 
 
-    public void SwingFalse()
-    {
-        // Not quite sure why this exists
-        m_swingAnim.SetBool("isSwinging", false);
-    }
 
-    public void RefillCharges()
-    {
-        // I refills the items charges. Might not need the bool. Should check above logic for when a swing happens.
-        m_wasRefilled = true;
-        m_charges = m_maxCharges;
-    }
+	public void RefillCharges()
+	{
+		// I refills the items charges. Might not need the bool. Should check above logic for when a swing happens.
+		m_wasRefilled = true;
+		m_charges = m_maxCharges;
+	}
 
-    public int GetCharges()
-    {
-        // Returns items current charges. Should really only be called by problems to confirm if the 
-        return m_charges;
-    }
+	public int GetCharges()
+	{
+		// Returns items current charges. Should really only be called by problems to confirm if the 
+		return m_charges;
+	}
 
-    public bool IsRefillable()
-    {
-        // 
+	public bool IsRefillable()
+	{
 		return m_refillable;
 	}
+	//Will return true if a charge has been used.
+	public void UseCharge()
+	{
+		// Will deduct charges from item. Could probably be change to a bool keeping logic in one place
+		if (m_charges > 0)
+		{
+			m_charges--;
+		}
+	}
+    public bool GetHeldItem() 
+    {
+        // Returnsfalse if item is not held.
+        return (m_playerHolding == null);   
+    }
+    public bool IsOneTimeUse()
+    {
+        // Tells you if 1 time use
+        return m_oneTimeUse;
+    }
+
+    public void SetSpawn(Source a_spawner)
+    {
+        m_spawner = a_spawner;
+    }
+    public Source GetSpawner()
+    {
+        return m_spawner;
+    }
 }
+
+
