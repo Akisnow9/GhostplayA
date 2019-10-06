@@ -1,8 +1,8 @@
 ﻿/***************************************************
  * Written By: Anton Huber
- * Purpose: Contains the problems and their qualitys
- * Data Created:14/09
- * Last Modified: 14/09
+ * Purpose: Contains the problems and the pending loop - Controls spawning of ui.
+ * Data Created: 14/09
+ * Last Modified: 06/10
  **************************************************/
  
 using System.Collections;
@@ -35,15 +35,14 @@ public class Problem : MonoBehaviour
     [SerializeField] private GameObject m_activeState; // Place the problems active state model here.
 
     private MeshRenderer m_inactiveMeshRenderer; // Gets the MeshRenderer in startup to turn on/off inactive model.
-    private MeshRenderer m_activeMeshRenderer; // Gets MeshRendere in startup to turn on/off active model.
-
+    private MeshRenderer m_activeMeshRenderer; // Gets MeshRendere in startup to turn on/off active model
 
     [SerializeField] private List<E_Quality> m_fixableProblems; // Will be able to set the list size and the problems from the unity editor.
 	[SerializeField] private E_Quality m_currentProblem; // The problem chosen from the above. Will call particle effects and animation. eg fixable problem 0 on list callse particle effect 0(if it exitss) completes then animation 0(if it exists) then acitvates.
     private int m_currentProblemIterator; // A number that keeps track of what breakparticleeffect/breakanimation/whilebrokenparticleeffect needs to trigger.
 
 
-    private bool m_isPending = false; 
+    private bool m_isPending = false; // If problem is in pending state will not countdown. If active and pending will continue cehcking pending status everyframe.
     private bool m_isActive = false; // Is the problem active or inactive. Can be used to trigger other events like ui or particle effects.
     private float m_timeBeforeFail; // Once this value is reached the problem will be expired and health will be lost.
 
@@ -59,13 +58,19 @@ public class Problem : MonoBehaviour
     [SerializeField] private float m_particleStartDistance = 3; // Where the particel will spawn
     [SerializeField] private float m_particleFallSpeed = 0.5f; // Controls the speed of the particle falling.
     [SerializeField] private List<Animation> m_breakAnimation; // What happens when it breaks? 1 to 1 ratio with paritcle and fixable problems.
+    [SerializeField] private List<ProblemPhsyicsObject> m_breakPhysics; // The physics object -- Will create a sepearate script for handling of physics.
     [SerializeField] private List<ParticleSystem> m_whileBrokenParticle; // Will just loop while the problem is active. 1 to 1.
 
 
+
+    // [SerializeField] private ProblemUi m_ui; Might need to be canvas.
+
     // private ParticleSystem m_currentParticle; // Has to be turned off in deactivate.
-    // Start is called before the first frame update
+
+
     void Start()
     {
+        // Might need to turn these into game objects.
         m_inactiveMeshRenderer = m_inactiveState.GetComponent<MeshRenderer>(); // Gets the meshrenderer to turn off 
         m_inactiveMeshRenderer.enabled = true; // Displays correct state.
         m_activeMeshRenderer = m_activeState.GetComponent<MeshRenderer>(); // Gets the meshrenderer to turn off 
@@ -105,7 +110,7 @@ public class Problem : MonoBehaviour
 
 public void Pending()
 	{
-        m_isPending = true;
+        m_isPending = true; // Problem is now pending. (no countdown but checks animation and particle effects.
 		m_isActive = true; // Activate the object
 		m_currentProblemIterator = Random.Range(0, m_fixableProblems.Count); // Need this int so that we can trigger appropriate animation or paricle effect. // is it an off by 1 error?
 		m_currentProblem = m_fixableProblems[m_currentProblemIterator]; // Sets the quality enum.
@@ -127,7 +132,15 @@ public void Pending()
 
     public void Activate(float a_timerBeforeFail)
     {
+        // This is mostly the above pending loop except it now activates the problem playing the animation and particle effects.
+        // These animations and particle effects stop once deactivate happens.
         m_isPending = false;
+        if(m_breakPhysics.Count != 0)
+            if(m_breakPhysics[m_currentProblemIterator] != null)
+            {
+                //m_breakPhysics[m_currentProblemIterator].enabled = true;
+                m_breakPhysics[m_currentProblemIterator].ApplyForce(); // Applies the force.
+            }
 		if (m_whileBrokenParticle.Count != 0)
 			if (m_whileBrokenParticle[m_currentProblemIterator] != null)
 			{
@@ -136,6 +149,7 @@ public void Pending()
                 m_currentParticle[0].transform.position = this.transform.position;
                 m_currentParticle[0].Play();
 			}
+        // Will need to play a while broken animation loop here. This will then need to be played and looped until deactivate.
         m_buttonPresses = m_maxButtonPresses[m_currentProblemIterator];
         m_inactiveMeshRenderer.enabled = false; // Hides the problems inactive Mesh.
         m_activeMeshRenderer.enabled = true; // Displays the problems active Mesh.
@@ -154,6 +168,14 @@ public void Pending()
                 m_currentParticle.Remove(t);
                 Destroy(t.gameObject, 2);
             }
+        // Will need to stop the while broken animation loop here and play the fixed animation if there is one. 
+        // Will need to check if physics. If so then resettostartpostion called.
+        if(m_breakPhysics.Count != 0)
+            if (m_breakPhysics[m_currentProblemIterator] != null)
+        {
+            //m_breakPhysics[m_currentProblemIterator].enabled = true;
+            m_breakPhysics[m_currentProblemIterator].ResetToStartPosition(); // resets to start postion.
+        }
         m_isActive = false;
         m_inactiveMeshRenderer.enabled = true;// Displays the problem inactive Mesh.
         m_activeMeshRenderer.enabled = false; // Hides the problem active Mesh.
@@ -251,6 +273,7 @@ public void Pending()
                             }
                             else if (item.IsOneTimeUse())
                             {
+                                item.GetSpawner().m_spawnedItemList.Remove(item);
                                 player.DropItem();                                     // Detaches the item from the palyer and vice versa
                                 item.enabled = false;
                                 Destroy(item.gameObject);                              // Destroys the item.

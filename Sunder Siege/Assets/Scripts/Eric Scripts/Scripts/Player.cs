@@ -88,7 +88,7 @@ public class Player : MonoBehaviour
 		{
 			Vector3 move = new Vector3(axisX * movementSpeed * Time.deltaTime, 0, axisY * movementSpeed * Time.deltaTime);
 			transform.forward = move.normalized;
-			transform.position += move;
+            rb.AddForce(move, ForceMode.Impulse);
 		}
 
 

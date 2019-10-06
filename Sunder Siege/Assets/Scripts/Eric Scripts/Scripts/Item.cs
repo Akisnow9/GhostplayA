@@ -2,7 +2,7 @@
  * Written By: Eric Brkic, Anton Huber
  * Purpose: Controls the items input handling 
  * Data Created: 12th Sep, 2019
- * Last Modified: 21st Sep, 2019
+ * Last Modified: 24st Sep, 2019
  **************************************************/
 using System.Collections.Generic;
 using UnityEngine;
@@ -69,13 +69,12 @@ public class Item : MonoBehaviour
 
 		if (m_isThrown)
 		{
-			if (m_playerHolding == false)
-				MoveTowards();
+			BeepBoopRotateSoup();
 		}
 
 		if (m_playerList != null)
 		{
-			if (m_playerList.Count > 0)
+			if (m_playerList.Count > 0 || m_playerHolding != null)
 			{
 				Actions();
 			}
@@ -90,46 +89,80 @@ public class Item : MonoBehaviour
 	{
 		// Switching depending on the colliders name
 		int count = m_playerList.Count;
+		Player collidedPlayer = null;
 		switch (other.name)
 		{
 			// Each case is the players triggerbox string
 			case "Player1":
-				m_playerList.Insert(count, Timer.PlayerGet(0)); // Add the correct player to the playerList
+				collidedPlayer = Timer.PlayerGet(0);
+				m_playerList.Insert(count, collidedPlayer); // Add the correct player to the playerList
 				break;
 			case "Player2":
+				collidedPlayer = Timer.PlayerGet(1);
 				m_playerList.Insert(count, Timer.PlayerGet(1));
 				break;
 			case "Player3":
+				collidedPlayer = Timer.PlayerGet(2);
 				m_playerList.Insert(count, Timer.PlayerGet(2));
 				break;
 			case "Player4":
+				collidedPlayer = Timer.PlayerGet(3);
 				m_playerList.Insert(count, Timer.PlayerGet(3));
 				break;
 			default:
 				break;
 		}
 
-		if (m_playerList != null)
-			if (m_playerList.Count > 0)
+		// Unfreeze the Y when the item is in a collision area with another object
+		m_rigidbody.constraints = RigidbodyConstraints.None;
+
+
+		// Check if the item is currently in the air
+		if (collidedPlayer /*m_isThrown*/)
+		{
+			// Check that whats collided is a player
+			if (m_isThrown /*collidedPlayer*/)
 			{
-				// Make kinematic and turn off box colliders on shaft and head. With whole models this will be easier.
-				// Item will not fall through world or cause player to walk on it.
-				m_rigidbody.isKinematic = true;
-				foreach (BoxCollider collider in m_model)
+				// Check that the player isn't already holding an item
+				if (m_playerHolding)
 				{
-					collider.enabled = false;
+					// Pickup the item
+					Pickup(collidedPlayer);
 				}
 			}
-		if (m_isThrown == false)
-			foreach (Player player in m_playerList)
-				if (player.GetItem() == null)
+			else
+			{
+				foreach (BoxCollider model in m_model)
 				{
-					m_rigidbody.isKinematic = true;
-					foreach (BoxCollider collider in m_model)
-					{
-						collider.enabled = false;
-					}
+					Physics.IgnoreCollision(model.GetComponent<BoxCollider>(), collidedPlayer.GetComponent<BoxCollider>());
 				}
+			}
+		}
+
+
+		// Old system
+		//if (m_playerList != null)
+		//	if (m_playerList.Count > 0)
+		//	{
+		//		// Make kinematic and turn off box colliders on shaft and head. With whole models this will be easier.
+		//		// Item will not fall through world or cause player to walk on it.
+		//		m_rigidbody.isKinematic = true;
+		//		foreach (BoxCollider collider in m_model)
+		//		{
+		//			collider.enabled = false;
+		//		}
+		//	}
+
+		//if (m_isThrown == false)
+		//	foreach (Player player in m_playerList)
+		//		if (player.GetItem() == null)
+		//		{
+		//			m_rigidbody.isKinematic = true;
+		//			foreach (BoxCollider collider in m_model)
+		//			{
+		//				collider.enabled = false;
+		//			}
+		//		}
 	}
 
 	// @brief Checks when another collider has exited the trigger area
@@ -137,34 +170,52 @@ public class Item : MonoBehaviour
 	//		  player is out of range of the item
 	private void OnTriggerExit(Collider other)
 	{
+		Player collidedPlayer = null;
 		// Switching depending on the colliders name
 		switch (other.name)
 		{
 			// Each case is the players triggerbox string
 			case "Player1":
-				m_playerList.Remove(Timer.PlayerGet(0)); // remove the correct player from the playerList
+				collidedPlayer = Timer.PlayerGet(0);
+				m_playerList.Remove(collidedPlayer); // remove the correct player from the playerList
 				break;
 			case "Player2":
-				m_playerList.Remove(Timer.PlayerGet(1));
+				collidedPlayer = Timer.PlayerGet(1);
+				m_playerList.Remove(collidedPlayer);
 				break;
 			case "Player3":
-				m_playerList.Remove(Timer.PlayerGet(2));
+				collidedPlayer = Timer.PlayerGet(2);
+				m_playerList.Remove(collidedPlayer);
 				break;
 			case "Player4":
-				m_playerList.Remove(Timer.PlayerGet(3));
+				collidedPlayer = Timer.PlayerGet(3);
+				m_playerList.Remove(collidedPlayer);
 				break;
 			default:
 				break;
 		}
-		if (m_playerList.Count == 0)
+
+		if (collidedPlayer)
 		{
-			// Item will not fall through world or cause player to walk on it.
-			m_rigidbody.isKinematic = false; // No lnger kinematic and turn on box colliders of models with multiple peices. Eg: shaft and head of hammer. 
-			foreach (BoxCollider collider in m_model)
+			if (m_playerHolding != true)
 			{
-				collider.enabled = true;
+				foreach (BoxCollider model in m_model)
+				{
+					Physics.IgnoreCollision(model.GetComponent<BoxCollider>(), collidedPlayer.GetComponent<BoxCollider>(), false);
+				}
 			}
 		}
+
+		// Old system.
+		//if (m_playerList.Count == 0)
+		//{
+		//	// Item will not fall through world or cause player to walk on it.
+		//	m_rigidbody.isKinematic = false; // No lnger kinematic and turn on box colliders of models with multiple peices. Eg: shaft and head of hammer. 
+		//	foreach (BoxCollider collider in m_model)
+		//	{
+		//		collider.enabled = true;
+		//	}
+		//}
 	}
 
 	// @brief Handles the different inputs the player can press.
@@ -233,6 +284,11 @@ public class Item : MonoBehaviour
         // Refer to player class for Pickup
         m_playerHolding = a_player;
         m_playerHolding.PickUpItem(this);
+
+		foreach (BoxCollider model in m_model)
+		{
+			Physics.IgnoreCollision(model.GetComponent<BoxCollider>(), m_playerHolding.GetComponent<BoxCollider>(), false);
+		}
 	}
 
 	void Drop()
@@ -240,10 +296,15 @@ public class Item : MonoBehaviour
 		// Refer to player class for drop
 		m_playerHolding.DropItem();
 		m_playerHolding = null;
+		m_rigidbody.AddForce(transform.forward * 10, ForceMode.Impulse);
+
 	}
 
 	void Throw()
 	{
+		// Freeze the Y position to keep the item from dropping down
+		m_rigidbody.constraints = RigidbodyConstraints.FreezePositionY;
+
 		// Work out where the throw will go. (Raycast). Will need to make a tag that players will able to throw over. The ray cast will simply ignore them.
 		RaycastHit vision = new RaycastHit();
 
@@ -254,28 +315,25 @@ public class Item : MonoBehaviour
 		if (Physics.Raycast(m_playerHolding.transform.position + m_raycastOffset, m_playerHolding.transform.forward, out vision, 9999f))
 		{
 			Debug.Log(vision.collider.name);
-			m_hitLocation = vision.point;
+			m_rigidbody.AddForce(transform.forward * m_throwForce, ForceMode.Impulse);
 			m_isThrown = true;
-			m_playerList.Clear();
-			m_rigidbody.isKinematic = true;
-			m_rigidbody.useGravity = false;
-			//Vector3 forward = m_playerHolding.transform.forward * 5; // Offsets where the item spawns.?
 
-			MoveTowards();
-			//Vector3 move = new Vector3(m_hitLocation.x /** forward.x*/ * m_throwForce * Time.deltaTime, 0, m_hitLocation.z /** forward.z*/ * m_throwForce * Time.deltaTime);
-			//transform.forward = move.normalized;
-			//transform.position += move;
+			// Old system
+			//m_hitLocation = vision.point;
+			//m_isThrown = true;
+			//m_playerList.Clear();
+			//m_rigidbody.isKinematic = true;
+			//m_rigidbody.useGravity = false;
+
+			//MoveTowards();
 		}
 		m_playerHolding.ThrowItem(); // Might need to be adjusted at the player class since player class currently drops items at "feet"
 		m_playerHolding = null;
 
-		// Item will not fall through world or cause player to walk on it.
-		m_rigidbody.isKinematic = false; // No lnger kinematic and turn on box colliders of models with multiple peices. Eg: shaft and head of hammer. 
-
-		foreach (BoxCollider collider in m_model)
-		{
-			collider.enabled = true;
-		}
+		//foreach (BoxCollider collider in m_model)
+		//{
+		//	collider.enabled = true;
+		//}
 
 		if (m_losesChargesOnThrow)
 		{
@@ -283,39 +341,26 @@ public class Item : MonoBehaviour
 		}
 	}
 
-	void MoveTowards()
+	void BeepBoopRotateSoup()
 	{
-		m_lastPosition = transform.position;
-
-		transform.position = Vector3.MoveTowards(transform.position, m_hitLocation, m_throwForce);
-		m_currentPosition = transform.position;
-		float tiltAroundZ = this.transform.position.y * -500f;
-		Quaternion target = Quaternion.Euler(0, 0, tiltAroundZ);
-		transform.rotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * 50.0f);
-
 		if (m_lastPosition == m_currentPosition)
 		{
 			m_isThrown = false;
-			m_rigidbody.isKinematic = false; // No lnger kinematic and turn on box colliders of models with multiple peices. Eg: shaft and head of hammer. 
-			m_rigidbody.useGravity = true;
-			foreach (BoxCollider collider in m_model)
-			{
-				collider.enabled = true;
-			}
+		}
+		else
+		{
+			float tiltAroundZ = this.transform.position.y * 500f;
+			Quaternion target = Quaternion.Euler(tiltAroundZ, 0, tiltAroundZ);
+			transform.rotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * 50.0f);
 		}
 
 	}
-
-
-
 
 	public Vector3 GetOffset()
 	{
 		// The postion offset. This is used to place the item at a certain point on the player without parenting it to a place. Once modesl are in game and not scaled parenting will be a better choice
 		return m_itemOffset;
 	}
-
-
 
 	public void RefillCharges()
 	{
@@ -334,6 +379,7 @@ public class Item : MonoBehaviour
 	{
 		return m_refillable;
 	}
+
 	//Will return true if a charge has been used.
 	public void UseCharge()
 	{
@@ -343,11 +389,13 @@ public class Item : MonoBehaviour
 			m_charges--;
 		}
 	}
+
     public bool GetHeldItem() 
     {
         // Returnsfalse if item is not held.
         return (m_playerHolding == null);   
     }
+
     public bool IsOneTimeUse()
     {
         // Tells you if 1 time use
@@ -358,6 +406,7 @@ public class Item : MonoBehaviour
     {
         m_spawner = a_spawner;
     }
+
     public Source GetSpawner()
     {
         return m_spawner;
@@ -365,3 +414,36 @@ public class Item : MonoBehaviour
 }
 
 
+/* Collision Rules
+ * 1. If a player eneters the collisions, it needs to ignore the players collision (not collide with player). If it is NOT thrown, and IF the palyer is not currently holding an item
+ *			- Never adds the player to the item list, players may need to still be added to the list, but it needs to ignore the player
+ *			
+ * Check if the player is in the list
+ * Then check what the player is doing, holding an item, facing an item, etc.
+ * 
+ * 
+ * 
+ * 
+ * OnTriggerEnter()
+ * check if it's a player and add it to it's list.
+ *		if the item is thrown.
+ *			renebale Y
+ *			if the player is facing(when that gets implemtned) && if the player is not holding an item
+ *				the player picks up item
+ *			else
+ *				disable collider on player entered
+ * else
+ *		if (y) is frozen
+ *			renebale.
+ *		
+ */
+
+/* Pickup and Drop changes
+ * Disable the collider with the player thats picked it up, remove clear.
+ * Change Drop to add a force forward to move it forward a bit. Idea, drop it in front
+ */
+
+/* Throw changes
+ * Make it travel along the Y (freeze Y?)
+ * Addforce rather than transform, huge amount but only once
+ */

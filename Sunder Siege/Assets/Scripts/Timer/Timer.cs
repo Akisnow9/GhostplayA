@@ -1,8 +1,8 @@
 ﻿/***************************************************
-* Written By: Anton Huber, Ciaran Coppell, Eric Brkic
-* Purpose: To keep gametime and trigger events
-* Data Created:14/09
-* Last Modified: 16/09
+ * Written By: Anton Huber, Ciaran Coppell, Eric Brkic
+ * Purpose: To keep gametime and trigger events
+ * Data Created:14/09
+ * Last Modified: 16/09
 **************************************************/
 
 using System.Collections;
@@ -64,6 +64,12 @@ public class Timer : MonoBehaviour
         }
         m_timeLimit -= m_timeScale * Time.deltaTime; // minus the time between frames * the scaler.
     }
+
+    public static int PlayerAmountGet()
+    {
+        return instance.m_playerList.Count;
+    }
+
 
     public static Player PlayerGet(int a_index)
     {
