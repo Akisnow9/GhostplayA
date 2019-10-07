@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 6220680521040432309}
   - component: {fileID: 6220680521040432308}
   - component: {fileID: 6220680521040432307}
-  - component: {fileID: 6220680521040432306}
+  - component: {fileID: 4443109515747613370}
   m_Layer: 0
   m_Name: Bucket
   m_TagString: Untagged
@@ -76,7 +76,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &6220680521040432306
+--- !u!114 &4443109515747613370
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,10 +93,10 @@ MonoBehaviour:
   m_model:
   - {fileID: 6220680521041293517}
   m_raycastOffset: {x: 0, y: 0, z: 0}
-  m_itemOffset: {x: 0, y: 2, z: 0}
-  m_refillable: 1
-  m_maxCharges: 3
-  m_losesChargesOnThrow: 1
+  m_itemOffset: {x: 0, y: 0, z: 0}
+  m_refillable: 0
+  m_maxCharges: 0
+  m_losesChargesOnThrow: 0
   m_oneTimeUse: 0
   m_fixableQuality: 01000000
 --- !u!1001 &6220680520961590121

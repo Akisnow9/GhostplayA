@@ -1860,7 +1860,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 202690011}
-  - component: {fileID: 202690010}
   m_Layer: 0
   m_Name: Timer
   m_TagString: Untagged
@@ -1868,26 +1867,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &202690010
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 202690009}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 925a540aae8f2354bb8ba86084057af4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_playerList:
-  - {fileID: 301496817}
-  m_timeLimit: 60
-  m_timeBeforeFail: 15
-  m_numberofLives: 5
-  m_numOfInactiveProblems: 0
-  m_pendingEventList: []
-  m_problemList: []
 --- !u!4 &202690011
 Transform:
   m_ObjectHideFlags: 0
@@ -1976,7 +1955,6 @@ GameObject:
   - component: {fileID: 301496820}
   - component: {fileID: 301496819}
   - component: {fileID: 301496818}
-  - component: {fileID: 301496817}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Untagged
@@ -1984,21 +1962,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &301496817
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 301496816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f3ef298bab044b4ebe4c3aea6fe4ef8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementSpeed: 25
-  dashDistance: 25
-  controller: 1
 --- !u!65 &301496818
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3132,7 +3095,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 437291394}
-  - component: {fileID: 437291393}
   m_Layer: 0
   m_Name: Well
   m_TagString: Untagged
@@ -3140,24 +3102,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &437291393
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 437291392}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 895bca02e1da197409337d89aff34e23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_playerList: []
-  m_spawnedItemList: []
-  m_willRefill: 1
-  m_spawnsItem: 0
-  m_itemToSpawn: {fileID: 0}
-  m_maxSpawnedItems: 5
 --- !u!4 &437291394
 Transform:
   m_ObjectHideFlags: 0
@@ -6877,7 +6821,6 @@ GameObject:
   - component: {fileID: 1454011077}
   - component: {fileID: 1454011076}
   - component: {fileID: 1454011075}
-  - component: {fileID: 1454011074}
   m_Layer: 0
   m_Name: Hammer
   m_TagString: Untagged
@@ -6885,29 +6828,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1454011074
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1454011073}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79f7b82717514e14ea444eabaf518391, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_playerList: []
-  m_throwForce: 1
-  m_model:
-  - {fileID: 1080427834}
-  m_raycastOffset: {x: 0, y: 0, z: 0}
-  m_itemOffset: {x: 0, y: 1.2, z: 0}
-  m_refillable: 0
-  m_maxCharges: 0
-  m_losesChargesOnThrow: 0
-  m_oneTimeUse: 0
-  m_fixableQuality: 02000000
 --- !u!54 &1454011075
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -8837,7 +8757,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1680087435}
-  - component: {fileID: 1680087436}
   m_Layer: 0
   m_Name: Barrel
   m_TagString: Untagged
@@ -8860,24 +8779,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1680087436
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1680087434}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 895bca02e1da197409337d89aff34e23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_playerList: []
-  m_spawnedItemList: []
-  m_willRefill: 0
-  m_spawnsItem: 0
-  m_itemToSpawn: {fileID: 0}
-  m_maxSpawnedItems: 5
 --- !u!1 &1701188421
 GameObject:
   m_ObjectHideFlags: 0
@@ -11469,7 +11370,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6220680521040432306, guid: 041dd34d1a6dd0542a5cbdf604a666ca, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 041dd34d1a6dd0542a5cbdf604a666ca, type: 3}
 --- !u!1001 &1945057616
 PrefabInstance:
@@ -12074,7 +11976,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2088088714}
-  - component: {fileID: 2088088713}
   - component: {fileID: 2088088715}
   - component: {fileID: 2088088716}
   m_Layer: 0
@@ -12084,25 +11985,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2088088713
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2088088712}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 895bca02e1da197409337d89aff34e23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_playerList: []
-  m_spawnedItemList:
-  - {fileID: 0}
-  m_willRefill: 0
-  m_spawnsItem: 1
-  m_itemToSpawn: {fileID: 0}
-  m_maxSpawnedItems: 5
 --- !u!4 &2088088714
 Transform:
   m_ObjectHideFlags: 0
