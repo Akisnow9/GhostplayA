@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: ce2aa146c81bf654fbf39e54a1068cc0
+guid: 5c50ef1f7e9504c4e9c027f8f263de8b
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: lambert1
+    2100000: lambert2
     2300000: //RootNode
     3300000: //RootNode
     4300000: Core
@@ -63,7 +63,7 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
+    previousCalculatedGlobalScale: 0.01
     hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60

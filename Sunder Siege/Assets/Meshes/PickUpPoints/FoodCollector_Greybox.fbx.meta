@@ -1,14 +1,14 @@
 fileFormatVersion: 2
-guid: 24ee73d06a508384dbe1886c11f73fb2
+guid: ff8708a8064d59b4fbbc311a00462e84
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: lambert1
+    2100000: lambert3
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Barrel
+    4300000: FoodCollection
   externalObjects: {}
   materials:
     importMaterials: 1

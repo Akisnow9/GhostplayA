@@ -66,7 +66,7 @@ public class Item : MonoBehaviour
 	//		  Makes sure there is a player in range before checking any actions
 	void Update()
 	{
-
+        Debug.Log("Charges: " + m_charges);
 		if (m_isThrown)
 		{
 			BeepBoopRotateSoup();
