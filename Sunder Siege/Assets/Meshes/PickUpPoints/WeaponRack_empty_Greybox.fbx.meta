@@ -1,21 +1,14 @@
 fileFormatVersion: 2
-guid: 239e47ac0fa8e4145bc361a877d9417c
+guid: 986e3ec94264e1c49b6cc18d698b1b3e
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
-    100002: Hammer_Handle
-    100004: Hammer_Head
     400000: //RootNode
-    400002: Hammer_Handle
-    400004: Hammer_Head
-    2100000: lambert1
-    2300000: Hammer_Handle
-    2300002: Hammer_Head
-    3300000: Hammer_Handle
-    3300002: Hammer_Head
-    4300000: Hammer_Handle
-    4300002: Hammer_Head
+    2100000: Weapon_Rack1
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Weapon_Rack
   externalObjects: {}
   materials:
     importMaterials: 1

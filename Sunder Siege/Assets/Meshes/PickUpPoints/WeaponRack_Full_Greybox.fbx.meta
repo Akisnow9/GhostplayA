@@ -1,69 +1,22 @@
 fileFormatVersion: 2
-guid: d275c460d6b0d494ea18b5d58d613ab1
+guid: 74af3e1f8a2e180478ff9d8294f36141
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: Bolt1
-    100002: Bolt2
-    100004: Bolt3
-    100006: Bolt4
-    100008: Bolt5
-    100010: Bolt6
-    100012: Bolt7
-    100014: Bolt8
-    100016: Bolts
-    100018: Bucket
-    100020: //RootNode
-    100022: Metal_1
-    100024: Metal_2
-    400000: Bolt1
-    400002: Bolt2
-    400004: Bolt3
-    400006: Bolt4
-    400008: Bolt5
-    400010: Bolt6
-    400012: Bolt7
-    400014: Bolt8
-    400016: Bolts
-    400018: Bucket
-    400020: //RootNode
-    400022: Metal_1
-    400024: Metal_2
-    2100000: Wood
-    2100002: Metal
-    2300000: Bolt1
-    2300002: Bolt2
-    2300004: Bolt3
-    2300006: Bolt4
-    2300008: Bolt5
-    2300010: Bolt6
-    2300012: Bolt7
-    2300014: Bolt8
-    2300016: Bucket
-    2300018: Metal_1
-    2300020: Metal_2
-    3300000: Bolt1
-    3300002: Bolt2
-    3300004: Bolt3
-    3300006: Bolt4
-    3300008: Bolt5
-    3300010: Bolt6
-    3300012: Bolt7
-    3300014: Bolt8
-    3300016: Bucket
-    3300018: Metal_1
-    3300020: Metal_2
-    4300000: Bucket
-    4300002: Metal_1
-    4300004: Metal_2
-    4300006: Bolt1
-    4300008: Bolt2
-    4300010: Bolt4
-    4300012: Bolt3
-    4300014: Bolt5
-    4300016: Bolt6
-    4300018: Bolt7
-    4300020: Bolt8
+    100000: SwordsOnRack
+    100002: Weapon_Rack
+    100004: //RootNode
+    400000: SwordsOnRack
+    400002: Weapon_Rack
+    400004: //RootNode
+    2100000: Weapon_Rack1
+    2100002: Sword1
+    2300000: SwordsOnRack
+    2300002: Weapon_Rack
+    3300000: SwordsOnRack
+    3300002: Weapon_Rack
+    4300000: Weapon_Rack
+    4300002: SwordsOnRack
   externalObjects: {}
   materials:
     importMaterials: 1

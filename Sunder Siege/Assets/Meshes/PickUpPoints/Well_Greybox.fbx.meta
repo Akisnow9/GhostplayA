@@ -1,22 +1,15 @@
 fileFormatVersion: 2
-guid: 11fc46391e34c6043bbd04e8f4c3401b
+guid: 8b5d0ed13da6cb447b2ef04c9fa22844
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: Water1
-    100002: Well
-    100004: //RootNode
-    400000: Water1
-    400002: Well
-    400004: //RootNode
-    2100000: Stone
-    2100002: Water
-    2300000: Water1
-    2300002: Well
-    3300000: Water1
-    3300002: Well
-    4300000: Well
-    4300002: Water1
+    100000: //RootNode
+    400000: //RootNode
+    2100000: Wood
+    2100002: lambert1
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Well_Final
   externalObjects: {}
   materials:
     importMaterials: 1

@@ -1,89 +1,14 @@
 fileFormatVersion: 2
-guid: 23af02548293cd8489e8a86fba217fff
+guid: 7abf5fc4c8150e544a252cce992f73b4
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: Base
-    100002: Body
-    100004: Pole1
-    100006: Pole2
-    100008: polySurface5
-    100010: polySurface6
-    100012: polySurface7
-    100014: polySurface8
-    100016: Sword1
-    100018: Sword2
-    100020: Sword3
-    100022: Sword4
-    100024: Sword5
-    100026: Sword6
-    100028: SwordsOnRack
-    100030: Weapon_Rack1
-    100032: WeaponsRack_Shelves
-    100034: WeaponsRack_Structure
-    100036: //RootNode
-    400000: Base
-    400002: Body
-    400004: Pole1
-    400006: Pole2
-    400008: polySurface5
-    400010: polySurface6
-    400012: polySurface7
-    400014: polySurface8
-    400016: Sword1
-    400018: Sword2
-    400020: Sword3
-    400022: Sword4
-    400024: Sword5
-    400026: Sword6
-    400028: SwordsOnRack
-    400030: Weapon_Rack1
-    400032: WeaponsRack_Shelves
-    400034: WeaponsRack_Structure
-    400036: //RootNode
+    100000: //RootNode
+    400000: //RootNode
     2100000: lambert1
-    2300000: Base
-    2300002: Body
-    2300004: Pole1
-    2300006: Pole2
-    2300008: polySurface5
-    2300010: polySurface6
-    2300012: polySurface7
-    2300014: polySurface8
-    2300016: Sword1
-    2300018: Sword2
-    2300020: Sword3
-    2300022: Sword4
-    2300024: Sword5
-    2300026: Sword6
-    3300000: Base
-    3300002: Body
-    3300004: Pole1
-    3300006: Pole2
-    3300008: polySurface5
-    3300010: polySurface6
-    3300012: polySurface7
-    3300014: polySurface8
-    3300016: Sword1
-    3300018: Sword2
-    3300020: Sword3
-    3300022: Sword4
-    3300024: Sword5
-    3300026: Sword6
-    4300000: polySurface5
-    4300002: polySurface6
-    4300004: polySurface7
-    4300006: polySurface8
-    4300008: Base
-    4300010: Pole1
-    4300012: Pole2
-    4300014: Body
-    4300016: Sword1
-    4300018: Sword2
-    4300020: Sword3
-    4300022: Sword4
-    4300024: Sword5
-    4300026: Sword6
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Hammer_Head1
   externalObjects: {}
   materials:
     importMaterials: 1
