@@ -1,26 +1,14 @@
 fileFormatVersion: 2
-guid: 3ed8e42aa1456fd4f99555424ce1d97e
+guid: 0a515941b5dba194cad102f37d81d1b4
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
-    100002: Pail
-    100004: Plane_Half
     400000: //RootNode
-    400002: Pail
-    400004: Plane_Half
-    2100000: Water1
-    2100002: Wood
-    2100004: Metal
-    2300000: Pail
-    2300002: Plane_Half
-    2300004: //RootNode
-    3300000: Pail
-    3300002: Plane_Half
-    3300004: //RootNode
-    4300000: Plane_Half
-    4300002: Pail
-    4300004: Bucket_Half
+    2100000: lambert1
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Groiund_Plane
   externalObjects: {}
   materials:
     importMaterials: 1

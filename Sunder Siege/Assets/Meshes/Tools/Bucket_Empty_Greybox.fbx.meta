@@ -10,8 +10,11 @@ ModelImporter:
     2100000: Wood
     2100002: Metal
     2300000: Pail
+    2300002: //RootNode
     3300000: Pail
+    3300002: //RootNode
     4300000: Pail
+    4300002: Bucket_Empty
   externalObjects: {}
   materials:
     importMaterials: 1

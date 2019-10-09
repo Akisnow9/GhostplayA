@@ -1,26 +1,41 @@
 fileFormatVersion: 2
-guid: 3ed8e42aa1456fd4f99555424ce1d97e
+guid: 492124113c87f554b92eb20660c415a4
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: Pail
-    100004: Plane_Half
-    400000: //RootNode
-    400002: Pail
-    400004: Plane_Half
-    2100000: Water1
-    2100002: Wood
-    2100004: Metal
-    2300000: Pail
-    2300002: Plane_Half
-    2300004: //RootNode
-    3300000: Pail
-    3300002: Plane_Half
-    3300004: //RootNode
-    4300000: Plane_Half
-    4300002: Pail
-    4300004: Bucket_Half
+    100000: Door_background
+    100002: JNT_Elbow
+    100004: JNT_Hand
+    100006: JNT_Thumb
+    100008: JNT_UpperArm
+    100010: JNT_Wrist
+    100012: //RootNode
+    100014: Troop_Arm
+    100016: Troop_Door
+    100018: Troop_Door2
+    400000: Door_background
+    400002: JNT_Elbow
+    400004: JNT_Hand
+    400006: JNT_Thumb
+    400008: JNT_UpperArm
+    400010: JNT_Wrist
+    400012: //RootNode
+    400014: Troop_Arm
+    400016: Troop_Door
+    400018: Troop_Door2
+    2100000: lambert1
+    2300000: Door_background
+    2300002: Troop_Door
+    2300004: Troop_Door2
+    3300000: Door_background
+    3300002: Troop_Door
+    3300004: Troop_Door2
+    4300000: Troop_Door
+    4300002: Troop_Door2
+    4300004: Door_background
+    4300006: Troop_Arm
+    9500000: //RootNode
+    13700000: Troop_Arm
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -74,7 +89,7 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
     previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 0
+    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -101,7 +116,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

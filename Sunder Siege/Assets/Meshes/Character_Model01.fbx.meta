@@ -1,26 +1,31 @@
 fileFormatVersion: 2
-guid: 3ed8e42aa1456fd4f99555424ce1d97e
+guid: f02c413f1d0c0274ea8e79ffdfb397cc
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: Pail
-    100004: Plane_Half
-    400000: //RootNode
-    400002: Pail
-    400004: Plane_Half
-    2100000: Water1
-    2100002: Wood
-    2100004: Metal
-    2300000: Pail
-    2300002: Plane_Half
-    2300004: //RootNode
-    3300000: Pail
-    3300002: Plane_Half
-    3300004: //RootNode
-    4300000: Plane_Half
-    4300002: Pail
-    4300004: Bucket_Half
+    100000: Character_Belt
+    100002: Character_Model
+    100004: //RootNode
+    100006: Character_Pants
+    100008: Character_Shirt
+    400000: Character_Belt
+    400002: Character_Model
+    400004: //RootNode
+    400006: Character_Pants
+    400008: Character_Shirt
+    2100000: lambert1
+    2300000: Character_Belt
+    2300002: Character_Model
+    2300004: Character_Pants
+    2300006: Character_Shirt
+    3300000: Character_Belt
+    3300002: Character_Model
+    3300004: Character_Pants
+    3300006: Character_Shirt
+    4300000: Character_Model
+    4300002: Character_Pants
+    4300004: Character_Shirt
+    4300006: Character_Belt
   externalObjects: {}
   materials:
     importMaterials: 1
