@@ -2,7 +2,7 @@
  * Written By: Eric Brkic, Anton Huber
  * Purpose: The item spawners and item refill sources
  * Data Created: 18th Sep, 2019
- * Last Modified: 21st Sep, 2019
+ * Last Modified: 14th Oct, 2019
  **************************************************/
 using System.Collections.Generic;
 using UnityEngine;
@@ -40,6 +40,7 @@ public class Source : MonoBehaviour
                             {
                                 if (quality == m_willRefill)
                                 {
+									playerItem.ItemReset();
                                     playerItem.RefillCharges();
                                 }
                             }
@@ -85,48 +86,24 @@ public class Source : MonoBehaviour
     {
         // Switching depending on the colliders name
         int count = m_playerList.Count;
-        switch (other.name)
-        {
-            // Each case is the players triggerbox string
-            case "Player1":
-                m_playerList.Insert(count, Timer.PlayerGet(0)); // Add the correct player to the playerList
-                break;
-            case "Player2":
-                m_playerList.Insert(count, Timer.PlayerGet(1));
-                break;
-            case "Player3":
-                m_playerList.Insert(count, Timer.PlayerGet(2));
-                break;
-            case "Player4":
-                m_playerList.Insert(count, Timer.PlayerGet(3));
-                break;
-            default:
-                break;
-        }
-    }
+
+		if (other.tag == "Player")
+		{
+			Player holder = other.GetComponent<Player>();
+
+			m_playerList.Insert(count, Timer.PlayerGet(holder.GetPlayerIndex()));
+		}
+	}
 
     private void OnTriggerExit(Collider other)
     {
-        // Switching depending on the colliders name
-        switch (other.name)
-        {
-            // Each case is the players triggerbox string
-            case "Player1":
-                m_playerList.Remove(Timer.PlayerGet(0)); // remove the correct player from the playerList
-                break;
-            case "Player2":
-                m_playerList.Remove(Timer.PlayerGet(1));
-                break;
-            case "Player3":
-                m_playerList.Remove(Timer.PlayerGet(2));
-                break;
-            case "Player4":
-                m_playerList.Remove(Timer.PlayerGet(3));
-                break;
-            default:
-                break;
-        }
-    }
+		if (other.tag == "Player")
+		{
+			Player holder = other.GetComponent<Player>();
+
+			m_playerList.Remove(Timer.PlayerGet(holder.GetPlayerIndex()));
+		}
+	}
 
     private bool FindUnheldObject()
     {

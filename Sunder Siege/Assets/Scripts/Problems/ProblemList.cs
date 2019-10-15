@@ -1,0 +1,149 @@
+﻿/***************************************************
+ * Written By: Anton Huber
+ * Made Pretty By: Ciaran Coppell
+ * Purpose: Contains all the information about a single problem.
+ * Data Created: 27/09
+ * Last Modified: 09/10
+ **************************************************/
+
+
+
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEditor;
+
+
+
+public class ProblemList : MonoBehaviour
+{
+    //*************************************************************************************
+    // This class is just a bunch of getters and variables that a single problem will have.
+    // Note that if you want a singe entity to be able to have several different problems
+    // you will have to attach a second script to the same object.
+    //*************************************************************************************
+
+
+
+    [Header("Problem Is Fixed By")] // All Things Revolving Around the Problem and Solution
+    [SerializeField] private E_Quality m_fixableProblem; // Will be able to set the list size and the problems from the unity editor.
+    [Header("In")]
+    [SerializeField] private int m_maxButtonPresses; // How many wacks it takes to fix the problem. Assaigned every activation. Per event.
+
+    [Header("Animation Controller")]
+    [SerializeField] private Animator m_animationController;
+
+    [Header("Broken State")] // All states of problems
+    [SerializeField] private GameObject m_activeState; // Place the problems active state model here.
+
+     
+
+
+    
+    [Header("Pending")]
+ 
+    [SerializeField] private ParticleSystem m_breakParticleEffect; // What particle effects take place. 1 to 1 ration with animation and Fixable problem.  // Could probably be changed to game object that is turned on and off.
+    [SerializeField] private float m_particleStartDirection; // The particel will start at (x,y,z) and then move towards the problem
+    [SerializeField] private float m_particleStartDistance = 3; // How far away will it spawn.
+    [SerializeField] private float m_particleFallSpeed = 0.5f; // Controls the speed of the particle moving towards the problem.
+
+
+    [Header("Active")]
+    [SerializeField] private ProblemPhsyicsObject m_breakPhysics; // The physics object -- Will create a sepearate script for handling of physics.    [Header("Pending")]
+    [SerializeField] private ParticleSystem m_whileBrokenParticle; // What plays while the problem is now active.
+    
+    
+
+    [Header("Fixed")]
+    [SerializeField] private ParticleSystem m_fixedParticle; // What plays when the problem is fixed.
+
+
+
+    private void Start()
+    {
+        m_activeState.SetActive(false); // Disables all active states of problems.
+    }
+
+
+    //*************************************************************************************
+    // Getters to easily access the things contained within.
+    //*************************************************************************************
+
+
+    public E_Quality GetQuality()
+    {
+        return m_fixableProblem;
+    }
+    public int GetMaxButtonPresses()
+    {
+        return m_maxButtonPresses;
+    }
+    public GameObject GetActiveState()
+    {
+        return m_activeState;
+    }
+    public ParticleSystem GetBreakParticleEffect()
+    {
+        return m_breakParticleEffect;
+    }
+    public float GetParticleStartDirection()
+    {
+        return m_particleStartDirection;
+    }
+    public float GetParticleStartDistance()
+    {
+        return m_particleStartDistance;
+    }
+    public float GetParticleFallSpeed()
+    {
+        return m_particleFallSpeed;
+    }
+    public ProblemPhsyicsObject GetPhsyicsObject()
+    {
+        return m_breakPhysics;
+    }
+    public ParticleSystem GetWhileBrokenParticle()
+    {
+        return m_whileBrokenParticle;
+    }
+    public ParticleSystem GetFixedParticle()
+    {
+        return m_fixedParticle;
+    }
+    public Animator GetAnimationController()
+    {
+        return m_animationController;
+    }
+
+}
+//[CustomEditor(typeof(ProblemList))]
+//public class ProblemListEditor : Editor
+//{
+//    public float labelWidth = 100.0f;
+//    public override void OnInspectorGUI()
+//    {
+//        //draws a default inspector
+//        base.DrawDefaultInspector();
+//        //Custom Form for problems list UI
+
+//        ProblemList problemList = (ProblemList) target;
+
+//        //Label of GUI
+//        GUILayout.Space(20.0f);
+//        GUILayout.Label("Problem List Editor", EditorStyles.boldLabel);
+
+//        //Label for Preferences
+//        GUILayout.Space(10.0f);
+//        GUILayout.Label("Problem Preference");
+
+//        //UwU
+//        GUILayout.BeginHorizontal();
+//        GUILayout.Label("Fixable Problem:", GUILayout.Width(labelWidth));
+
+
+//    }
+//}
+
+
+

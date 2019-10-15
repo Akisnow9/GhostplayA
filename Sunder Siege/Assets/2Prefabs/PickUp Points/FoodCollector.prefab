@@ -1,0 +1,149 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6100516894954517955
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6100516894954517952}
+  - component: {fileID: 6100516894954517953}
+  - component: {fileID: 6100516894954517954}
+  m_Layer: 0
+  m_Name: FoodCollector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6100516894954517952
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6100516894954517955}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4, y: 0, z: 6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 6100516894850195027}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6100516894954517953
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6100516894954517955}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.2, y: 2, z: 3}
+  m_Center: {x: -0.5, y: 1, z: 0}
+--- !u!114 &6100516894954517954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6100516894954517955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 895bca02e1da197409337d89aff34e23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_playerList: []
+  m_spawnedItemList: []
+  m_willRefill: 0
+  m_spawnsItem: 1
+  m_itemToSpawn: {fileID: 566378683485983233, guid: 0f848ec6a1384564f9fed61b69bb9f00,
+    type: 3}
+  m_maxSpawnedItems: 5
+--- !u!65 &6100516895751555587
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6100516894850613875}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 335.3514, y: 146.122, z: 209.50322}
+  m_Center: {x: -29.65895, y: 73.50663, z: 0}
+--- !u!1001 &6100516894850581715
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 6100516894954517952}
+    m_Modifications:
+    - target: {fileID: 100000, guid: 000d15eac9306044ab55cdc5d8dff855, type: 3}
+      propertyPath: m_Name
+      value: FoodCollector_Greybox
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 000d15eac9306044ab55cdc5d8dff855, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 000d15eac9306044ab55cdc5d8dff855, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 000d15eac9306044ab55cdc5d8dff855, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 000d15eac9306044ab55cdc5d8dff855, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 000d15eac9306044ab55cdc5d8dff855, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 000d15eac9306044ab55cdc5d8dff855, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 000d15eac9306044ab55cdc5d8dff855, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 000d15eac9306044ab55cdc5d8dff855, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 000d15eac9306044ab55cdc5d8dff855, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 000d15eac9306044ab55cdc5d8dff855, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 000d15eac9306044ab55cdc5d8dff855, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 000d15eac9306044ab55cdc5d8dff855, type: 3}
+--- !u!1 &6100516894850613875 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 000d15eac9306044ab55cdc5d8dff855,
+    type: 3}
+  m_PrefabInstance: {fileID: 6100516894850581715}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6100516894850195027 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400000, guid: 000d15eac9306044ab55cdc5d8dff855,
+    type: 3}
+  m_PrefabInstance: {fileID: 6100516894850581715}
+  m_PrefabAsset: {fileID: 0}

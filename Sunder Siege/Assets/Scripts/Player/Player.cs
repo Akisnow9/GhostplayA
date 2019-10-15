@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private float movementSpeed = 10f;
     [SerializeField] private float dashDistance = 10f;
+	[SerializeField] private float dropOffset;
 	public XboxController controller;
 	//public Vector3 direction;
 	//public Vector3 localDirection;
@@ -23,37 +24,15 @@ public class Player : MonoBehaviour
 
 	private static bool didQueryNumOfCtrlrs = false; // Why is this static?
 
+	private int m_playerIndex;
+
+	[SerializeField] private GameObject m_playerShirt;
+
 	// Start is called before the first frame update
 	void Start()
 	{
-        //m_itempostionOffset = new Vector3(m_itemPostionX, m_itemPostionY, m_itemPostionZ); 
-
-
+		
 		rb = GetComponent<Rigidbody>();
-		//newPosition = transform.position;
-		if (!didQueryNumOfCtrlrs)
-		{
-			didQueryNumOfCtrlrs = true;
-
-			int queriedNumOfCtrls = XCI.GetNumPluggedCtrlrs();
-			if (queriedNumOfCtrls == 1)
-			{
-				Debug.Log("Only " + queriedNumOfCtrls + " Xbox Controller plugged in.");
-			}
-			else if (queriedNumOfCtrls == 0)
-			{
-				Debug.Log("No Xbox Controllers plugged in!");
-			}
-			else
-			{
-				Debug.Log(queriedNumOfCtrls + " Xbox Controllers plugged in.");
-			}
-
-			XCI.DEBUG_LogControllerNames();
-		}
-        
-
-
     }
 
 	// Update is called once per frame
@@ -128,8 +107,6 @@ public class Player : MonoBehaviour
 
     public void DropItem()
     {
-        m_heldItem.transform.position = this.transform.position - new Vector3(0, 0.40f, 0); // Puts item on ground? This is hard coded and will either beed a variable for designers or a lot of tweaking... There should be a better way useing tags. If i can get it working only need to set held item to null.
-        m_heldItem.transform.Rotate(0, -20, 90);                                            // This needs some information from the parent but functons a-okay
         m_heldItem = null;
     }
 
@@ -142,4 +119,19 @@ public class Player : MonoBehaviour
     {
         return m_heldItem;
     }
+
+	public int GetPlayerIndex()
+	{
+		return m_playerIndex;
+	}
+
+	public void SetPlayerIndex(int a_index)
+	{
+		m_playerIndex = a_index;
+	}
+
+	public GameObject GetPlayerShirt()
+	{
+		return m_playerShirt;
+	}
 }

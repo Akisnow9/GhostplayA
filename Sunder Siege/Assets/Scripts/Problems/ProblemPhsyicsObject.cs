@@ -17,7 +17,7 @@ public class ProblemPhsyicsObject : MonoBehaviour
     // peices. These peices will be non interactible. Thye will phase out after a time limit.
     // Will need to reset to start postion once fixed.
     //*************************************************************************************
-    public List<Vector3> m_childrenStartPostions; // Postion of all the children.
+    public List<Transform> m_childrenStartPostions; // Postion of all the children.
 
     [SerializeField] private float m_addedForce; // The force applied to all objects. -- Does it need to be applied to parents or each part.
     [SerializeField] private float m_timeBeforeDissapear; // How long the objects will exist in the game world
@@ -32,7 +32,7 @@ public class ProblemPhsyicsObject : MonoBehaviour
 
     private bool m_isDoingPhysics; // If yes will check if it is time to destroy itself in update.
     private float m_timeToDissapear; // When the peice will deactivate.
-    private Vector3 m_startPostion; // Reset postion. Will return to this once complete. Might not be enough because of the way items are parented. Might need to also store rotation.
+    private Transform m_startPostion; // Reset postion. Will return to this once complete. Might not be enough because of the way items are parented. Might need to also store rotation.
 
     void Start()
     {
@@ -41,18 +41,18 @@ public class ProblemPhsyicsObject : MonoBehaviour
         for (int i = 0; i < Timer.PlayerAmountGet(); i++) // Cycles through all players and sets them to ignore each of the physics problems.
             foreach (GameObject child in m_children) // cycles through all children -- This is extremly dumb. Should just put a check which ignores tag 'player' in oncollisonenter.
             {
-                Physics.IgnoreCollision(child.GetComponent<BoxCollider>(), Timer.PlayerGet(i).GetComponent<BoxCollider>()); // Should ensure no interaction between palyer and parent.. Does this extend to children?
+                Physics.IgnoreCollision(child.GetComponent<Collider>(), Timer.PlayerGet(i).GetComponent<Collider>()); // Should ensure no interaction between palyer and parent.. Does this extend to children?
             }
 
         foreach(GameObject child1 in m_children)
             foreach(GameObject child2 in m_children)
             {
-                Physics.IgnoreCollision(child1.GetComponent<BoxCollider>(), child2.GetComponent<BoxCollider>());
+                Physics.IgnoreCollision(child1.GetComponent<Collider>(), child2.GetComponent<Collider>());
             }
         // May need to add a null check in case of no children.
         for (int i = 0; i < m_children.Count; i++)
         {
-            m_startPostion = m_children[i].transform.position;
+            m_startPostion = m_children[i].transform;
             if (m_childrenStartPostions != null)
             {
                 int count = m_childrenStartPostions.Count;
@@ -101,7 +101,8 @@ public class ProblemPhsyicsObject : MonoBehaviour
         m_isDoingPhysics = false; // No longer active so will not update.
         for (int i = 0; i < m_children.Count; i++)
         {
-            m_children[i].transform.position = m_childrenStartPostions[i]; // Sets child postion back to start.
+            m_children[i].transform.rotation = m_childrenStartPostions[i].rotation; // Sets child postion back to start.
+            m_children[i].transform.position = m_childrenStartPostions[i].position;
         }
         this.gameObject.SetActive(false);
     }

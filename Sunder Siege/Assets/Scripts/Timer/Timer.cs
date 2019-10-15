@@ -1,30 +1,34 @@
 ﻿/***************************************************
- * Written By: Anton Huber, Ciaran Coppell, Eric Brkic
+ * Written By: Anton Huber, Eric Brkic
  * Purpose: To keep gametime and trigger events
- * Data Created:14/09
- * Last Modified: 16/09
+ * Data Created: 14th Sep, 2019
+ * Last Modified: 14th Oct, 2019
 **************************************************/
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class Timer : MonoBehaviour
 {
-    //*************************************************************************************
-    // When events will occur. 
-    // Eg: Once 'm_timeLimit' reaches 'm_eventTriggerTime' there will be 'm_numberOfEvents' 
-    // over the next 'm_eventTriggerTime'
-    //*************************************************************************************
+	//*************************************************************************************
+	// When events will occur. 
+	// Eg: Once 'm_timeLimit' reaches 'm_eventTriggerTime' there will be 'm_numberOfEvents' 
+	// over the next 'm_eventTriggerTime'
+	//*************************************************************************************
+	//** Player based info **//
+	[SerializeField] private Player m_playerToSpawn;
     public List<Player> m_playerList;
+	public List<GameObject> m_spawnPoints;
+	public List<Material> m_playerMats;
 
     [SerializeField] private float m_timeLimit = 60; // The timer will count down from this point. Set from Unity Editor.
     [SerializeField] private float m_timeBeforeFail = 15; // Once a problem has activated how long before the player loses a life.
     [SerializeField] private int m_numberofLives = 5; // How many times items from the active list can expire.
     //[SerializeField] private float m_minRangeOfProblem = 3; // Minus this from max. Then add to repeat every. Only for problems.
-    //[SerializeField] private float m_maxRangeOfProblem = 15; // This minus min. Then add to repeat every. Only for problems.
-
+    //[SerializeField] private float m_maxRangeOfProblem = 15; // This minus min. Then add to repeat every. Only for problems
 
     private float m_timeScale = 1; // This can be used to modify the rate of seconds passing also movement speed and animation. Useful if people want to include a slowdown effect but needs to be included in everything that is effected. Eg movement/ animation will need to be multiplied by this all the time.
 
@@ -35,21 +39,44 @@ public class Timer : MonoBehaviour
     public List<Events> m_pendingEventList; // The event list. Events are added from the editor.
     public List<Problem> m_problemList; // List of problems. Problems added to this list will be randomly selected.
 
-
-
     private static Timer instance = null;
 
     private void Awake()
     {
         instance = this;
 
+		Player playerClone;
+		for (int i = 0; i < Menus.GetActivatedPlayerAmount(); i++)
+		{
+			// Create the players an attach their controllers
+			playerClone = Instantiate(m_playerToSpawn);
+			StaticVariables holder = Menus.GetPlayerInformation(i);
+			playerClone.controller = holder.Controller;
+
+			// Set the players spawn point
+			playerClone.transform.position = m_spawnPoints[i].transform.position;
+
+			// Set the players index
+			playerClone.SetPlayerIndex(i);
+
+			// Add the players to the playerList
+			m_playerList.Insert(i, playerClone);
+
+			// Set the shirts material
+			Material newMaterial = Instantiate(m_playerMats[i]);
+			newMaterial.SetColor(m_playerMats[i].name, m_playerMats[i].color);
+
+			MeshRenderer thisRenderer = m_playerList[i].GetPlayerShirt().GetComponent<MeshRenderer>();
+			thisRenderer.material = newMaterial;
+		}
+
 		// GameObject newObject = Instantiate();
 		// GameObject.AddComponent<Events>();
-		
-    }
 
-    // Start is called before the first frame update
-    void Start()
+	}
+
+	// Start is called before the first frame update
+	void Start()
     {
         m_numOfInactiveProblems = m_problemList.Count;
     }
@@ -60,7 +87,11 @@ public class Timer : MonoBehaviour
         CheckEventsLists();
         if (CheckProblems()) // Returns true if fail state reached. Either timer hit 0 or lives hit 0.
         {
-            //Game over state here.
+            //Game over state here
+            if(m_numberofLives <= 0)
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
+            else
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
         m_timeLimit -= m_timeScale * Time.deltaTime; // minus the time between frames * the scaler.
     }
