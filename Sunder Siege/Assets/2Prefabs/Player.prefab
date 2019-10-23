@@ -120,7 +120,7 @@ Rigidbody:
   m_GameObject: {fileID: 7534270861074451463}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 3
+  m_Drag: 15
   m_AngularDrag: 999999
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -139,8 +139,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f3ef298bab044b4ebe4c3aea6fe4ef8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 18
-  dashDistance: 8
+  movementSpeed: 150
+  dashDistance: 40
   dropOffset: 0
   controller: 0
   m_playerShirt: {fileID: 7534270860968178849}

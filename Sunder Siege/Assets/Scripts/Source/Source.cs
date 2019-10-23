@@ -21,7 +21,7 @@ public class Source : MonoBehaviour
     [SerializeField] private int m_maxSpawnedItems = 5; // Limits the amount of this item that the source can spawn.
 
 
-    private void Update()
+    private void LateUpdate()
     {
         if (m_playerList != null)
         {
@@ -34,49 +34,50 @@ public class Source : MonoBehaviour
                     // Item playerItem = player.GetItem() Get palyer item here then use it for the checks below and increase charges ect
                     if (XCI.GetButtonDown(XboxButton.A, controller))
                     {
-                        if (!m_spawnsItem)
-                        {
-                            foreach (E_Quality quality in playerItem.m_fixableQuality)
-                            {
-                                if (quality == m_willRefill)
-                                {
-									playerItem.ItemReset();
-                                    playerItem.RefillCharges();
-                                }
-                            }
-                        }
-                        else
-                        {
-                            if (player.GetItem() == null)           // bullshit workaround to check if player is carring something.
-                                if (m_spawnedItemList == null)
-                                {
-                                    Item newItemToList = Instantiate<Item>(m_itemToSpawn); // Spawns item
-                                    newItemToList.Pickup(player); // Adds it to the player that pressed button
-                                    m_spawnedItemList.Insert(0, newItemToList); // Adds it to it's own list so it can know how many are spawned.
-                                    newItemToList.SetSpawn(this);
-                                    newItemToList.m_playerList.Insert(0, player); // Adds the player to the player list so it will now check input
-                                }
-                                else if (m_spawnedItemList.Count >= m_maxSpawnedItems) // Needs to iterate through list
-                                {
-                                    if (FindUnheldObject()) // Checks if it can find a unheld object that is has spawned. if it has it will destroy it in function then create a new item and add it back to the list.
-                                    {
-                                        Item newItemToList = Instantiate<Item>(m_itemToSpawn); // Spawns item
-                                        newItemToList.Pickup(player); // Adds it to the player that pressed button
-                                        m_spawnedItemList.Insert(0, newItemToList); // Adds it to it's own list so it can know how many are spawned.
-                                        newItemToList.SetSpawn(this);
-                                        newItemToList.m_playerList.Insert(0, player); // Adds the player to the player list so it will now check input
-                                    }
-                                }
-                                else
-                                {
-                                    Item newItemToList = Instantiate<Item>(m_itemToSpawn); // Spawns item
-                                    newItemToList.Pickup(player); // Adds it to the player that pressed button
-                                    m_spawnedItemList.Insert(0, newItemToList); // Adds it to it's own list so it can know how many are spawned.
-                                    newItemToList.SetSpawn(this);
-                                    newItemToList.m_playerList.Insert(0, player); // Adds the player to the player list so it will now check input
-                                }
-                            
-                        }
+						if (!m_spawnsItem)
+						{
+							if (playerItem != null)
+								foreach (E_Quality quality in playerItem.m_fixableQuality)
+								{
+									if (quality == m_willRefill)
+									{
+										playerItem.ItemReset();
+										playerItem.RefillCharges();
+									}
+								}
+						}
+						else
+						{
+							if (player.GetItem() == null)           // bullshit workaround to check if player is carring something.
+								if (m_spawnedItemList == null)
+								{
+									Item newItemToList = Instantiate<Item>(m_itemToSpawn); // Spawns item
+									newItemToList.Pickup(player); // Adds it to the player that pressed button
+									m_spawnedItemList.Insert(0, newItemToList); // Adds it to it's own list so it can know how many are spawned.
+									newItemToList.SetSpawn(this);
+									newItemToList.m_playerList.Insert(0, player); // Adds the player to the player list so it will now check input
+								}
+								else if (m_spawnedItemList.Count >= m_maxSpawnedItems) // Needs to iterate through list
+								{
+									if (FindUnheldObject()) // Checks if it can find a unheld object that is has spawned. if it has it will destroy it in function then create a new item and add it back to the list.
+									{
+										Item newItemToList = Instantiate<Item>(m_itemToSpawn); // Spawns item
+										newItemToList.Pickup(player); // Adds it to the player that pressed button
+										m_spawnedItemList.Insert(0, newItemToList); // Adds it to it's own list so it can know how many are spawned.
+										newItemToList.SetSpawn(this);
+										newItemToList.m_playerList.Insert(0, player); // Adds the player to the player list so it will now check input
+									}
+								}
+								else
+								{
+									Item newItemToList = Instantiate<Item>(m_itemToSpawn); // Spawns item
+									newItemToList.Pickup(player); // Adds it to the player that pressed button
+									m_spawnedItemList.Insert(0, newItemToList); // Adds it to it's own list so it can know how many are spawned.
+									newItemToList.SetSpawn(this);
+									newItemToList.m_playerList.Insert(0, player); // Adds the player to the player list so it will now check input
+								}
+
+						}
                     }
                 }
             }
@@ -125,6 +126,4 @@ public class Source : MonoBehaviour
         // Used to remove items from list when used up when used.
         m_spawnedItemList.Remove(a_itemToDestroy);
     }
-
-
 }

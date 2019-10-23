@@ -15,6 +15,10 @@ ModelImporter:
     100018: Wall_Gate 1
     100020: //RootNode
     100022: wood_plank
+    100024: Wall_Gate_Archway
+    100026: Wall_Gate_DoorL
+    100028: Wall_Gate_DoorR
+    100030: Wall_Gate_Plank
     400000: door1
     400002: door2
     400004: doorA
@@ -27,8 +31,14 @@ ModelImporter:
     400018: Wall_Gate 1
     400020: //RootNode
     400022: wood_plank
+    400024: Wall_Gate_Archway
+    400026: Wall_Gate_DoorL
+    400028: Wall_Gate_DoorR
+    400030: Wall_Gate_Plank
     2100000: lambert2
     2100002: lambert3
+    2100004: lambert8
+    2100006: lambert7
     2300000: doorA
     2300002: DoorB
     2300004: frame
@@ -38,6 +48,10 @@ ModelImporter:
     2300012: hinge_3
     2300014: Wall_Gate 1
     2300016: wood_plank
+    2300018: Wall_Gate_Archway
+    2300020: Wall_Gate_DoorL
+    2300022: Wall_Gate_DoorR
+    2300024: Wall_Gate_Plank
     3300000: doorA
     3300002: DoorB
     3300004: frame
@@ -47,6 +61,10 @@ ModelImporter:
     3300012: hinge_3
     3300014: Wall_Gate 1
     3300016: wood_plank
+    3300018: Wall_Gate_Archway
+    3300020: Wall_Gate_DoorL
+    3300022: Wall_Gate_DoorR
+    3300024: Wall_Gate_Plank
     4300000: Wall_Gate
     4300002: DoorB
     4300004: hinge_3
@@ -56,6 +74,10 @@ ModelImporter:
     4300012: hinge2
     4300014: wood_plank
     4300016: frame
+    4300018: Wall_Gate_Plank
+    4300020: Wall_Gate_Archway
+    4300022: Wall_Gate_DoorR
+    4300024: Wall_Gate_DoorL
   externalObjects: {}
   materials:
     importMaterials: 1

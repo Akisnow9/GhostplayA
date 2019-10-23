@@ -30,6 +30,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1537327645206241391}
   - {fileID: 7655752225340499041}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -79,12 +80,12 @@ MonoBehaviour:
   m_model:
   - {fileID: 7655752226101606774}
   m_itemOffset: {x: 0, y: 1.8, z: 0}
-  m_rayOffset: 0.8
   m_throwForce: 0.5
   m_bounceForce: 5
   m_oneTimeUse: 1
   m_losesChargesOnThrow: 0
   m_refillable: 0
+  m_filledLevels: []
   m_maxCharges: 0
   m_fixableQuality: 06000000
 --- !u!65 &7655752226101606774
@@ -100,6 +101,73 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5, z: 1.7311876}
   m_Center: {x: 0, y: 0, z: 0.51030815}
+--- !u!1001 &1537327645205854959
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 7655752224620611635}
+    m_Modifications:
+    - target: {fileID: 100000, guid: 498c9bd3026090341aa150db452c49f4, type: 3}
+      propertyPath: m_Name
+      value: Sword_Greybox
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 498c9bd3026090341aa150db452c49f4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 498c9bd3026090341aa150db452c49f4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 498c9bd3026090341aa150db452c49f4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 498c9bd3026090341aa150db452c49f4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 498c9bd3026090341aa150db452c49f4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 498c9bd3026090341aa150db452c49f4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 498c9bd3026090341aa150db452c49f4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 498c9bd3026090341aa150db452c49f4, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 498c9bd3026090341aa150db452c49f4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 498c9bd3026090341aa150db452c49f4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 498c9bd3026090341aa150db452c49f4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 498c9bd3026090341aa150db452c49f4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: dc48602141202c940be164d7186ca980, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 498c9bd3026090341aa150db452c49f4, type: 3}
+--- !u!4 &1537327645206241391 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400000, guid: 498c9bd3026090341aa150db452c49f4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1537327645205854959}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7655752225340636899
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -107,6 +175,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7655752224620611635}
     m_Modifications:
+    - target: {fileID: 100002, guid: c253ff1d31bc9fc499063ddc7f40828c, type: 3}
+      propertyPath: m_Name
+      value: Sword_Greybox_FBX
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: c253ff1d31bc9fc499063ddc7f40828c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: c253ff1d31bc9fc499063ddc7f40828c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -137,7 +213,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: c253ff1d31bc9fc499063ddc7f40828c, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: c253ff1d31bc9fc499063ddc7f40828c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -151,10 +227,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 100002, guid: c253ff1d31bc9fc499063ddc7f40828c, type: 3}
-      propertyPath: m_Name
-      value: Sword_Greybox_FBX
-      objectReference: {fileID: 0}
+    - target: {fileID: 2300002, guid: c253ff1d31bc9fc499063ddc7f40828c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: dc48602141202c940be164d7186ca980, type: 2}
+    - target: {fileID: 2300000, guid: c253ff1d31bc9fc499063ddc7f40828c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: dc48602141202c940be164d7186ca980, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c253ff1d31bc9fc499063ddc7f40828c, type: 3}
 --- !u!1 &7655752225340536897 stripped

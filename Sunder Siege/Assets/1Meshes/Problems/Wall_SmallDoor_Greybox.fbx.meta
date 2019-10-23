@@ -6,16 +6,33 @@ ModelImporter:
     100000: polySurface1
     100002: polySurface2
     100004: //RootNode
+    100006: Wall_Door 1
+    100008: Wall_DoorArchway
+    100010: Wall_WithDoor
     400000: polySurface1
     400002: polySurface2
     400004: //RootNode
+    400006: Wall_Door 1
+    400008: Wall_DoorArchway
+    400010: Wall_WithDoor
     2100000: lambert3
+    2100002: lambert9
+    2100004: lambert10
     2300000: polySurface1
     2300002: polySurface2
+    2300004: Wall_Door 1
+    2300006: Wall_DoorArchway
+    2300008: Wall_WithDoor
     3300000: polySurface1
     3300002: polySurface2
+    3300004: Wall_Door 1
+    3300006: Wall_DoorArchway
+    3300008: Wall_WithDoor
     4300000: polySurface1
     4300002: polySurface2
+    4300004: Wall_Door
+    4300006: Wall_DoorArchway
+    4300008: Wall_WithDoor
   externalObjects: {}
   materials:
     importMaterials: 1

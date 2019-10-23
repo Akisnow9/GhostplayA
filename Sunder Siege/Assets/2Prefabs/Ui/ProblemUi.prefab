@@ -1512,7 +1512,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_progressSprite: {fileID: 7493720630880078838}
   m_timeSprite: {fileID: 7493720630379483980}
-  m_spawnDistance: 3
+  m_spawnDistance: 2
 --- !u!1 &7493720630705963455
 GameObject:
   m_ObjectHideFlags: 0

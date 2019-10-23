@@ -17,30 +17,39 @@ public class ProblemPhsyicsObject : MonoBehaviour
     // peices. These peices will be non interactible. Thye will phase out after a time limit.
     // Will need to reset to start postion once fixed.
     //*************************************************************************************
-    public List<Transform> m_childrenStartPostions; // Postion of all the children.
+    public List<PhysicsObjectPositionalData> m_childrenStartPostions; // Postion of all the children.
+
+    
 
     [SerializeField] private float m_addedForce; // The force applied to all objects. -- Does it need to be applied to parents or each part.
     [SerializeField] private float m_timeBeforeDissapear; // How long the objects will exist in the game world
-    
+    [SerializeField] private float m_scaleSpeedOfChildren; // Passed into the setup for children objects.
     // May not need below colliderlist.
     [SerializeField] private List<GameObject> m_children; // Colliders of all the children too ignore. -- If more is needed to be done could be gameobjects.
     private Vector3 m_postion; // Instead of creating and destroying a vector3 just have one always available to assaign.
 
-    [SerializeField] private ParticleSystem m_dissapearingParticleEffect; // The pieces will dissapear with a particle effect.
+    [SerializeField] private ParticleSystem m_dissapearingParticleEffect; // The pieces will dissapear with a particle effect. -- Might change into a list.
     
     // private Shader m_dissapearingShaderEffect;
 
     private bool m_isDoingPhysics; // If yes will check if it is time to destroy itself in update.
     private float m_timeToDissapear; // When the peice will deactivate.
-    private Transform m_startPostion; // Reset postion. Will return to this once complete. Might not be enough because of the way items are parented. Might need to also store rotation.
+    private PhysicsObjectPositionalData m_startPostion; // Reset postion. Will return to this once complete. Might not be enough because of the way items are parented. Might need to also store rotation.
 
     void Start()
     {
+        m_childrenStartPostions = new List<PhysicsObjectPositionalData>();
         // NEED TO MAKE SURE ALL THE PHYSIC PARTS IGNORE PLAYERS.
         // May need to disable all physics interactions until apply force is called.
         for (int i = 0; i < Timer.PlayerAmountGet(); i++) // Cycles through all players and sets them to ignore each of the physics problems.
             foreach (GameObject child in m_children) // cycles through all children -- This is extremly dumb. Should just put a check which ignores tag 'player' in oncollisonenter.
             {
+                if (child.GetComponent<ChildrenPhysicsObject>() == null)
+                {
+                    child.AddComponent<ChildrenPhysicsObject>();
+                }
+                if (child.GetComponent<Collider>() == null)             // Checks if the child has a box collider. If not adds one.
+                    child.AddComponent<BoxCollider>(); 
                 Physics.IgnoreCollision(child.GetComponent<Collider>(), Timer.PlayerGet(i).GetComponent<Collider>()); // Should ensure no interaction between palyer and parent.. Does this extend to children?
             }
 
@@ -52,7 +61,9 @@ public class ProblemPhsyicsObject : MonoBehaviour
         // May need to add a null check in case of no children.
         for (int i = 0; i < m_children.Count; i++)
         {
-            m_startPostion = m_children[i].transform;
+            m_startPostion = new PhysicsObjectPositionalData();
+            m_startPostion.m_position = m_children[i].transform.position;
+            m_startPostion.m_rotation = m_children[i].transform.rotation;
             if (m_childrenStartPostions != null)
             {
                 int count = m_childrenStartPostions.Count;
@@ -63,22 +74,14 @@ public class ProblemPhsyicsObject : MonoBehaviour
                 m_childrenStartPostions.Insert(0, m_startPostion);
             }
         }
-        this.gameObject.SetActive(false);
-    }
+        //this.gameObject.SetActive(false);
+    } // Ignores collsion of player and other children of object. Saves start postion data.
 
 
     // Update is called once per frame
     void Update()
     {
-        if(m_isDoingPhysics)
-        {
-            if(Timer.TimeGet() > m_timeToDissapear) // Checks if it's time to dissapear
-            {
-                
-                // Does it dissapear via shader? - Does it dissapear via particle?
-            }
-        }
-        // Nothing else should happen other then physics which is handled by engine.
+       
     }
 
     public void ApplyForce() 
@@ -88,11 +91,20 @@ public class ProblemPhsyicsObject : MonoBehaviour
         m_isDoingPhysics = true; // Now true it will check if it is destroyed every frame.
         foreach(GameObject child in m_children)
         {
-            child.GetComponent<Rigidbody>().AddForce(transform.forward * m_addedForce, ForceMode.Impulse); // Adds force to each individual object.
+            child.gameObject.SetActive(true);
+            if(child.GetComponent<Rigidbody>() == null) // Checks if the child has a rigidbody. If not adds one.
+            {
+                child.AddComponent<Rigidbody>(); 
+            }
+            child.GetComponent<Rigidbody>().AddForce(transform.forward * (m_addedForce + (float)Random.Range(0, 10)) , ForceMode.Impulse); // Adds force to each individual object.
         }
 
         // Set the time time for when it is to be "destroyed".
-        m_timeToDissapear = Timer.TimeGet() + m_timeBeforeDissapear; // Will dissaper 'x' amount of time in the future.
+        m_timeToDissapear = Timer.TimeGet() - m_timeBeforeDissapear; // Will dissaper 'x' amount of time in the future.
+        foreach(GameObject child in m_children)
+        {
+            child.GetComponent<ChildrenPhysicsObject>().Setup(m_timeToDissapear, m_scaleSpeedOfChildren);
+        }
     }
 
     public void ResetToStartPosition()
@@ -101,8 +113,10 @@ public class ProblemPhsyicsObject : MonoBehaviour
         m_isDoingPhysics = false; // No longer active so will not update.
         for (int i = 0; i < m_children.Count; i++)
         {
-            m_children[i].transform.rotation = m_childrenStartPostions[i].rotation; // Sets child postion back to start.
-            m_children[i].transform.position = m_childrenStartPostions[i].position;
+            m_children[i].transform.rotation = m_childrenStartPostions[i].m_rotation; // Sets child postion back to start.
+            m_children[i].transform.position = m_childrenStartPostions[i].m_position;
+            m_children[i].transform.localScale = new Vector3(1, 1, 1);
+            m_children[i].GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0); // Sets velocity to 0.
         }
         this.gameObject.SetActive(false);
     }

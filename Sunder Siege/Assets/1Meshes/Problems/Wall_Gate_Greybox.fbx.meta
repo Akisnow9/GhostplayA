@@ -6,16 +6,40 @@ ModelImporter:
     100000: Wall_Gate 1
     100002: //RootNode
     100004: Wall_Gate_Peripheral
+    100006: Wall_Gate_Archway
+    100008: Wall_Gate_DoorL
+    100010: Wall_Gate_DoorR
+    100012: Wall_Gate_Plank
     400000: Wall_Gate 1
     400002: //RootNode
     400004: Wall_Gate_Peripheral
+    400006: Wall_Gate_Archway
+    400008: Wall_Gate_DoorL
+    400010: Wall_Gate_DoorR
+    400012: Wall_Gate_Plank
     2100000: lambert1
+    2100002: lambert3
+    2100004: lambert2
+    2100006: lambert8
+    2100008: lambert7
     2300000: Wall_Gate 1
     2300002: Wall_Gate_Peripheral
+    2300004: Wall_Gate_Archway
+    2300006: Wall_Gate_DoorL
+    2300008: Wall_Gate_DoorR
+    2300010: Wall_Gate_Plank
     3300000: Wall_Gate 1
     3300002: Wall_Gate_Peripheral
+    3300004: Wall_Gate_Archway
+    3300006: Wall_Gate_DoorL
+    3300008: Wall_Gate_DoorR
+    3300010: Wall_Gate_Plank
     4300000: Wall_Gate
     4300002: Wall_Gate_Peripheral
+    4300004: Wall_Gate_Plank
+    4300006: Wall_Gate_Archway
+    4300008: Wall_Gate_DoorR
+    4300010: Wall_Gate_DoorL
   externalObjects: {}
   materials:
     importMaterials: 1
