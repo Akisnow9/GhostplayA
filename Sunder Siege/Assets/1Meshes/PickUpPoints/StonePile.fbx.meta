@@ -8,6 +8,7 @@ ModelImporter:
     400000: StonePile
     400002: //RootNode
     2100000: Material
+    2100002: StonePile_MAT
     2300000: StonePile
     3300000: StonePile
     4300000: StonePile
