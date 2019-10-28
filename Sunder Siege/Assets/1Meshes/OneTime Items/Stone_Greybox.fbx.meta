@@ -5,12 +5,18 @@ ModelImporter:
   fileIDToRecycleName:
     100000: polySurface1
     100002: //RootNode
+    100004: StonePiece
     400000: polySurface1
     400002: //RootNode
+    400004: StonePiece
     2100000: lambert2
+    2100002: Material
     2300000: polySurface1
+    2300002: StonePiece
     3300000: polySurface1
+    3300002: StonePiece
     4300000: polySurface1
+    4300002: StonePiece
   externalObjects: {}
   materials:
     importMaterials: 1
