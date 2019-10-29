@@ -171,6 +171,26 @@ PrefabInstance:
       propertyPath: m_scaleSpeedOfChildren
       value: 0.15
       objectReference: {fileID: 0}
+    - target: {fileID: 2131482022061317167, guid: eba121382c9199a429c2eaf70561cb26,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2131482022063506159, guid: eba121382c9199a429c2eaf70561cb26,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 054584ff294012f47afc0a6ca588835a, type: 2}
+    - target: {fileID: 7076195769443304362, guid: eba121382c9199a429c2eaf70561cb26,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4433655342276673103, guid: eba121382c9199a429c2eaf70561cb26,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 054584ff294012f47afc0a6ca588835a, type: 2}
     - target: {fileID: 3142968941626571460, guid: eba121382c9199a429c2eaf70561cb26,
         type: 3}
       propertyPath: m_Enabled
