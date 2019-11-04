@@ -55,7 +55,7 @@ MonoBehaviour:
   m_problemList:
   - m_name: 
     m_activeState: {fileID: 1646436706185660423}
-    m_fixableProblem: 0
+    m_fixableProblem: 5
     m_maxButtonPresses: 0
     m_animationController: {fileID: 0}
     m_breakParticleEffect: []
@@ -91,6 +91,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BreakableWall
+      objectReference: {fileID: 0}
+    - target: {fileID: 978899318292335778, guid: eba121382c9199a429c2eaf70561cb26,
+        type: 3}
+      propertyPath: m_addedForce
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 978899318292335778, guid: eba121382c9199a429c2eaf70561cb26,
+        type: 3}
+      propertyPath: m_timeBeforeDissapear
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 978899318292335778, guid: eba121382c9199a429c2eaf70561cb26,
+        type: 3}
+      propertyPath: m_scaleSpeedOfChildren
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 2179706517152915069, guid: eba121382c9199a429c2eaf70561cb26,
         type: 3}
@@ -146,21 +161,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 978899318292335778, guid: eba121382c9199a429c2eaf70561cb26,
-        type: 3}
-      propertyPath: m_addedForce
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 978899318292335778, guid: eba121382c9199a429c2eaf70561cb26,
-        type: 3}
-      propertyPath: m_timeBeforeDissapear
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 978899318292335778, guid: eba121382c9199a429c2eaf70561cb26,
-        type: 3}
-      propertyPath: m_scaleSpeedOfChildren
-      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 2131482022061317167, guid: eba121382c9199a429c2eaf70561cb26,
         type: 3}

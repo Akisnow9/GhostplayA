@@ -95,7 +95,7 @@ MonoBehaviour:
   m_problemList:
   - m_name: Break
     m_activeState: {fileID: 1352475389875352472}
-    m_fixableProblem: 0
+    m_fixableProblem: 4
     m_maxButtonPresses: 0
     m_animationController: {fileID: 0}
     m_breakParticleEffect: []
@@ -116,7 +116,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: d73756f148a0226468ea5717c33a194e, type: 3}
       propertyPath: m_Name
-      value: FoodBarrel_Greybox (1)
+      value: Active
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: d73756f148a0226468ea5717c33a194e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d73756f148a0226468ea5717c33a194e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -627,7 +631,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: d73756f148a0226468ea5717c33a194e, type: 3}
       propertyPath: m_Name
-      value: FoodBarrel_Greybox
+      value: Inactive
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d73756f148a0226468ea5717c33a194e, type: 3}
       propertyPath: m_IsActive
@@ -677,6 +681,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: d73756f148a0226468ea5717c33a194e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0cc79b6d0bbaf3a478d893e75852ff4c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d73756f148a0226468ea5717c33a194e, type: 3}
 --- !u!1 &5007990487096449430 stripped

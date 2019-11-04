@@ -216,7 +216,7 @@ MonoBehaviour:
   m_problemList:
   - m_name: 
     m_activeState: {fileID: 5651757515223698407}
-    m_fixableProblem: 0
+    m_fixableProblem: 2
     m_maxButtonPresses: 0
     m_animationController: {fileID: 0}
     m_breakParticleEffect: []
