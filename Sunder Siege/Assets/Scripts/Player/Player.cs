@@ -76,21 +76,21 @@ public class Player : MonoBehaviour
             float axisX = 0;
             float axisY = 0;
             // Get which direction from wsad.
-            if (Input.GetKeyDown(KeyCode.W))
+            if (Input.GetKey(KeyCode.W))
             {
                 axisY++;
             }
-            if (Input.GetKeyDown(KeyCode.S))
+            if (Input.GetKey(KeyCode.S))
             {
                 axisY--;
             }
-            if (Input.GetKeyDown(KeyCode.D))
+            if (Input.GetKey(KeyCode.D))
             {
                 axisX++;
             }
-            if (Input.GetKeyDown(KeyCode.A))
+            if (Input.GetKey(KeyCode.A))
             {
-                axisY++;
+                axisX--;
             }
 
 
@@ -128,7 +128,7 @@ public class Player : MonoBehaviour
                     }
                     else
                     {
-                        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
+                        //if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
                         {
                             rb.AddForce(transform.forward * dashDistance, ForceMode.Impulse); // applies a force to the player in the direction the player is facing
                             dashStart = Time.time;

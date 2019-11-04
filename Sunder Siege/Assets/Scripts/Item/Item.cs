@@ -546,7 +546,7 @@ public class Item : MonoBehaviour
 			m_playerList.Remove(Timer.PlayerGet(holder.GetPlayerIndex()));
 			if (m_isThrown || m_isDropped)
 			{
-				foreach (Collider Collider in m_model)
+				foreach (Collider Collider in a)
 				{
 					Physics.IgnoreCollision(Collider, other.gameObject.GetComponent<Collider>(), false);
 				}

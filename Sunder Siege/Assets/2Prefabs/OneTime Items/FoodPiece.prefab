@@ -92,7 +92,7 @@ MonoBehaviour:
   m_model:
   - {fileID: 2657866919678135615}
   m_itemOffset: {x: 0, y: 1.7, z: 0}
-  m_throwForce: 0.5
+  m_throwForce: 35
   m_bounceForce: 5
   m_oneTimeUse: 1
   m_losesChargesOnThrow: 0
@@ -111,10 +111,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: FoodPiece002
       objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: fa2c8d56d4346a74f8d9ca0cfe36d068, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 20fc77d85b5ffcb498e3e4f29fea0c9c, type: 2}
     - target: {fileID: 400000, guid: fa2c8d56d4346a74f8d9ca0cfe36d068, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -159,6 +155,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: fa2c8d56d4346a74f8d9ca0cfe36d068, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 20fc77d85b5ffcb498e3e4f29fea0c9c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa2c8d56d4346a74f8d9ca0cfe36d068, type: 3}
 --- !u!1 &2732157567570666940 stripped

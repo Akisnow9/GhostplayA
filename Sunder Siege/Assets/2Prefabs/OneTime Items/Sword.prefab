@@ -92,7 +92,7 @@ MonoBehaviour:
   m_model:
   - {fileID: 6352336780256089508}
   m_itemOffset: {x: 0, y: 1.8, z: 0}
-  m_throwForce: 0.5
+  m_throwForce: 35
   m_bounceForce: 5
   m_oneTimeUse: 1
   m_losesChargesOnThrow: 0
@@ -111,6 +111,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sword_Greybox
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 498c9bd3026090341aa150db452c49f4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: dc48602141202c940be164d7186ca980, type: 2}
     - target: {fileID: 400000, guid: 498c9bd3026090341aa150db452c49f4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -155,10 +159,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: 498c9bd3026090341aa150db452c49f4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: dc48602141202c940be164d7186ca980, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 498c9bd3026090341aa150db452c49f4, type: 3}
 --- !u!1 &1537327645205757007 stripped

@@ -20,7 +20,7 @@ public class Timer : MonoBehaviour
     //** Player based info **//
 
     [SerializeField] private Player m_playerToSpawn;
-    [HideInInspector]
+    //[HideInInspector]
     public List<Player> m_playerList;
     public List<GameObject> m_spawnPoints;
     public List<Material> m_playerMats;

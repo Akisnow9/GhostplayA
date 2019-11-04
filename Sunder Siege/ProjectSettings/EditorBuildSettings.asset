@@ -9,8 +9,8 @@ EditorBuildSettings:
     path: Assets/3Scenes/MainMenu.unity
     guid: dcb42313a2e733743808d292e0d02f81
   - enabled: 1
-    path: Assets/3Scenes/Sandbox/SandBox010.unity
-    guid: c88091c571e1b20438e8b75d36b638a1
+    path: Assets/3Scenes/Beta/Beta004.5.unity
+    guid: d01f6a63bf397884b99b2709637d6fd1
   - enabled: 1
     path: Assets/3Scenes/Menus/WinMenu.unity
     guid: 423a4d0f2372bd146a499586db134537

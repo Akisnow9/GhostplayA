@@ -141,8 +141,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 150
-  dashDistance: 40
+  dashDistance: 50
   dropOffset: 0
+  dashCooldown: 0
+  playerAcceleration: 10
   controller: 0
   m_playerShirt: {fileID: 7534270860968178849}
 --- !u!65 &7534270861074451462
@@ -404,7 +406,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7534270862577322414
 Transform:
   m_ObjectHideFlags: 0
@@ -436,7 +438,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3e41ee35285ca6b4db2f51cbaa748e94, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.404
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3e41ee35285ca6b4db2f51cbaa748e94, type: 3}
       propertyPath: m_LocalPosition.y
