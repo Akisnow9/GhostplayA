@@ -69,11 +69,10 @@ MonoBehaviour:
   m_losesChargesOnThrow: 1
   m_refillable: 1
   m_filledLevels:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7071513677171957192}
+  - {fileID: 7071513677171957190}
+  - {fileID: 7071513677171957188}
+  - {fileID: 7071513677171957194}
   m_maxCharges: 3
   m_fixableQuality: 01000000
 --- !u!54 &6402777086581628938
@@ -175,6 +174,30 @@ GameObject:
 --- !u!4 &7071513677171589612 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400002, guid: 5127163be6a84cd4b84fe361cc6e72c6,
+    type: 3}
+  m_PrefabInstance: {fileID: 7071513677171989358}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7071513677171957192 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100006, guid: 5127163be6a84cd4b84fe361cc6e72c6,
+    type: 3}
+  m_PrefabInstance: {fileID: 7071513677171989358}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7071513677171957190 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100008, guid: 5127163be6a84cd4b84fe361cc6e72c6,
+    type: 3}
+  m_PrefabInstance: {fileID: 7071513677171989358}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7071513677171957188 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100010, guid: 5127163be6a84cd4b84fe361cc6e72c6,
+    type: 3}
+  m_PrefabInstance: {fileID: 7071513677171989358}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7071513677171957194 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100004, guid: 5127163be6a84cd4b84fe361cc6e72c6,
     type: 3}
   m_PrefabInstance: {fileID: 7071513677171989358}
   m_PrefabAsset: {fileID: 0}
