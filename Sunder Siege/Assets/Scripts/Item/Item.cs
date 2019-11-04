@@ -30,12 +30,10 @@ public class Item : MonoBehaviour
 	[Header("Offset of the item when picked up")]
 	[SerializeField] private Vector3 m_itemOffset;              // Where the item is held relative to the player once picked up
 	[Header("How hard the item is thrown")]
-	[SerializeField] private float m_throwForce = 35f;          // How much force will be applied to the item when thrown
+	[SerializeField] private float m_throwForce = 0.5f;         // How much force will be applied to the item when thrown
 	[Header("How much the item bounces when it collides with somethiing")]
 	[SerializeField] private float m_bounceForce = 5f;          // How much force will be applied to the item when ricochet
-	private Vector3 m_hitLocation;								// Location the raycast hit when the item is thrown
-	private Vector3 m_currentPosition;							// Stores the currently position (transform) of the item
-	private Vector3 m_lastPosition;								// Stores the previous position (transform) of the item
+	private Vector3 m_startingPos;								// Starting position for the item to reset too
 	private Vector3 newEulerAngles;								// Stores new eular angles used for rotating the item when it is thrown
 	private Rigidbody m_rigidbody;                              // RB for general Physics things, applying force, toggling gravity, etc.
 	private bool m_isThrown = false;                            // Stores if the item is currently airborne 
@@ -72,6 +70,7 @@ public class Item : MonoBehaviour
 		m_rigidbody = GetComponent<Rigidbody>();
 		m_charges = m_maxCharges;
 		m_levelCount = m_filledLevels.Count;
+		m_startingPos = transform.position;
 	}
 
 	// @brief Update is called once per frame
@@ -102,6 +101,8 @@ public class Item : MonoBehaviour
 			// Make sure the playerList is larger than zero
 			if (m_playerList.Count > 0 || m_playerHolding != null)
 			{
+				m_lastPlayerHolding = m_playerHolding;
+
 				// Allow for actions to take place
 				Actions();
 			}
@@ -129,43 +130,69 @@ public class Item : MonoBehaviour
 		}
 
 		// If there is no player holding the item
-		if (m_playerHolding == null && !m_isThrown)
+		if (m_playerHolding == null)
 		{
 			// Loop through each player near the item (each player in the List)
 			for (int i = 0; i < m_playerList.Count; i++)
 			{
-				// Set the enum on the controller to the player thats in ranges controller
-				controller = m_playerList[i].controller;
+                if (Timer.GetKeyBoard())
+                {
+                    if(Input.GetKeyDown(KeyCode.E) && m_playerList[i].GetItem() == null)
+                    {
+                        Pickup(m_playerList[i]);
+                    }
+                }
+                else
+                {
+                    // Set the enum on the controller to the player thats in ranges controller
+                    controller = m_playerList[i].controller;
 
-				// if the 'A' button is pressed, and an item isn't already held (this is for swing logic overloading the 'A' button)
-				// then pickup the item.
-				if (XCI.GetButtonDown(XboxButton.A, controller) && m_playerList[i].GetItem() == null)
-				{
-					Pickup(m_playerList[i]);
-				}
+                    // if the 'A' button is pressed, and an item isn't already held (this is for swing logic overloading the 'A' button)
+                    // then pickup the item.
+                    if (XCI.GetButtonDown(XboxButton.A, controller) && m_playerList[i].GetItem() == null)
+                    {
+                        Pickup(m_playerList[i]);
+                    }
+                }
 			}
 		}
 		else if (m_playerHolding != null)// Otherwise there is a player holding the item
 		{
-			// The controller is assigned the player holding the item controller
-			controller = m_playerHolding.controller;
+            if (Timer.GetKeyBoard())
+            {
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    Drop();
+                }
 
-			// If the item is in the players hand then handle dropping the item when 'B' is pressed
-			if (XCI.GetButtonDown(XboxButton.B, controller))
-			{
-				Drop();
-			}
+                if(Input.GetKeyDown(KeyCode.Space))
+                {
+                    Throw();
+                }
+            }
+            else
+            {
+                // The controller is assigned the player holding the item controller
+                controller = m_playerHolding.controller;
 
-			// If the item is in the players hand then handle throwing the item when 'Y' is pressed
-			if (XCI.GetButtonDown(XboxButton.Y, controller))
-			{
-				//if(!thing that preventsthrowing)
-				Throw();
-			}
+                // If the item is in the players hand then handle dropping the item when 'B' is pressed
+                if (XCI.GetButtonDown(XboxButton.B, controller))
+                {
+                    Drop();
+                }
+
+                // If the item is in the players hand then handle throwing the item when 'Y' is pressed
+                if (XCI.GetButtonDown(XboxButton.Y, controller))
+                {
+                    //if(!thing that preventsthrowing)
+                    Throw();
+                }
+            }
+            
 		}
+
 		if(m_rigidbody.velocity == Vector3.zero)
 		{
-			m_isThrown = false;
 			m_isDropped = true;
 		}
 	}
@@ -187,6 +214,8 @@ public class Item : MonoBehaviour
 	// @brief Handles dropping the item when called
 	void Drop()
 	{
+		m_rigidbody.velocity = Vector3.zero;
+
 		m_isDropped = true;
 
 		// Item will not fall through world or cause player to walk on it
@@ -217,13 +246,16 @@ public class Item : MonoBehaviour
 		if (Physics.Raycast(forwardRay, out hit))
 		{
 			// Under 1.0 is generally too close to the wall
-			//Debug.DrawRay(rayPosition, transform.forward, Color.black, 10f);
-			//Debug.Log("Hit distance: " + hit.distance);
+			Debug.DrawRay(rayPosition, transform.forward, Color.black, 10f);
+			Debug.Log("Hit distance: " + hit.distance);
 
 			if (hit.distance < 1.0)
 			{
-				Drop();
-				return;
+				if (hit.collider.tag == "Wall")
+				{
+					Drop();
+					return;
+				}
 			}
 		}
 
@@ -244,13 +276,14 @@ public class Item : MonoBehaviour
 		// Normalize the forward of the player to get the direction only
 		playersForward.Normalize();
 
+		// Refer to the player class to throw the item, also have no player holding the item anymore
+		m_playerHolding.ThrowItem();
+		m_playerHolding = null;
+
 		// Begin moving towards the location
 		m_rigidbody.AddForce(playersForward * m_throwForce, ForceMode.Impulse);
 		BeepBoopRotateSoup();
 
-		// Refer to the player class to throw the item, also have no player holding the item anymore
-		m_playerHolding.ThrowItem();
-		m_playerHolding = null;
 
 		// If the item is to lose its charges when thrown, set its chargers to zero
 		if (m_losesChargesOnThrow)
@@ -265,7 +298,7 @@ public class Item : MonoBehaviour
 	{
 		// Set the new eular angles to the current transform, multiplying the Y to have it spin
 		newEulerAngles = transform.position;
-		newEulerAngles.y = transform.position.y * 10f;
+		newEulerAngles.y = transform.position.y * 100f;
 
 		// Basic rotation
 		transform.Rotate(0f, newEulerAngles.y, 0f);
@@ -319,6 +352,13 @@ public class Item : MonoBehaviour
 				m_filledLevels[i].SetActive(false);
 			}
 		}
+	}
+
+	// @brief Resets the items position in the level
+	public void ItemPosReset()
+	{
+		transform.position = m_startingPos;
+		m_rigidbody.velocity = Vector3.zero;
 	}
 
 	//*************************************************************************************
@@ -438,9 +478,9 @@ public class Item : MonoBehaviour
 			// Also the player isn't the last player to be holding the item
 			foreach (Player player in m_playerList)
 			{
-				if (!m_isDropped)
+				if (m_isThrown)
 				{
-					//if (m_lastPlayerHolding != player)
+					if (m_lastPlayerHolding != player)
 					{
 						if (player.GetItem() == null)
 						{
@@ -449,9 +489,12 @@ public class Item : MonoBehaviour
 
 							// So pick up the item
 							player.PickUpItem(this);
+							m_rigidbody.velocity = Vector3.zero;
 
 							// Set the new last player holding to current holder
 							m_lastPlayerHolding = m_playerHolding;
+
+							m_isThrown = false;
 						}
 					}
 				}
@@ -482,6 +525,8 @@ public class Item : MonoBehaviour
 			// Make sure the item is no longer thrown/dropped
 			m_isThrown = false;
 			m_isDropped = true;
+
+			m_lastPlayerHolding = null;
 		}
 	}
 

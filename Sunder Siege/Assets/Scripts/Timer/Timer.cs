@@ -8,21 +8,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-
+using UnityEngine.Audio;
 
 public class Timer : MonoBehaviour
 {
-	//*************************************************************************************
-	// When events will occur. 
-	// Eg: Once 'm_timeLimit' reaches 'm_eventTriggerTime' there will be 'm_numberOfEvents' 
-	// over the next 'm_eventTriggerTime'
-	//*************************************************************************************
-	//** Player based info **//
-	[SerializeField] private Player m_playerToSpawn;
+    //*************************************************************************************
+    // When events will occur. 
+    // Eg: Once 'm_timeLimit' reaches 'm_eventTriggerTime' there will be 'm_numberOfEvents' 
+    // over the next 'm_eventTriggerTime'
+    //*************************************************************************************
+    //** Player based info **//
+
+    [SerializeField] private Player m_playerToSpawn;
+    [HideInInspector]
     public List<Player> m_playerList;
-	public List<GameObject> m_spawnPoints;
-	public List<Material> m_playerMats;
+    public List<GameObject> m_spawnPoints;
+    public List<Material> m_playerMats;
+    //[SerializeField] private List<AudioMixerGroup> m_mixers;
+    [SerializeField] private SoundManager m_soundManager;
+
 
     [SerializeField] private float m_timeLimit = 60; // The timer will count down from this point. Set from Unity Editor.
     [SerializeField] private float m_timeBeforeFail = 15; // Once a problem has activated how long before the player loses a life.
@@ -32,53 +36,69 @@ public class Timer : MonoBehaviour
 
     private float m_timeScale = 1; // This can be used to modify the rate of seconds passing also movement speed and animation. Useful if people want to include a slowdown effect but needs to be included in everything that is effected. Eg movement/ animation will need to be multiplied by this all the time.
 
-
+    [HideInInspector]
     [SerializeField] private int m_numOfInactiveProblems; // The amount of problems in the list that are inactive. Easier then checking every inactive amounts in list.
 
-   
+    //[HideInInspector]
     public List<Events> m_pendingEventList; // The event list. Events are added from the editor.
     public List<Problem> m_problemList; // List of problems. Problems added to this list will be randomly selected.
 
     private static Timer instance = null;
 
+    [SerializeField] private List<SoundRequester> m_sounds;
+
+    [SerializeField] private bool m_keyboard = false;
+
     private void Awake()
     {
         instance = this;
 
-		Player playerClone;
-		for (int i = 0; i < Menus.GetActivatedPlayerAmount(); i++)
-		{
-			// Create the players an attach their controllers
-			playerClone = Instantiate(m_playerToSpawn);
-			StaticVariables holder = Menus.GetPlayerInformation(i);
-			playerClone.controller = holder.Controller;
 
-			// Set the players spawn point
-			playerClone.transform.position = m_spawnPoints[i].transform.position;
+        // This needs to be re-enabled
+        //Player playerClone;
+        //for (int i = 0; i < Menus.GetActivatedPlayerAmount(); i++)
+        //{
+        //    // Create the players an attach their controllers
+        //    playerClone = Instantiate(m_playerToSpawn);
+        //    StaticVariables holder = Menus.GetPlayerInformation(i);
+        //    playerClone.controller = holder.Controller;
 
-			// Set the players index
-			playerClone.SetPlayerIndex(i);
+        //    // Set the players spawn point
+        //    playerClone.transform.position = m_spawnPoints[i].transform.position;
 
-			// Add the players to the playerList
-			m_playerList.Insert(i, playerClone);
+        //    // Set the players index
+        //    playerClone.SetPlayerIndex(i);
 
-			// Set the shirts material
-			Material newMaterial = Instantiate(m_playerMats[i]);
-			newMaterial.SetColor(m_playerMats[i].name, m_playerMats[i].color);
+        //    // Add the players to the playerList
+        //    m_playerList.Insert(i, playerClone);
 
-			MeshRenderer thisRenderer = m_playerList[i].GetPlayerShirt().GetComponent<MeshRenderer>();
-			thisRenderer.material = newMaterial;
-		}
+        //    // Set the shirts material
+        //    Material newMaterial = Instantiate(m_playerMats[i]);
+        //    newMaterial.SetColor(m_playerMats[i].name, m_playerMats[i].color);
 
-		// GameObject newObject = Instantiate();
-		// GameObject.AddComponent<Events>();
+        //    MeshRenderer thisRenderer = m_playerList[i].GetPlayerShirt().GetComponent<MeshRenderer>();
+        //    thisRenderer.material = newMaterial;
+        //}
 
-	}
+        //GameObject newObject = Instantiate();
+        //GameObject.AddComponent<Events>();
 
-	// Start is called before the first frame update
-	void Start()
+    }
+
+    // Start is called before the first frame update
+    void Start()
     {
+        if (m_sounds != null)
+            if (m_sounds.Count != 0)
+            {
+                foreach (SoundRequester sounds in m_sounds)
+                {
+                    sounds.SetupSound(this.gameObject);
+                }
+            }
         m_numOfInactiveProblems = m_problemList.Count;
+        //Needs safety here.
+        //Timer.SoundMangerGet().Play(m_sounds, WhenToPlaySound.Menu);
     }
 
     // Update is called once per frame
@@ -87,14 +107,21 @@ public class Timer : MonoBehaviour
         CheckEventsLists();
         if (CheckProblems()) // Returns true if fail state reached. Either timer hit 0 or lives hit 0.
         {
-            //Game over state here
-            if(m_numberofLives <= 0)
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
-            else
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            //Game over state here.
         }
         m_timeLimit -= m_timeScale * Time.deltaTime; // minus the time between frames * the scaler.
+        if (m_sounds.Count != 0)
+            Timer.SoundMangerGet().CheckAudio(m_sounds);
     }
+
+
+
+    public static bool GetKeyBoard()
+    {
+        return instance.m_keyboard;
+    }
+
+
 
     public static int PlayerAmountGet()
     {
@@ -107,6 +134,10 @@ public class Timer : MonoBehaviour
         return instance.m_playerList[a_index];
     }
 
+    public static SoundManager SoundMangerGet()
+    {
+        return instance.m_soundManager;
+    }
 
     //Gets time for ui
     public static float TimeGet()
@@ -172,12 +203,14 @@ public class Timer : MonoBehaviour
         {
             if (m_problemList[i].CheckActive(m_timeLimit) && !m_problemList[i].GetPending()) // Checks if a problem has expired. -- Can probably be used more efficently now that list sorts active
             {
-                m_problemList[i].Deactivate();
+                m_problemList[i].Deactivate(); 
                 m_numberofLives--; // Subtract a life.
-                Problem addToFront = m_problemList[i]; // Copies itself.
-                m_problemList.Remove(m_problemList[i]); // Removes itself.
-                m_problemList.Insert(0, addToFront); // Puts problem to the front of the list.    --    This will be skipped if the problem has a permanent broken state.
-                m_numOfInactiveProblems++;
+                Problem addToFront = m_problemList[i]; // Copies itself. -- // Might need to be moved into a function. That can be called elsewhere
+                m_problemList.Remove(m_problemList[i]); // Removes itself. -- // Might need to be moved into a function. That can be called elsewhere
+                // If permanent Get rid of insert and encapsulate with an if(maxbutton presses == current button presses) Then insert.
+                // Consider changing color of model. New function perma break.
+                m_problemList.Insert(0, addToFront); // Puts problem to the front of the list.    --    This will be skipped if the problem has a permanent broken state.  -- // Might need to be moved into a function. That can be called elsewhere
+                m_numOfInactiveProblems++; // Might need to be moved into a function. That can be called elsewhere
             }
             else if (m_problemList[i].GetPending())                          // If active will now check pending status.
                 if (m_problemList[i].CheckPending())

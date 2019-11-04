@@ -1,0 +1,18 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class EntityReset : MonoBehaviour
+{
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.tag == "Item")
+		{
+			other.GetComponent<Item>().ItemPosReset();
+		}
+		else if (other.tag == "Player")
+		{
+			other.GetComponent<Player>().playerPosReset();
+		}
+	}
+}

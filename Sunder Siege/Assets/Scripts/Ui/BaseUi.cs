@@ -22,6 +22,8 @@ public class BaseUi : MonoBehaviour
     public List<GameObject> m_orderedSpriteList; // All ui sprites.
     private int m_activePieces = 0;
 
+    [SerializeField] private float m_elemnenFadeSpeed = 0.05f;
+
     // Start is called before the first frame update
 
     public void Deactivate()
@@ -35,14 +37,16 @@ public class BaseUi : MonoBehaviour
 
     public bool Increment() // Could be changed to voids
     {
-        m_orderedSpriteList[m_activePieces].SetActive(true);
+        m_orderedSpriteList[m_activePieces].SetActive(true); // Change to function on the object which will increase opactiy. -- This will now happen in fadein.
+       // m_orderedSpriteList[m_activePieces - 1].GetComponent<ProblemUiElementFade>().FadeOut(m_elemnenFadeSpeed);
         m_activePieces++;
         return m_activePieces == m_orderedSpriteList.Count; // Return that it has reached the max sprites
     }
 
     public bool Decrement() // Could be changed to voids
     {
-        m_orderedSpriteList[m_activePieces - 1].SetActive(false);
+        m_orderedSpriteList[m_activePieces - 1].SetActive(false); // Change to function on the object which will reduce opactiy. -- This will now happen in fafeout.
+        //m_orderedSpriteList[m_activePieces - 1].GetComponent<ProblemUiElementFade>().FadeOut(m_elemnenFadeSpeed);
         m_activePieces--;
         return m_activePieces == 0;
     }

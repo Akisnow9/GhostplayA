@@ -28,6 +28,8 @@ public class ProblemPhsyicsObject : MonoBehaviour
     [SerializeField] private List<GameObject> m_children; // Colliders of all the children too ignore. -- If more is needed to be done could be gameobjects.
     private Vector3 m_postion; // Instead of creating and destroying a vector3 just have one always available to assaign.
 
+    [SerializeField] private bool m_dissapear = false;
+
     [SerializeField] private ParticleSystem m_dissapearingParticleEffect; // The pieces will dissapear with a particle effect. -- Might change into a list.
     
     // private Shader m_dissapearingShaderEffect;
@@ -44,25 +46,20 @@ public class ProblemPhsyicsObject : MonoBehaviour
         for (int i = 0; i < Timer.PlayerAmountGet(); i++) // Cycles through all players and sets them to ignore each of the physics problems.
             foreach (GameObject child in m_children) // cycles through all children -- This is extremly dumb. Should just put a check which ignores tag 'player' in oncollisonenter.
             {
-                //if (child.GetComponent<ChildrenPhysicsObject>() == null)
-                //{
-                //    child.AddComponent<ChildrenPhysicsObject>();
-                //}
+                if (child.GetComponent<ChildrenPhysicsObject>() == null)
+                {
+                    child.AddComponent<ChildrenPhysicsObject>();
+                }
                 if (child.GetComponent<Collider>() == null)             // Checks if the child has a box collider. If not adds one.
                     child.AddComponent<BoxCollider>(); 
                 Physics.IgnoreCollision(child.GetComponent<Collider>(), Timer.PlayerGet(i).GetComponent<Collider>()); // Should ensure no interaction between palyer and parent.. Does this extend to children?
             }
 
-        foreach (GameObject child1 in m_children)
-        {
-            foreach (GameObject child2 in m_children)
+        foreach(GameObject child1 in m_children)
+            foreach(GameObject child2 in m_children)
             {
-                if (child1 != child2)
-                {
-                    Physics.IgnoreCollision(child1.GetComponent<Collider>(), child2.GetComponent<Collider>());
-                }
+                Physics.IgnoreCollision(child1.GetComponent<Collider>(), child2.GetComponent<Collider>());
             }
-        }
         // May need to add a null check in case of no children.
         for (int i = 0; i < m_children.Count; i++)
         {
@@ -97,18 +94,18 @@ public class ProblemPhsyicsObject : MonoBehaviour
         foreach(GameObject child in m_children)
         {
             child.gameObject.SetActive(true);
-            //if(child.GetComponent<Rigidbody>() == null) // Checks if the child has a rigidbody. If not adds one.
-            //{
-            //    child.AddComponent<Rigidbody>(); 
-            //}
+            if(child.GetComponent<Rigidbody>() == null) // Checks if the child has a rigidbody. If not adds one.
+            {
+                child.AddComponent<Rigidbody>(); 
+            }
             child.GetComponent<Rigidbody>().AddForce(transform.forward * (m_addedForce + (float)Random.Range(0, 10)) , ForceMode.Impulse); // Adds force to each individual object.
         }
 
         // Set the time time for when it is to be "destroyed".
-        m_timeToDissapear = Timer.TimeGet() - m_timeBeforeDissapear; // Will dissaper 'x' amount of time in the future.
-        foreach(GameObject child in m_children)
+        if (m_dissapear)
         {
-            if (child.GetComponent<ChildrenPhysicsObject>() != null)
+            m_timeToDissapear = Timer.TimeGet() - m_timeBeforeDissapear; // Will dissaper 'x' amount of time in the future.
+            foreach (GameObject child in m_children)
             {
                 child.GetComponent<ChildrenPhysicsObject>().Setup(m_timeToDissapear, m_scaleSpeedOfChildren);
             }

@@ -23,7 +23,8 @@ using UnityEngine;
 
 // This is a waste of time.
 // I'm sure it could be done better.
-public class Events : MonoBehaviour
+[System.Serializable]
+public class Events
 {
     public E_Event m_event; // The actual queued event.
     public float m_eventTriggerTime; // This is the time the event will trigger. Should be less then current time or will fire instantly 

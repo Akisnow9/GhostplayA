@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8260139806342146606}
   - component: {fileID: 4704985698014100377}
   - component: {fileID: 1043549127147201181}
-  - component: {fileID: 8010281212256596637}
   m_Layer: 0
   m_Name: WallGate
   m_TagString: Untagged
@@ -61,36 +60,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_playerList: []
-  m_currentParticle: {fileID: 0}
+  m_currentParticle:
+  - {fileID: 0}
   m_uiPrefab: {fileID: 7493720630696751244, guid: 10e1f20f78a56e740913d218e5494977,
     type: 3}
+  m_uiPosition: {x: 0, y: 4, z: 0}
   m_inactiveState: {fileID: 5417787037506214409}
   m_problemList:
-  - {fileID: 8010281212256596637}
---- !u!114 &8010281212256596637
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1212366516857112993}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff0ce4f6d042f704bab5bc0ad3dcf6ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_fixableProblem: 2
-  m_maxButtonPresses: 1
-  m_animationController: {fileID: 0}
-  m_activeState: {fileID: 6872062685134673721}
-  m_breakParticleEffect: {fileID: 0}
-  m_particleStartDirection: 0
-  m_particleStartDistance: 3
-  m_particleFallSpeed: 0.5
-  m_breakPhysics: {fileID: 0}
-  m_whileBrokenParticle: {fileID: 0}
-  m_fixedParticle: {fileID: 4811201962163518272, guid: 65ae94aa724657445a5550e449895a14,
-    type: 3}
+  - m_name: 
+    m_activeState: {fileID: 6872062685134673721}
+    m_fixableProblem: 0
+    m_maxButtonPresses: 0
+    m_animationController: {fileID: 0}
+    m_breakParticleEffect: []
+    m_particleStartDirection: 0
+    m_particleStartDistance: 3
+    m_particleFallSpeed: 0.5
+    m_breakPhysics: {fileID: 7240933096680737106}
+    m_whileBrokenParticles: []
+    m_fixedParticles: []
+    m_failParticles: []
+    m_sounds: []
 --- !u!54 &5672160809713804996
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -283,6 +273,7 @@ MonoBehaviour:
   - {fileID: 1570654367756224294}
   - {fileID: 1570654367756224288}
   - {fileID: 1570654367756224290}
+  m_dissapear: 0
   m_dissapearingParticleEffect: {fileID: 0}
 --- !u!64 &3215466837715700496
 MeshCollider:

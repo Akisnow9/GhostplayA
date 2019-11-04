@@ -31,7 +31,7 @@ public class ProblemController : MonoBehaviour
     [SerializeField]private BaseUi m_progressSprite;
     [SerializeField]private BaseUi m_timeSprite;
 
-    [SerializeField]private float m_spawnDistance;
+    //[SerializeField]private float m_spawnDistance;
 
     // Does this need effects animations?
     // Scales? Oppacity?
@@ -47,6 +47,7 @@ public class ProblemController : MonoBehaviour
     void Update()
     {
         this.transform.LookAt(Camera.main.transform); // Currently shows back of sprite rather then front
+        this.transform.Rotate(0, 180, 0); // Look at seems to look exactley away. Could be a problem with the prefab.
         //if (Input.GetKeyDown(KeyCode.A))
         //{
         //    m_timeSprite.Decrement();
@@ -82,10 +83,11 @@ public class ProblemController : MonoBehaviour
 
    
 
-    public void Setup(Problem a_problemToSpawnOver)
+    public void Setup(Problem a_problemToSpawnOver, Vector3 a_uiPostion)
     {
         m_problemToSpawnOver = a_problemToSpawnOver;
-        this.transform.position = m_problemToSpawnOver.transform.position + new Vector3(0, m_spawnDistance, 0);
+        //this.transform.position = m_problemToSpawnOver.transform.position + new Vector3(0, m_spawnDistance, 0);
+        this.transform.position = m_problemToSpawnOver.transform.position + a_uiPostion;
         this.gameObject.SetActive(false);
     }
 

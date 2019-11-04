@@ -15,8 +15,8 @@ using UnityEngine;
 using UnityEditor;
 
 
-
-public class ProblemList : MonoBehaviour
+[System.Serializable]
+public class ProblemList
 {
     //*************************************************************************************
     // This class is just a bunch of getters and variables that a single problem will have.
@@ -24,7 +24,8 @@ public class ProblemList : MonoBehaviour
     // you will have to attach a second script to the same object.
     //*************************************************************************************
 
-
+    [SerializeField] private string m_name;
+    [SerializeField] private GameObject m_activeState; // Place the problems active state model here.
 
     [Header("Problem Is Fixed By")] // All Things Revolving Around the Problem and Solution
     [SerializeField] private E_Quality m_fixableProblem; // Will be able to set the list size and the problems from the unity editor.
@@ -35,7 +36,6 @@ public class ProblemList : MonoBehaviour
     [SerializeField] private Animator m_animationController;
 
     [Header("Broken State")] // All states of problems
-    [SerializeField] private GameObject m_activeState; // Place the problems active state model here.
 
      
 
@@ -43,28 +43,27 @@ public class ProblemList : MonoBehaviour
     
     [Header("Pending")]
  
-    [SerializeField] private ParticleSystem m_breakParticleEffect; // What particle effects take place. 1 to 1 ration with animation and Fixable problem.  // Could probably be changed to game object that is turned on and off.
+    [SerializeField] private List<ParticleSystem> m_breakParticleEffect; // What particle effects take place. 1 to 1 ration with animation and Fixable problem.  // Could probably be changed to game object that is turned on and off.
     [SerializeField] private float m_particleStartDirection; // The particel will start at (x,y,z) and then move towards the problem
-    [SerializeField] private float m_particleStartDistance = 3; // How far away will it spawn.
+    //[SerializeField] private Vector3 m_particleStartDirection;
+    [SerializeField] private float m_particleStartDistance = 3f; // How far away will it spawn.
     [SerializeField] private float m_particleFallSpeed = 0.5f; // Controls the speed of the particle moving towards the problem.
 
 
     [Header("Active")]
     [SerializeField] private ProblemPhsyicsObject m_breakPhysics; // The physics object -- Will create a sepearate script for handling of physics.    [Header("Pending")]
-    [SerializeField] private ParticleSystem m_whileBrokenParticle; // What plays while the problem is now active.
+    [SerializeField] private List<ParticleSystem> m_whileBrokenParticles; // What plays while the problem is now active.
+    // While broken animation?
     
     
 
-    [Header("Fixed")]
-    [SerializeField] private ParticleSystem m_fixedParticle; // What plays when the problem is fixed.
+    [Header("Succesfully Fixed and failed to fix")]
+    [SerializeField] private List<ParticleSystem> m_fixedParticles; // What plays when the problem is fixed.
+    [SerializeField] private List<ParticleSystem> m_failParticles; // What plays when the problem fails.
 
 
-
-    private void Start()
-    {
-        m_activeState.SetActive(false); // Disables all active states of problems.
-    }
-
+    [Header("Sounds for pending, active, fail and success for this problem.")]
+    [SerializeField] private List<SoundRequester> m_sounds;
 
     //*************************************************************************************
     // Getters to easily access the things contained within.
@@ -83,7 +82,7 @@ public class ProblemList : MonoBehaviour
     {
         return m_activeState;
     }
-    public ParticleSystem GetBreakParticleEffect()
+    public List<ParticleSystem> GetBreakParticleEffect()
     {
         return m_breakParticleEffect;
     }
@@ -103,17 +102,25 @@ public class ProblemList : MonoBehaviour
     {
         return m_breakPhysics;
     }
-    public ParticleSystem GetWhileBrokenParticle()
+    public List<ParticleSystem> GetWhileBrokenParticle()
     {
-        return m_whileBrokenParticle;
+        return m_whileBrokenParticles;
     }
-    public ParticleSystem GetFixedParticle()
+    public List<ParticleSystem> GetFixedParticle()
     {
-        return m_fixedParticle;
+        return m_fixedParticles;
+    }
+    public List<ParticleSystem> GetFailedParticle()
+    {
+        return m_failParticles;
     }
     public Animator GetAnimationController()
     {
         return m_animationController;
+    }
+    public List<SoundRequester> GetSounds()
+    {
+        return m_sounds;
     }
 
 }
