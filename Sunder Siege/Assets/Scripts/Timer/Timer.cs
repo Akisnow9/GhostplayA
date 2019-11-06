@@ -9,7 +9,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
-
+using UnityEngine.SceneManagement;
 public class Timer : MonoBehaviour
 {
     //*************************************************************************************
@@ -107,11 +107,18 @@ public class Timer : MonoBehaviour
         CheckEventsLists();
         if (CheckProblems()) // Returns true if fail state reached. Either timer hit 0 or lives hit 0.
         {
-            //Game over state here.
+            if (m_numberofLives <= 0)
+                SceneManager.LoadScene(3);
+            else
+                SceneManager.LoadScene(2);
         }
         m_timeLimit -= m_timeScale * Time.deltaTime; // minus the time between frames * the scaler.
         if (m_sounds.Count != 0)
             Timer.SoundMangerGet().CheckAudio(m_sounds);
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
 

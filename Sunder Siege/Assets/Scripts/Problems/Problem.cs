@@ -34,7 +34,7 @@ public class Problem : MonoBehaviour
     public List<Player> m_playerList; // List of players to check input and item held.
     [HideInInspector]
 	public List<ParticleSystem> m_currentParticle; // Has to be turned off in deactivate.
-
+    public List<GameObject> m_currentProjectile;
     [SerializeField] private ProblemController m_uiPrefab;
     [SerializeField] private Vector3 m_uiPosition = new Vector3(0,4,0); // Ui can be set elsewhere.
     private ProblemController m_ui;
@@ -97,8 +97,6 @@ public class Problem : MonoBehaviour
         SoundManager s = Timer.SoundMangerGet();
         // Sounds for problem would go here.
         if(m_currentProblem != null)
-            if(m_currentProblem.GetSounds() != null)
-            if(m_currentProblem.GetSounds().Count != 0)
             s.CheckAudio(m_currentProblem.GetSounds()); // The problems for the specified problem occuring
     }
 
@@ -140,13 +138,14 @@ public class Problem : MonoBehaviour
         if (m_currentProblem.GetBreakParticleEffect() != null) // Checks if there is a particle effect in here for the associated problem and then activates then returns.
             if (m_currentProblem.GetBreakParticleEffect().Count != 0)
             {
-                List<ParticleSystem> particle = m_currentProblem.GetBreakParticleEffect();
+                List<GameObject> particle = m_currentProblem.GetBreakParticleEffect();
                 for (int i = 0; i < m_currentProblem.GetBreakParticleEffect().Count; i++)
                 {
-                    ParticleSystem t = Instantiate<ParticleSystem>(particle[i]);
-                    m_currentParticle.Add(t);
-                    m_currentParticle[i].transform.position = this.transform.position + new Vector3(0, m_currentProblem.GetParticleStartDistance(), 0); // Sets the particle effect to start off sceen above the problem.
-                    m_currentParticle[i].Play();
+                    GameObject t = Instantiate<GameObject>(particle[i]);
+                    //m_currentParticle.Add(t);
+                    m_currentProjectile.Add(t);
+                    m_currentProjectile[i].transform.position = this.transform.position + new Vector3(0, m_currentProblem.GetParticleStartDistance(), 0); // Sets the particle effect to start off sceen above the problem.
+                    //m_currentParticle[i].Play();
                 }
             }
         if(m_currentProblem.GetSounds() != null)
@@ -162,21 +161,21 @@ public class Problem : MonoBehaviour
         if (m_currentProblem.GetBreakParticleEffect() != null)
         {
             if (m_currentProblem.GetBreakParticleEffect().Count != 0)
-                if (m_currentParticle[0].isPlaying) // Specific case for particle effect as upon completion 
+                //if (m_currentParticle[0].isPlaying) // Specific case for particle effect as upon completion 
                 {
                     Vector3 move = new Vector3(0, m_currentProblem.GetParticleFallSpeed() * Time.deltaTime, 0);                  // Only should be movement on y axis
-                    foreach (ParticleSystem particle in m_currentParticle)                               // m_curentParicle.transform.position = move.normalized;
+                    foreach (GameObject projectile in m_currentProjectile)                               // m_curentParicle.transform.position = move.normalized;
                     {
-                        particle.transform.position -= move; // Will move each particle. -- Old single direction sysetm
+                        projectile.transform.position -= move; // Will move each particle. -- Old single direction sysetm
                     }
-                    if (m_currentParticle[0].transform.position.y <= this.transform.position.y) // Check if it has moved past the object.
+                    if (m_currentProjectile[0].transform.position.y <= this.transform.position.y) // Check if it has moved past the object.
                     {
-                        foreach (ParticleSystem particle in m_currentParticle)
+                        foreach (GameObject projectile in m_currentProjectile)
                         {
-                            particle.Stop();
-                            Destroy(particle.gameObject, 2);
+                            //projectile.Stop();
+                            Destroy(projectile.gameObject, 2);
                         }
-                        m_currentParticle.Clear();
+                        m_currentProjectile.Clear();
                         m_isPending = false;
                         return true; // May cause issues with 
                                      // Animator needs to check for a 'Start' animation. if it does play it. If it doesn't skip.
@@ -348,7 +347,6 @@ public class Problem : MonoBehaviour
                                 if (item.IsRefillable())
                                 {
                                     item.UseCharge();
-                                
                                     //Does math to see what plane to display.
                                 }
                                 else if (item.IsOneTimeUse())

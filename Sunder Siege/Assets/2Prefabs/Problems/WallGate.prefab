@@ -62,6 +62,7 @@ MonoBehaviour:
   m_playerList: []
   m_currentParticle:
   - {fileID: 0}
+  m_currentProjectile: []
   m_uiPrefab: {fileID: 7493720630696751244, guid: 2b414005ea8758443a5c3341bb380ad1,
     type: 3}
   m_uiPosition: {x: 0, y: 4, z: 0}
@@ -72,10 +73,10 @@ MonoBehaviour:
     m_fixableProblem: 2
     m_maxButtonPresses: 0
     m_animationController: {fileID: 0}
-    m_breakParticleEffect: []
-    m_particleStartDirection: 0
-    m_particleStartDistance: 3
-    m_particleFallSpeed: 0.5
+    m_breakProjectile: []
+    m_startDirection: 0
+    m_startDistance: 3
+    m_fallSpeed: 0.5
     m_breakPhysics: {fileID: 7240933096680737106}
     m_whileBrokenParticles: []
     m_fixedParticles: []
@@ -475,7 +476,7 @@ PrefabInstance:
     - target: {fileID: 2300014, guid: e8f4e95a0b641584c8e71d89c9b21fbf, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 054584ff294012f47afc0a6ca588835a, type: 2}
+      objectReference: {fileID: 2100000, guid: f7b993a81a498484a94b771e3582b890, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8f4e95a0b641584c8e71d89c9b21fbf, type: 3}
 --- !u!1 &1570654367756224296 stripped
@@ -596,7 +597,7 @@ PrefabInstance:
     - target: {fileID: 2300014, guid: e8f4e95a0b641584c8e71d89c9b21fbf, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 054584ff294012f47afc0a6ca588835a, type: 2}
+      objectReference: {fileID: 2100000, guid: f7b993a81a498484a94b771e3582b890, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8f4e95a0b641584c8e71d89c9b21fbf, type: 3}
 --- !u!4 &4215203329270242020 stripped

@@ -43,11 +43,11 @@ public class ProblemList
     
     [Header("Pending")]
  
-    [SerializeField] private List<ParticleSystem> m_breakParticleEffect; // What particle effects take place. 1 to 1 ration with animation and Fixable problem.  // Could probably be changed to game object that is turned on and off.
-    [SerializeField] private float m_particleStartDirection; // The particel will start at (x,y,z) and then move towards the problem
+    [SerializeField] private List<GameObject> m_breakProjectile; // What particle effects take place. 1 to 1 ration with animation and Fixable problem.  // Could probably be changed to game object that is turned on and off.
+    [SerializeField] private float m_startDirection; // The particel will start at (x,y,z) and then move towards the problem
     //[SerializeField] private Vector3 m_particleStartDirection;
-    [SerializeField] private float m_particleStartDistance = 3f; // How far away will it spawn.
-    [SerializeField] private float m_particleFallSpeed = 0.5f; // Controls the speed of the particle moving towards the problem.
+    [SerializeField] private float m_startDistance = 3f; // How far away will it spawn.
+    [SerializeField] private float m_fallSpeed = 0.5f; // Controls the speed of the particle moving towards the problem.
 
 
     [Header("Active")]
@@ -82,21 +82,21 @@ public class ProblemList
     {
         return m_activeState;
     }
-    public List<ParticleSystem> GetBreakParticleEffect()
+    public List<GameObject> GetBreakParticleEffect()
     {
-        return m_breakParticleEffect;
+        return m_breakProjectile;
     }
     public float GetParticleStartDirection()
     {
-        return m_particleStartDirection;
+        return m_startDirection;
     }
     public float GetParticleStartDistance()
     {
-        return m_particleStartDistance;
+        return m_startDistance;
     }
     public float GetParticleFallSpeed()
     {
-        return m_particleFallSpeed;
+        return m_fallSpeed;
     }
     public ProblemPhsyicsObject GetPhsyicsObject()
     {
