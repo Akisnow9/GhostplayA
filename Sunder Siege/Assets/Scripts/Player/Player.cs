@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float dropOffset;
     private float dashStart;
     [SerializeField] private float dashCooldown;
-    [SerializeField] private float playerAcceleration = 10f;
+    //[SerializeField] private float playerAcceleration = 10f;
     Vector3 m_startingPos;
     public XboxController controller;
     //public Vector3 direction;

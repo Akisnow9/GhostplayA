@@ -856,8 +856,8 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 042255a1e481d9041bb36acad80b2c70, type: 2}
   - {fileID: 2100000, guid: 427d44acc4f42f74c9a722dc9458e303, type: 2}
   - {fileID: 2100000, guid: 9b28aa23dedbc9744bed6b88371f1a4e, type: 2}
-  m_soundManager: {fileID: 0}
-  m_timeLimit: 90
+  m_soundManager: {fileID: 169669445}
+  m_timeLimit: 10
   m_timeBeforeFail: 15
   m_numberofLives: 10
   m_numOfInactiveProblems: 10
@@ -866,7 +866,7 @@ MonoBehaviour:
     m_eventTriggerTime: 88
     m_dataToModify: 0
     m_repeatable: 1
-    m_repeatEvery: 0.2
+    m_repeatEvery: 2
     m_minRange: 0
     m_maxRange: 0
   m_problemList:
@@ -885,7 +885,7 @@ MonoBehaviour:
   - {fileID: 1003952092}
   - {fileID: 1138406025}
   m_sounds: []
-  m_keyboard: 1
+  m_keyboard: 0
 --- !u!4 &202690011
 Transform:
   m_ObjectHideFlags: 0
@@ -1243,7 +1243,7 @@ PrefabInstance:
     - target: {fileID: 4650738593915313459, guid: c9db8473ad8f1bf469c8a6a97852a9e7,
         type: 3}
       propertyPath: m_problemList.Array.data[0].m_sounds.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4650738593915313459, guid: c9db8473ad8f1bf469c8a6a97852a9e7,
         type: 3}
@@ -1320,6 +1320,12 @@ PrefabInstance:
       propertyPath: m_problemList.Array.data[0].m_sounds.Array.data[0].m_spatialBlend
       value: 0.761
       objectReference: {fileID: 0}
+    - target: {fileID: 4650738593915313459, guid: c9db8473ad8f1bf469c8a6a97852a9e7,
+        type: 3}
+      propertyPath: m_uiPrefab
+      value: 
+      objectReference: {fileID: 1809342633882374901, guid: ee4e6ff2378f6c348ae84fabce63cc94,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9db8473ad8f1bf469c8a6a97852a9e7, type: 3}
 --- !u!1001 &296464925
@@ -2468,6 +2474,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7534270861074451465, guid: 8a1f118cacd2cf44cab20fc762cc27d0,
+        type: 3}
+      propertyPath: dashDistance
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 7534270861074451465, guid: 8a1f118cacd2cf44cab20fc762cc27d0,
+        type: 3}
+      propertyPath: movementSpeed
+      value: 120
+      objectReference: {fileID: 0}
     - target: {fileID: 7534270861074451467, guid: 8a1f118cacd2cf44cab20fc762cc27d0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2523,6 +2539,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7534270861074451464, guid: 8a1f118cacd2cf44cab20fc762cc27d0,
+        type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7534270861074451464, guid: 8a1f118cacd2cf44cab20fc762cc27d0,
+        type: 3}
+      propertyPath: m_Drag
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6991869141293611469, guid: 8a1f118cacd2cf44cab20fc762cc27d0,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: de3c2ea8178c3d546a825a7b7c7d74ac, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a1f118cacd2cf44cab20fc762cc27d0, type: 3}
 --- !u!1001 &488860901
@@ -4588,6 +4619,11 @@ PrefabInstance:
       propertyPath: m_fixableProblem
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4650738593915313459, guid: b05be6837615be24283577f9e7cbd191,
+        type: 3}
+      propertyPath: m_problemList.Array.data[0].m_fixableProblem
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b05be6837615be24283577f9e7cbd191, type: 3}
 --- !u!114 &1138406025 stripped
@@ -5769,11 +5805,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7071513677169689356, guid: f05ab0bc090677b47a830176a7f2b086,
+    - target: {fileID: 3277343149358811087, guid: f05ab0bc090677b47a830176a7f2b086,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: b1e68ce4efc9d534aa8e4a70216b7f78, type: 2}
+      propertyPath: m_maxCharges
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3277343149358811087, guid: f05ab0bc090677b47a830176a7f2b086,
+        type: 3}
+      propertyPath: m_itemOffset.y
+      value: 1.8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f05ab0bc090677b47a830176a7f2b086, type: 3}
 --- !u!1001 &1297908453

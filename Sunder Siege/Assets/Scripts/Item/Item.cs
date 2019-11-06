@@ -79,10 +79,10 @@ public class Item : MonoBehaviour
 	void Update()
 	{
 		// If the item is refillable, do the maths to deduct each segment when used
-		if (m_refillable)
-		{
-			ItemDeduct();
-		}
+		//if (m_refillable)
+		//{
+		//	ItemDeduct();
+		//}
 
 		// Check if the item is thrown
 		if (m_isThrown)
@@ -132,13 +132,17 @@ public class Item : MonoBehaviour
 		// If there is no player holding the item
 		if (m_playerHolding == null)
 		{
-			// Loop through each player near the item (each player in the List)
-			for (int i = 0; i < m_playerList.Count; i++)
-			{
+            // Loop through each player near the item (each player in the List)
+            for (int i = 0; i < m_playerList.Count; i++)
+            {
                 if (Timer.GetKeyBoard())
                 {
-                    if(Input.GetKeyDown(KeyCode.E) && m_playerList[i].GetItem() == null)
+                    if (Input.GetKeyDown(KeyCode.E) && m_playerList[i].GetItem() == null)
                     {
+                        foreach (Collider Collider in m_model)
+                        {
+                            Physics.IgnoreCollision(Collider, m_playerList[i].gameObject.GetComponent<Collider>(), true);
+                        }
                         Pickup(m_playerList[i]);
                     }
                 }
@@ -151,10 +155,14 @@ public class Item : MonoBehaviour
                     // then pickup the item.
                     if (XCI.GetButtonDown(XboxButton.A, controller) && m_playerList[i].GetItem() == null)
                     {
+                        foreach (Collider Collider in m_model)
+                        {
+                            Physics.IgnoreCollision(Collider, m_playerList[i].gameObject.GetComponent<Collider>(), true);
+                        }
                         Pickup(m_playerList[i]);
                     }
                 }
-			}
+            }
 		}
 		else if (m_playerHolding != null)// Otherwise there is a player holding the item
 		{
@@ -286,10 +294,10 @@ public class Item : MonoBehaviour
 
 
 		// If the item is to lose its charges when thrown, set its chargers to zero
-		if (m_losesChargesOnThrow)
-		{
-			m_charges = 0;
-		}
+		//if (m_losesChargesOnThrow)
+		//{
+		//	m_charges = 0;
+		//}
 	}
 
 	// @brief Handles moving along a line towards the hitLocation retrieved above via
@@ -311,27 +319,32 @@ public class Item : MonoBehaviour
 		// Ignore zero
 		if (m_levelCount != 0)
 		{
-			float number = (float)GetCharges() / (float)GetMaxCharges();
-			float number2 = (float)m_levelCount / (float)m_filledLevels.Count;
+            foreach (GameObject g in m_filledLevels)
+            {
+                float number = (float)GetCharges() / (float)GetMaxCharges();
+                float number2 = (float)m_levelCount / (float)m_filledLevels.Count;
 
-			if (number < number2)
-			{
-				m_filledLevels[(int)(m_filledLevels.Count - m_levelCount)].SetActive(false);
+                if (number < number2)
+                {
+                    m_filledLevels[(int)(m_filledLevels.Count - m_levelCount)].SetActive(false);
 
-				m_levelCount--;
-				if (m_levelCount != 0)
-				{
-					m_filledLevels[(int)(m_filledLevels.Count - m_levelCount)].SetActive(true);
-				}
-			}
+                    m_levelCount--;
+                    //if (m_levelCount != 0)
+                    //{
+                    //	m_filledLevels[(int)(m_filledLevels.Count - m_levelCount)].SetActive(true);
+                    //}
+                }
+                else
+                    return;
+            }
 		}
-		else
-		{
-			for (int i = 0; i < m_filledLevels.Count - 1; i++)
-			{
-				m_filledLevels[i].SetActive(false);
-			}
-		}
+		//else
+		//{
+		//	for (int i = 0; i < m_filledLevels.Count - 1; i++)
+		//	{
+		//		m_filledLevels[i].SetActive(false);
+		//	}
+		//}
 	}
 
 	// @brief Resets the items levels to the max level
@@ -341,16 +354,16 @@ public class Item : MonoBehaviour
 		m_levelCount = m_filledLevels.Count;
 
 		// Reset the levels
-		for (int i = 0; i < m_filledLevels.Count - 1; i++)
+		for (int i = 0; i < m_filledLevels.Count; i++)
 		{
-			if (i <= 0)
+			//if (i <= 0)
 			{
 				m_filledLevels[i].SetActive(true);
 			}
-			else
-			{
-				m_filledLevels[i].SetActive(false);
-			}
+			//else
+			//{
+			//	m_filledLevels[i].SetActive(false);
+			//}
 		}
 	}
 
@@ -371,7 +384,8 @@ public class Item : MonoBehaviour
 		if (m_charges > 0)
 		{
 			m_charges--;
-		}
+            ItemDeduct();
+        }
 	}
 
 	// @brief Handles refilling the charges of the item when called
@@ -484,8 +498,12 @@ public class Item : MonoBehaviour
 					{
 						if (player.GetItem() == null)
 						{
-							// Set the new player holding to the item catcher
-							m_playerHolding = player;
+                            foreach (Collider Collider in m_model)
+                            {
+                                Physics.IgnoreCollision(Collider, other.gameObject.GetComponent<Collider>(), true);
+                            }
+                            // Set the new player holding to the item catcher
+                            m_playerHolding = player;
 
 							// So pick up the item
 							player.PickUpItem(this);
@@ -527,7 +545,14 @@ public class Item : MonoBehaviour
 			m_isDropped = true;
 
 			m_lastPlayerHolding = null;
-		}
+
+
+            if (m_losesChargesOnThrow)
+            {
+                m_charges = 0;
+                Empty();
+            }
+        }
 	}
 
 	// @brief Checks when another Collider has exited the trigger area
@@ -546,11 +571,20 @@ public class Item : MonoBehaviour
 			m_playerList.Remove(Timer.PlayerGet(holder.GetPlayerIndex()));
 			if (m_isThrown || m_isDropped)
 			{
-				foreach (Collider Collider in a)
+				foreach (Collider Collider in m_model)
 				{
 					Physics.IgnoreCollision(Collider, other.gameObject.GetComponent<Collider>(), false);
 				}
 			}
 		}
 	}
+
+
+    private void Empty()
+    {
+        foreach(GameObject g in m_filledLevels)
+        {
+            g.SetActive(false);
+        } 
+    }
 }

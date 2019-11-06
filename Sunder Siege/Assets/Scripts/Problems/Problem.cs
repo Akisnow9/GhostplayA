@@ -348,6 +348,7 @@ public class Problem : MonoBehaviour
                                 if (item.IsRefillable())
                                 {
                                     item.UseCharge();
+                                
                                     //Does math to see what plane to display.
                                 }
                                 else if (item.IsOneTimeUse())
