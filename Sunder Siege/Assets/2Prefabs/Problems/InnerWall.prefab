@@ -432,7 +432,8 @@ MonoBehaviour:
     m_fallSpeed: 9
     m_breakPhysics: {fileID: 2795447579632526534}
     m_whileBrokenParticles: []
-    m_fixedParticles: []
+    m_fixedParticles:
+    - {fileID: 4811201962163518272, guid: 65ae94aa724657445a5550e449895a14, type: 3}
     m_failParticles: []
     m_sounds: []
   - m_name: Fire
@@ -447,7 +448,8 @@ MonoBehaviour:
     m_fallSpeed: 9
     m_breakPhysics: {fileID: 0}
     m_whileBrokenParticles: []
-    m_fixedParticles: []
+    m_fixedParticles:
+    - {fileID: 4811201962163518272, guid: 65ae94aa724657445a5550e449895a14, type: 3}
     m_failParticles: []
     m_sounds:
     - m_name: Fire

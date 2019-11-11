@@ -209,6 +209,7 @@ MonoBehaviour:
   m_playerList: []
   m_currentParticle:
   - {fileID: 0}
+  m_currentProjectile: []
   m_uiPrefab: {fileID: 7493720630696751244, guid: 2b414005ea8758443a5c3341bb380ad1,
     type: 3}
   m_uiPosition: {x: 0, y: 4, z: 0}
@@ -217,15 +218,16 @@ MonoBehaviour:
   - m_name: 
     m_activeState: {fileID: 5651757515223698407}
     m_fixableProblem: 2
-    m_maxButtonPresses: 0
+    m_maxButtonPresses: 5
     m_animationController: {fileID: 0}
-    m_breakParticleEffect: []
-    m_particleStartDirection: 0
-    m_particleStartDistance: 3
-    m_particleFallSpeed: 0.5
+    m_breakProjectile: []
+    m_startDirection: 0
+    m_startDistance: 3
+    m_fallSpeed: 0.5
     m_breakPhysics: {fileID: 8600792363534231636}
     m_whileBrokenParticles: []
-    m_fixedParticles: []
+    m_fixedParticles:
+    - {fileID: 4811201962163518272, guid: 65ae94aa724657445a5550e449895a14, type: 3}
     m_failParticles: []
     m_sounds: []
 --- !u!65 &7685458633263924214
@@ -309,14 +311,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2300004, guid: fcbedd909f156f142ad020764eb0881b, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 548fbcc58b715cf47b753a2cbf77ae48, type: 2}
     - target: {fileID: 2300008, guid: fcbedd909f156f142ad020764eb0881b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 054584ff294012f47afc0a6ca588835a, type: 2}
+    - target: {fileID: 2300004, guid: fcbedd909f156f142ad020764eb0881b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 548fbcc58b715cf47b753a2cbf77ae48, type: 2}
     - target: {fileID: 2300006, guid: fcbedd909f156f142ad020764eb0881b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -402,14 +404,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2300004, guid: fcbedd909f156f142ad020764eb0881b, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 548fbcc58b715cf47b753a2cbf77ae48, type: 2}
     - target: {fileID: 2300008, guid: fcbedd909f156f142ad020764eb0881b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 054584ff294012f47afc0a6ca588835a, type: 2}
+    - target: {fileID: 2300004, guid: fcbedd909f156f142ad020764eb0881b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 548fbcc58b715cf47b753a2cbf77ae48, type: 2}
     - target: {fileID: 2300006, guid: fcbedd909f156f142ad020764eb0881b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

@@ -438,7 +438,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 3e41ee35285ca6b4db2f51cbaa748e94, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3e41ee35285ca6b4db2f51cbaa748e94, type: 3}
       propertyPath: m_LocalPosition.x
@@ -505,7 +505,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: f787d4abf86906d4fb1c6072c95fd538, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f787d4abf86906d4fb1c6072c95fd538, type: 3}
       propertyPath: m_LocalPosition.x
@@ -513,7 +513,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f787d4abf86906d4fb1c6072c95fd538, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.144
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f787d4abf86906d4fb1c6072c95fd538, type: 3}
       propertyPath: m_LocalPosition.z
@@ -551,7 +551,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 13700002, guid: f787d4abf86906d4fb1c6072c95fd538, type: 3}
+    - target: {fileID: 13700012, guid: f787d4abf86906d4fb1c6072c95fd538, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: de3c2ea8178c3d546a825a7b7c7d74ac, type: 2}
@@ -559,7 +559,7 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: de3c2ea8178c3d546a825a7b7c7d74ac, type: 2}
-    - target: {fileID: 13700012, guid: f787d4abf86906d4fb1c6072c95fd538, type: 3}
+    - target: {fileID: 13700002, guid: f787d4abf86906d4fb1c6072c95fd538, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: de3c2ea8178c3d546a825a7b7c7d74ac, type: 2}

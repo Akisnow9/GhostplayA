@@ -71,7 +71,7 @@ MonoBehaviour:
   - m_name: 
     m_activeState: {fileID: 6872062685134673721}
     m_fixableProblem: 2
-    m_maxButtonPresses: 0
+    m_maxButtonPresses: 5
     m_animationController: {fileID: 0}
     m_breakProjectile: []
     m_startDirection: 0
@@ -79,7 +79,8 @@ MonoBehaviour:
     m_fallSpeed: 0.5
     m_breakPhysics: {fileID: 7240933096680737106}
     m_whileBrokenParticles: []
-    m_fixedParticles: []
+    m_fixedParticles:
+    - {fileID: 4811201962163518272, guid: 65ae94aa724657445a5550e449895a14, type: 3}
     m_failParticles: []
     m_sounds: []
 --- !u!54 &5672160809713804996

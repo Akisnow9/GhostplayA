@@ -173,7 +173,8 @@ MonoBehaviour:
     m_fallSpeed: 0.5
     m_breakPhysics: {fileID: 0}
     m_whileBrokenParticles: []
-    m_fixedParticles: []
+    m_fixedParticles:
+    - {fileID: 4811201962163518272, guid: 65ae94aa724657445a5550e449895a14, type: 3}
     m_failParticles: []
     m_sounds: []
 --- !u!1001 &2090470012173398999

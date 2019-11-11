@@ -88,6 +88,7 @@ MonoBehaviour:
   m_playerList: []
   m_currentParticle:
   - {fileID: 0}
+  m_currentProjectile: []
   m_uiPrefab: {fileID: 7493720630696751244, guid: 2b414005ea8758443a5c3341bb380ad1,
     type: 3}
   m_uiPosition: {x: 0, y: 4, z: 0}
@@ -96,15 +97,16 @@ MonoBehaviour:
   - m_name: Break
     m_activeState: {fileID: 1352475389875352472}
     m_fixableProblem: 4
-    m_maxButtonPresses: 0
+    m_maxButtonPresses: 3
     m_animationController: {fileID: 0}
-    m_breakParticleEffect: []
-    m_particleStartDirection: 0
-    m_particleStartDistance: 3
-    m_particleFallSpeed: 0.5
+    m_breakProjectile: []
+    m_startDirection: 0
+    m_startDistance: 3
+    m_fallSpeed: 0.5
     m_breakPhysics: {fileID: 0}
     m_whileBrokenParticles: []
-    m_fixedParticles: []
+    m_fixedParticles:
+    - {fileID: 4811201962163518272, guid: 65ae94aa724657445a5550e449895a14, type: 3}
     m_failParticles: []
     m_sounds: []
 --- !u!1001 &1352475389875451192
