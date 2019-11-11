@@ -30,7 +30,7 @@ public class ProblemController : MonoBehaviour
     private Problem m_problemToSpawnOver;
     [SerializeField]private BaseUi m_progressSprite;
     [SerializeField]private BaseUi m_timeSprite;
-
+    
     //[SerializeField]private float m_spawnDistance;
 
     // Does this need effects animations?

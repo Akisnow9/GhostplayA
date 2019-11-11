@@ -45,14 +45,14 @@ public class PlayerAdd : MonoBehaviour
 
 	private void Start()
 	{
-		for (int i = 0; i < Menus.GetMaxNumOfPlayers(); i++)
-		{
-			m_listOfUI.Insert(i, Instantiate(m_confirmUI));
-			Vector3 uiOffset = new Vector3(0, 0.2f, 0);
-			Vector3 uiLocation = m_players[i].transform.position - uiOffset;
-			m_listOfUI[i].transform.position = uiLocation;
-			m_listOfUI[i].SetActive(false);
-		}
+		//for (int i = 0; i < Menus.GetMaxNumOfPlayers(); i++)
+		//{
+		//	m_listOfUI.Insert(i, Instantiate(m_confirmUI));
+		//	Vector3 uiOffset = new Vector3(0, 0.2f, 0);
+		//	Vector3 uiLocation = m_players[i].transform.position - uiOffset;
+		//	m_listOfUI[i].transform.position = uiLocation;
+		//	m_listOfUI[i].SetActive(false);
+		//}
 	}
 
 
@@ -61,11 +61,11 @@ public class PlayerAdd : MonoBehaviour
 	private void Update()
 	{
 		// Add players to the game
-		AddPlayer();
+		//AddPlayer();
 
-		HatSelection();
+		//HatSelection();
 
-		ReadyUp();
+		//ReadyUp();
 
 		// If there are no players in the list, the game cannot start
 		if (Menus.GetActivatedPlayerAmount() <= 0)

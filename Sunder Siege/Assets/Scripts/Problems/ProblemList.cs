@@ -25,6 +25,8 @@ public class ProblemList
     //*************************************************************************************
 
     [SerializeField] private string m_name;
+
+    [SerializeField] private ProblemIndicator m_uiElement; // The problems ui element.
     [SerializeField] private GameObject m_activeState; // Place the problems active state model here.
 
     [Header("Problem Is Fixed By")] // All Things Revolving Around the Problem and Solution
@@ -123,6 +125,14 @@ public class ProblemList
         return m_sounds;
     }
 
+    public ProblemIndicator GetProblemIndicator()
+    {
+        return m_uiElement;
+    }
+    public string GetName()
+    {
+        return m_name;
+    }
 }
 //[CustomEditor(typeof(ProblemList))]
 //public class ProblemListEditor : Editor

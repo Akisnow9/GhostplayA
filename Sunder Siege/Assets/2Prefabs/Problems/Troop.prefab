@@ -163,6 +163,8 @@ MonoBehaviour:
   m_inactiveState: {fileID: 8449635625608384332}
   m_problemList:
   - m_name: 
+    m_uiElement: {fileID: 3750699538719667555, guid: d490359937920104db013cf78ddd7466,
+      type: 3}
     m_activeState: {fileID: 7305110498566285643}
     m_fixableProblem: 6
     m_maxButtonPresses: 0
@@ -173,9 +175,11 @@ MonoBehaviour:
     m_fallSpeed: 0.5
     m_breakPhysics: {fileID: 0}
     m_whileBrokenParticles: []
-    m_fixedParticles:
-    - {fileID: 4811201962163518272, guid: 65ae94aa724657445a5550e449895a14, type: 3}
-    m_failParticles: []
+    m_fixedParticles: []
+    m_failParticles:
+    - {fileID: 3244365351854202973, guid: 9c0050426abbb4044adee23b4b2357fc, type: 3}
+    - {fileID: 3792599640936278634, guid: 30d4ceea0dd6b694f8bc16269357d4f1, type: 3}
+    - {fileID: 711217586589158238, guid: 1e54e1341cec86d409dd57bf4e91afe3, type: 3}
     m_sounds: []
 --- !u!1001 &2090470012173398999
 PrefabInstance:
@@ -310,6 +314,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 9100000, guid: 7a31ae927d7be0d42a13fbcd144b9a5c, type: 2}
     - target: {fileID: 2300004, guid: f08da877c89f72244a27262a08c6cff5, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ec5c263f9cdab3b40a3f5e4eb3e49545, type: 2}
+    - target: {fileID: 2300000, guid: f08da877c89f72244a27262a08c6cff5, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ec5c263f9cdab3b40a3f5e4eb3e49545, type: 2}

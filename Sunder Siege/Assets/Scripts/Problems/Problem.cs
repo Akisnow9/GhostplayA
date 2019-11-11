@@ -43,7 +43,8 @@ public class Problem : MonoBehaviour
     [SerializeField] private List<ProblemList> m_problemList; // A list of all the problems that can take place on this object. // Need this to extend out.
     private ProblemList m_currentProblem; // All the info about the currently selected problem.
 
-    
+    private ProblemIndicator m_indicator;
+
     private bool m_isPending = false; 
     private bool m_isActive = false; // Is the problem active or inactive. Can be used to trigger other events like ui or particle effects.
     private float m_timeBeforeFail; // Once this value is reached the problem will be expired and health will be lost.
@@ -226,7 +227,15 @@ public class Problem : MonoBehaviour
         m_inactiveState.SetActive(false); // Hides the problems inactive Mesh.
         m_timeBeforeFail = a_timerBeforeFail;// Assaigns it a time frame before a life is lost.
         m_ui.Activate();
-
+        if (m_currentProblem.GetProblemIndicator() != null)
+        {
+            m_indicator = Instantiate(m_currentProblem.GetProblemIndicator());
+            m_indicator.Setup(this.gameObject, m_uiPosition);           // Creates the ui element.
+        }
+        else
+        {
+            Debug.Log("Problem named " + m_currentProblem.GetName() + " has not been asaigned a ui element. Can be found in problem list of " + this.name);
+        }
     }
 
     public void Deactivate()
@@ -290,6 +299,14 @@ public class Problem : MonoBehaviour
         else
         {
             m_currentProblem.GetAnimationController().SetTrigger("EndAnimation");
+        }
+        if (m_currentProblem.GetProblemIndicator() != null)
+        {
+            Destroy(m_indicator.gameObject);
+        }
+        else
+        {
+            Debug.Log("Problem named " + m_currentProblem.GetName() + " has not been asaigned a ui element. Can be found in problem list of " + this.name);
         }
         m_currentProblem = null;
     }

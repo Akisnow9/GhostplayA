@@ -216,6 +216,8 @@ MonoBehaviour:
   m_inactiveState: {fileID: 5201149268689998787}
   m_problemList:
   - m_name: 
+    m_uiElement: {fileID: 4226588033203457149, guid: a8ff4c0bea334e343944099580bace3d,
+      type: 3}
     m_activeState: {fileID: 5651757515223698407}
     m_fixableProblem: 2
     m_maxButtonPresses: 5
@@ -228,7 +230,10 @@ MonoBehaviour:
     m_whileBrokenParticles: []
     m_fixedParticles:
     - {fileID: 4811201962163518272, guid: 65ae94aa724657445a5550e449895a14, type: 3}
-    m_failParticles: []
+    m_failParticles:
+    - {fileID: 3244365351854202973, guid: 9c0050426abbb4044adee23b4b2357fc, type: 3}
+    - {fileID: 3792599640936278634, guid: 30d4ceea0dd6b694f8bc16269357d4f1, type: 3}
+    - {fileID: 711217586589158238, guid: 1e54e1341cec86d409dd57bf4e91afe3, type: 3}
     m_sounds: []
 --- !u!65 &7685458633263924214
 BoxCollider:

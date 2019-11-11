@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
 
     private static bool didQueryNumOfCtrlrs = false; // Why is this static?
 
-    private int m_playerIndex;
+    public int m_playerIndex;
 
     [SerializeField] private GameObject m_playerShirt;
 
