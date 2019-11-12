@@ -166,6 +166,7 @@ public class Item : MonoBehaviour
 		}
 		else if (m_playerHolding != null)// Otherwise there is a player holding the item
 		{
+            IgnoreCollision(m_playerHolding); // THis is innecficcent
             if (Timer.GetKeyBoard())
             {
                 if (Input.GetKeyDown(KeyCode.F))
@@ -244,6 +245,7 @@ public class Item : MonoBehaviour
 	//        off of a raycast from the player position in a straight line
 	void Throw()
 	{
+        this.transform.position = m_playerHolding.transform.position + m_itemOffset;
 		RaycastHit hit;
 
 		Vector3 rayOffset = new Vector3(0f, 0.5f, 0f);
@@ -286,9 +288,10 @@ public class Item : MonoBehaviour
 
 		// Refer to the player class to throw the item, also have no player holding the item anymore
 		m_playerHolding.ThrowItem();
-		m_playerHolding = null;
 
-		// Begin moving towards the location
+        // Begin moving towards the location
+
+        m_playerHolding = null;
 		m_rigidbody.AddForce(playersForward * m_throwForce, ForceMode.Impulse);
 		BeepBoopRotateSoup();
 
@@ -306,7 +309,7 @@ public class Item : MonoBehaviour
 	{
 		// Set the new eular angles to the current transform, multiplying the Y to have it spin
 		newEulerAngles = transform.position;
-		newEulerAngles.y = transform.position.y * 100f;
+		newEulerAngles.y = transform.position.y * 5f;
 
 		// Basic rotation
 		transform.Rotate(0f, newEulerAngles.y, 0f);
@@ -585,6 +588,14 @@ public class Item : MonoBehaviour
         foreach(GameObject g in m_filledLevels)
         {
             g.SetActive(false);
-        } 
+        }
+    }
+
+    public void IgnoreCollision(Player a_player)
+    {
+        foreach (Collider Collider in m_model)
+        {
+            Physics.IgnoreCollision(Collider, a_player.gameObject.GetComponent<Collider>(), true);
+        }
     }
 }

@@ -75,8 +75,8 @@ MonoBehaviour:
   m_playerList: []
   m_model:
   - {fileID: 7425431707612542537}
-  m_itemOffset: {x: 0, y: 1.5, z: 0}
-  m_throwForce: 35
+  m_itemOffset: {x: 0, y: 1.7, z: 0}
+  m_throwForce: 20
   m_bounceForce: 5
   m_oneTimeUse: 1
   m_losesChargesOnThrow: 0

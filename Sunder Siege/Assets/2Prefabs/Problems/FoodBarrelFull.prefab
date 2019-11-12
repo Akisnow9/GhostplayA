@@ -113,7 +113,29 @@ MonoBehaviour:
     - {fileID: 3244365351854202973, guid: 9c0050426abbb4044adee23b4b2357fc, type: 3}
     - {fileID: 3792599640936278634, guid: 30d4ceea0dd6b694f8bc16269357d4f1, type: 3}
     - {fileID: 711217586589158238, guid: 1e54e1341cec86d409dd57bf4e91afe3, type: 3}
-    m_sounds: []
+    m_sounds:
+    - m_name: THE BIG WILLIE
+      m_trigger: 0
+      m_requestedSounds: 
+      m_soundBank: []
+      m_enableDelay: 0
+      m_delay: 0
+      m_clipLength: 0
+      m_loop: 0
+      m_fadeIn: 0
+      m_startVolume: 0
+      m_maxVolume: 0
+      m_increaseRate: 0
+      m_sequence: 0
+      m_fadeOut: 0
+      m_minVolume: 0
+      m_reductionRate: 0
+      m_timeTillFade: 0
+      m_spatialBlend: 0
+      m_lastPlayed: 0
+      m_isActive: 0
+      m_fadeOutStart: 0
+      m_delayOffset: 0
 --- !u!1001 &1352475389875451192
 PrefabInstance:
   m_ObjectHideFlags: 0

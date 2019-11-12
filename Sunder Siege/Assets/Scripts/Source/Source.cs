@@ -54,6 +54,7 @@ public class Source : MonoBehaviour
                                     newItemToList.Pickup(player); // Adds it to the player that pressed button
                                     m_spawnedItemList.Insert(0, newItemToList); // Adds it to it's own list so it can know how many are spawned.
                                     newItemToList.SetSpawn(this);
+                                    m_spawnedItemList[0].IgnoreCollision(player);
                                     newItemToList.m_playerList.Insert(0, player); // Adds the player to the player list so it will now check input
                                 }
                                 else if (m_spawnedItemList.Count >= m_maxSpawnedItems) // Needs to iterate through list
@@ -64,6 +65,7 @@ public class Source : MonoBehaviour
                                         newItemToList.Pickup(player); // Adds it to the player that pressed button
                                         m_spawnedItemList.Insert(0, newItemToList); // Adds it to it's own list so it can know how many are spawned.
                                         newItemToList.SetSpawn(this);
+                                        m_spawnedItemList[0].IgnoreCollision(player);
                                         newItemToList.m_playerList.Insert(0, player); // Adds the player to the player list so it will now check input
                                     }
                                 }
@@ -73,6 +75,7 @@ public class Source : MonoBehaviour
                                     newItemToList.Pickup(player); // Adds it to the player that pressed button
                                     m_spawnedItemList.Insert(0, newItemToList); // Adds it to it's own list so it can know how many are spawned.
                                     newItemToList.SetSpawn(this);
+                                    m_spawnedItemList[0].IgnoreCollision(player);
                                     newItemToList.m_playerList.Insert(0, player); // Adds the player to the player list so it will now check input
                                 }
                             

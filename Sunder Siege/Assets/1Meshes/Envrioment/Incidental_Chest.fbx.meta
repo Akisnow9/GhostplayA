@@ -6,9 +6,11 @@ ModelImporter:
     100000: //RootNode
     400000: //RootNode
     2100000: lambert13
+    2100002: Chest1
     2300000: //RootNode
     3300000: //RootNode
     4300000: ChestModel
+    4300002: Chest2
   externalObjects: {}
   materials:
     importMaterials: 1

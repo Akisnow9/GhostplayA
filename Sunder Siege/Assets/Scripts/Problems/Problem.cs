@@ -37,6 +37,7 @@ public class Problem : MonoBehaviour
     public List<GameObject> m_currentProjectile;
     [SerializeField] private ProblemController m_uiPrefab;
     [SerializeField] private Vector3 m_uiPosition = new Vector3(0,4,0); // Ui can be set elsewhere.
+    [SerializeField] private Vector3 m_particleOffset = new Vector3(2,0,0);
     private ProblemController m_ui;
     [SerializeField] private GameObject m_inactiveState; // Place the problems inactive state model here.
    
@@ -50,6 +51,7 @@ public class Problem : MonoBehaviour
     private float m_timeBeforeFail; // Once this value is reached the problem will be expired and health will be lost.
 
     private int m_buttonPresses; // The counter for button presses.
+
 
     //[SerializeField] private List<SoundRequester> m_sounds;            
     
@@ -214,6 +216,7 @@ public class Problem : MonoBehaviour
                 for (int i = 0; i < m_currentProblem.GetWhileBrokenParticle().Count; i++)
                 {
                     ParticleSystem t = Instantiate<ParticleSystem>(particles[i]);
+                    t.transform.position = t.transform.position + m_particleOffset;
                     t.Play();
                     t.transform.position = this.transform.position;
                     m_currentParticle.Add(t);
@@ -265,6 +268,7 @@ public class Problem : MonoBehaviour
                     foreach (ParticleSystem particle in particles)
                     {
                         ParticleSystem t = Instantiate<ParticleSystem>(particle);
+                        t.transform.position = t.transform.position + m_particleOffset;
                         t.Play();
                         t.transform.position = this.transform.position;
                         // Could use a stop here.
@@ -282,6 +286,7 @@ public class Problem : MonoBehaviour
                 {
 
                     ParticleSystem t = Instantiate<ParticleSystem>(particle);
+                    t.transform.position = t.transform.position + m_particleOffset;
                     t.Play();
                     t.transform.position = this.transform.position;
                     // Could use a stop here.
@@ -292,14 +297,6 @@ public class Problem : MonoBehaviour
             m_ui.gameObject.SetActive(false);
             m_ui.ResetSprites();
             m_isActive = false;
-        if (m_currentProblem.GetAnimationController() == null)
-        {
-            ModelSwap();
-        }
-        else
-        {
-            m_currentProblem.GetAnimationController().SetTrigger("EndAnimation");
-        }
         if (m_currentProblem.GetProblemIndicator() != null)
         {
             Destroy(m_indicator.gameObject);
@@ -308,13 +305,22 @@ public class Problem : MonoBehaviour
         {
             Debug.Log("Problem named " + m_currentProblem.GetName() + " has not been asaigned a ui element. Can be found in problem list of " + this.name);
         }
-        m_currentProblem = null;
+        if (m_currentProblem.GetAnimationController() == null)
+        {
+            ModelSwap();
+        }
+        else
+        {
+            m_currentProblem.GetAnimationController().SetTrigger("EndAnimation");
+        }
+        
     }
 
     public void ModelSwap()
     {
         m_inactiveState.SetActive(true); // Re-enables the inactive game object
         m_currentProblem.GetActiveState().SetActive(false); // Hides the problem active Mesh. -- May need review.
+        m_currentProblem = null;
     }
 
 
@@ -344,7 +350,7 @@ public class Problem : MonoBehaviour
                                 if (item.GetCharges() > 0)
                                 {
                                     m_buttonPresses++; // this has to be 
-
+                                    player.GetAnimator().SetTrigger("Fix");
                                 }
                                 else
                                 {

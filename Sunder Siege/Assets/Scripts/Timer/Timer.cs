@@ -24,15 +24,16 @@ public class Timer : MonoBehaviour
     public List<Player> m_playerList;
     public List<GameObject> m_spawnPoints;
     public List<Material> m_playerMats;
-    //[SerializeField] private List<AudioMixerGroup> m_mixers;
+	public List<GameObject> m_hats;
+    [SerializeField] private List<AudioMixerGroup> m_mixers;
     [SerializeField] private SoundManager m_soundManager;
 
 
     [SerializeField] private float m_timeLimit = 60; // The timer will count down from this point. Set from Unity Editor.
     [SerializeField] private float m_timeBeforeFail = 15; // Once a problem has activated how long before the player loses a life.
     [SerializeField] private int m_numberofLives = 5; // How many times items from the active list can expire.
-    //[SerializeField] private float m_minRangeOfProblem = 3; // Minus this from max. Then add to repeat every. Only for problems.
-    //[SerializeField] private float m_maxRangeOfProblem = 15; // This minus min. Then add to repeat every. Only for problems
+    [SerializeField] private float m_minRangeOfProblem = 3; // Minus this from max. Then add to repeat every. Only for problems.
+    [SerializeField] private float m_maxRangeOfProblem = 15; // This minus min. Then add to repeat every. Only for problems
 
     private float m_timeScale = 1; // This can be used to modify the rate of seconds passing also movement speed and animation. Useful if people want to include a slowdown effect but needs to be included in everything that is effected. Eg movement/ animation will need to be multiplied by this all the time.
 
@@ -54,36 +55,40 @@ public class Timer : MonoBehaviour
         instance = this;
 
 
-        // This needs to be re-enabled
-        //Player playerClone;
-        //for (int i = 0; i < Menus.GetActivatedPlayerAmount(); i++)
-        //{
-        //    // Create the players an attach their controllers
-        //    playerClone = Instantiate(m_playerToSpawn);
-        //    StaticVariables holder = Menus.GetPlayerInformation(i);
-        //    playerClone.controller = holder.Controller;
+		// This needs to be re-enabled
+		Player playerClone;
+		for (int i = 0; i < Menus.GetActivatedPlayerAmount(); i++)
+		{
+			// Create the players an attach their controllers
+			playerClone = Instantiate(m_playerToSpawn);
+			StaticVariables holder = Menus.GetPlayerInformation(i);
+			playerClone.controller = holder.Controller;
 
-        //    // Set the players spawn point
-        //    playerClone.transform.position = m_spawnPoints[i].transform.position;
+			// Set the players spawn point
+			playerClone.transform.position = m_spawnPoints[i].transform.position;
 
-        //    // Set the players index
-        //    playerClone.SetPlayerIndex(i);
+			// Set the players index
+			playerClone.SetPlayerIndex(holder.Player);
 
-        //    // Add the players to the playerList
-        //    m_playerList.Insert(i, playerClone);
+			// Set player details
+			//playerClone.PlayerHat = m_hats[(int)holder.HatID];
+			playerClone.HatID = holder.HatID;
 
-        //    // Set the shirts material
-        //    Material newMaterial = Instantiate(m_playerMats[i]);
-        //    newMaterial.SetColor(m_playerMats[i].name, m_playerMats[i].color);
+			// Add the players to the playerList
+			m_playerList.Insert(i, playerClone);
 
-        //    MeshRenderer thisRenderer = m_playerList[i].GetPlayerShirt().GetComponent<MeshRenderer>();
-        //    thisRenderer.material = newMaterial;
-        //}
+			// Set the shirts material
+			Material newMaterial = Instantiate(holder.PlayerMaterial);
+			newMaterial.SetColor(holder.PlayerMaterial.name, holder.PlayerMaterial.color);
 
-        //GameObject newObject = Instantiate();
-        //GameObject.AddComponent<Events>();
+			SkinnedMeshRenderer thisRenderer = m_playerList[i].GetPlayerShirt().GetComponent<SkinnedMeshRenderer>();
+			thisRenderer.material = newMaterial;
+		}
 
-    }
+		//GameObject newObject = Instantiate();
+		//GameObject.AddComponent<Events>();
+
+	}
 
     // Start is called before the first frame update
     void Start()
@@ -98,7 +103,7 @@ public class Timer : MonoBehaviour
             }
         m_numOfInactiveProblems = m_problemList.Count;
         //Needs safety here.
-        //Timer.SoundMangerGet().Play(m_sounds, WhenToPlaySound.Menu);
+        Timer.SoundMangerGet().Play(m_sounds, WhenToPlaySound.Menu);
     }
 
     // Update is called once per frame
@@ -140,6 +145,17 @@ public class Timer : MonoBehaviour
     {
         return instance.m_playerList[a_index];
     }
+
+	public static List<GameObject> Hat
+	{
+		get
+		{
+			//if (instance.m_hats != null)
+			{
+				return instance.m_hats;
+			}
+		}
+	}
 
     public static SoundManager SoundMangerGet()
     {

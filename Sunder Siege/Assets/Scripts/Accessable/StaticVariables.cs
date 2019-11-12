@@ -6,6 +6,7 @@
  **************************************************/
 using System.Collections.Generic;
 using XboxCtrlrInput;
+using UnityEngine;
 
 // @brief Holds variables that are required throughout the runtime
 //		  of the program.
@@ -15,8 +16,9 @@ public class StaticVariables
 	private XboxController controller;     // Store the controller enum to see what controller is being used
 	private float timeToStopVibrato = 15f; // Store how long the controller will vibrate
 	private bool m_isReady = false;        // Store if the player has readied up or not
-	//private int m_hatID;                   // Store the hats ID number to know which hat the player is wearing
-	private e_Hats m_hatID;
+	private GameObject m_hat;			   // Store the actual hat game object
+	private e_Hats m_hatID;                // Store the hats ID number to know which hat the player is wearing
+	private Material m_playerMat;		   // Store the players colour
 
 	//*************************************************************************************
 	// Properties functionality
@@ -48,9 +50,21 @@ public class StaticVariables
 		set { m_isReady = value; }
 	}
 
+	public GameObject Hat
+	{
+		get { return m_hat; }
+		set { m_hat = value; }
+	}
+
 	public e_Hats HatID
 	{
 		get { return m_hatID; }
 		set { m_hatID = value; }
+	}
+
+	public Material PlayerMaterial
+	{
+		get { return m_playerMat; }
+		set { m_playerMat = value; }
 	}
 }
