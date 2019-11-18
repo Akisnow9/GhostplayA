@@ -213,6 +213,7 @@ MonoBehaviour:
   m_uiPrefab: {fileID: 7493720630696751244, guid: 2b414005ea8758443a5c3341bb380ad1,
     type: 3}
   m_uiPosition: {x: 0, y: 4, z: 0}
+  m_particleOffset: {x: 2, y: 0, z: 0}
   m_inactiveState: {fileID: 5201149268689998787}
   m_problemList:
   - m_name: 
@@ -234,7 +235,29 @@ MonoBehaviour:
     - {fileID: 3244365351854202973, guid: 9c0050426abbb4044adee23b4b2357fc, type: 3}
     - {fileID: 3792599640936278634, guid: 30d4ceea0dd6b694f8bc16269357d4f1, type: 3}
     - {fileID: 711217586589158238, guid: 1e54e1341cec86d409dd57bf4e91afe3, type: 3}
-    m_sounds: []
+    m_sounds:
+    - m_name: Door Break
+      m_trigger: 7
+      m_requestedSounds: 02000000
+      m_soundBank: []
+      m_enableDelay: 0
+      m_delay: 0
+      m_clipLength: 3
+      m_loop: 0
+      m_fadeIn: 0
+      m_startVolume: 0
+      m_maxVolume: 0
+      m_increaseRate: 0
+      m_sequence: 0
+      m_fadeOut: 1
+      m_minVolume: 0.217
+      m_reductionRate: 0.01
+      m_timeTillFade: 0
+      m_spatialBlend: 1
+      m_lastPlayed: 0
+      m_isActive: 0
+      m_fadeOutStart: 0
+      m_delayOffset: 0
 --- !u!65 &7685458633263924214
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -246,8 +269,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.8, y: 2, z: 2.5}
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Size: {x: 4.8, y: 2, z: 3}
+  m_Center: {x: 0, y: 1, z: 1}
 --- !u!65 &2864819747356949306
 BoxCollider:
   m_ObjectHideFlags: 0

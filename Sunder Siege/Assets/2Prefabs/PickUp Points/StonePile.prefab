@@ -57,7 +57,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.441413, y: 1, z: 4.1276207}
+  m_Size: {x: 5, y: 1, z: 5}
   m_Center: {x: -0.27929354, y: 1, z: -0.011579514}
 --- !u!114 &9012315070304089199
 MonoBehaviour:
@@ -75,7 +75,7 @@ MonoBehaviour:
   m_spawnedItemList: []
   m_willRefill: 0
   m_spawnsItem: 1
-  m_itemToSpawn: {fileID: 7242222260863609822, guid: 77fdfe592cdc8ee41ab1f36777bf8810,
+  m_itemToSpawn: {fileID: 7425431707453331253, guid: 718bf936d12b08a468eb8a60682cda5a,
     type: 3}
   m_maxSpawnedItems: 5
 --- !u!1001 &7608528506767052346
@@ -88,6 +88,18 @@ PrefabInstance:
     - target: {fileID: 100002, guid: d19c40276eb8732448f6b6724c80b8c9, type: 3}
       propertyPath: m_Name
       value: StonePile
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d19c40276eb8732448f6b6724c80b8c9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d19c40276eb8732448f6b6724c80b8c9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d19c40276eb8732448f6b6724c80b8c9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: d19c40276eb8732448f6b6724c80b8c9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -131,18 +143,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: d19c40276eb8732448f6b6724c80b8c9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: d19c40276eb8732448f6b6724c80b8c9, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: d19c40276eb8732448f6b6724c80b8c9, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: d19c40276eb8732448f6b6724c80b8c9, type: 3}
-      propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: d19c40276eb8732448f6b6724c80b8c9, type: 3}

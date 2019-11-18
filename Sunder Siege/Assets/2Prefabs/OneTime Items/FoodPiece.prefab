@@ -1,7 +1,7 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!65 &2657866919678135615
-BoxCollider:
+--- !u!135 &3939860717074206232
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -11,7 +11,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.7065308, y: 0.9741722, z: 0.8158314}
+  m_Radius: 0.4
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5943120038558090879
 GameObject:
@@ -69,8 +69,8 @@ Rigidbody:
   m_GameObject: {fileID: 5943120038558090879}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 1
+  m_AngularDrag: 999999
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -90,9 +90,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_playerList: []
   m_model:
-  - {fileID: 2657866919678135615}
-  m_itemOffset: {x: 0, y: 1.7, z: 0}
-  m_throwForce: 20
+  - {fileID: 3939860717074206232}
+  m_itemOffset: {x: 0, y: 2, z: 0}
+  m_throwForce: 35
   m_bounceForce: 5
   m_oneTimeUse: 1
   m_losesChargesOnThrow: 0

@@ -85,6 +85,7 @@ public class ProblemController : MonoBehaviour
 
     public void Setup(Problem a_problemToSpawnOver, Vector3 a_uiPostion)
     {
+        this.transform.SetParent(a_problemToSpawnOver.transform, false);
         m_problemToSpawnOver = a_problemToSpawnOver;
         //this.transform.position = m_problemToSpawnOver.transform.position + new Vector3(0, m_spawnDistance, 0);
         this.transform.position = m_problemToSpawnOver.transform.position + a_uiPostion;

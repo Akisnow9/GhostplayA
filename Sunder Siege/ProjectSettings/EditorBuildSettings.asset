@@ -9,8 +9,8 @@ EditorBuildSettings:
     path: Assets/3Scenes/MainMenu.unity
     guid: dcb42313a2e733743808d292e0d02f81
   - enabled: 1
-    path: Assets/3Scenes/Beta/Beta007.unity
-    guid: 6e5783a28f4f1b343b968b4e5cccea70
+    path: Assets/3Scenes/Gold/Gold001.unity
+    guid: f11a8a6b725c99249b045e3cdd95f7eb
   - enabled: 1
     path: Assets/3Scenes/Menus/WinMenu.unity
     guid: 423a4d0f2372bd146a499586db134537

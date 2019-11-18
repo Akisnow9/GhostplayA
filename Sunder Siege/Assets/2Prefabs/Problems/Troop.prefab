@@ -179,7 +179,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.8, y: 1, z: 1.8}
+  m_Size: {x: 2.7, y: 1, z: 2.3}
   m_Center: {x: 0, y: 0.5, z: -0.82}
 --- !u!114 &9131061054191464516
 MonoBehaviour:
@@ -387,10 +387,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Troop arm - no animation
       objectReference: {fileID: 0}
-    - target: {fileID: 100012, guid: f08da877c89f72244a27262a08c6cff5, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 400012, guid: f08da877c89f72244a27262a08c6cff5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.025523335
@@ -435,14 +431,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9500000, guid: f08da877c89f72244a27262a08c6cff5, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 6805a6cbed466dd43b06824a2b3cf203, type: 2}
-    - target: {fileID: 2300004, guid: f08da877c89f72244a27262a08c6cff5, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: ec5c263f9cdab3b40a3f5e4eb3e49545, type: 2}
     - target: {fileID: 2300000, guid: f08da877c89f72244a27262a08c6cff5, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -451,6 +439,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ec5c263f9cdab3b40a3f5e4eb3e49545, type: 2}
+    - target: {fileID: 2300004, guid: f08da877c89f72244a27262a08c6cff5, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ec5c263f9cdab3b40a3f5e4eb3e49545, type: 2}
+    - target: {fileID: 9500000, guid: f08da877c89f72244a27262a08c6cff5, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 6805a6cbed466dd43b06824a2b3cf203, type: 2}
     - target: {fileID: 13700000, guid: f08da877c89f72244a27262a08c6cff5, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

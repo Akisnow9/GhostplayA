@@ -171,12 +171,12 @@ public class Item : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.F))
                 {
-                    Drop();
+                    DropTrigger();
                 }
 
                 if(Input.GetKeyDown(KeyCode.Space))
                 {
-                    Throw();
+                    ThrowTrigger();
                 }
             }
             else
@@ -187,14 +187,14 @@ public class Item : MonoBehaviour
                 // If the item is in the players hand then handle dropping the item when 'B' is pressed
                 if (XCI.GetButtonDown(XboxButton.B, controller))
                 {
-                    Drop();
+                    DropTrigger();
                 }
 
                 // If the item is in the players hand then handle throwing the item when 'Y' is pressed
                 if (XCI.GetButtonDown(XboxButton.Y, controller))
                 {
                     //if(!thing that preventsthrowing)
-                    Throw();
+                    ThrowTrigger();
                 }
             }
             
@@ -213,6 +213,7 @@ public class Item : MonoBehaviour
 		// Refer to player class for Pickup
 		m_playerHolding = a_player;
 		m_lastPlayerHolding = m_playerHolding;
+        this.transform.rotation = new Quaternion(0, 0, 0, 0);
 		m_playerHolding.PickUpItem(this);
 		if (m_rigidbody != null)
 		{
@@ -221,7 +222,7 @@ public class Item : MonoBehaviour
 	}
 
 	// @brief Handles dropping the item when called
-	void Drop()
+	public void Drop()
 	{
 		m_rigidbody.velocity = Vector3.zero;
 
@@ -237,15 +238,24 @@ public class Item : MonoBehaviour
 		m_rigidbody.AddForce(transform.forward * 3f, ForceMode.Impulse);
 
 		// Refer to player class for drop
-		m_playerHolding.DropItem();
+		//m_playerHolding.DropItem();
 		m_playerHolding = null;
 	}
 
+    void DropTrigger()
+    {
+        this.m_playerHolding.DropItem();
+    }
+
+
 	// @brief Handles throwing the item, the location to be throwin towards based
 	//        off of a raycast from the player position in a straight line
-	void Throw()
+	public void Throw()
 	{
         this.transform.position = m_playerHolding.transform.position + m_itemOffset;
+        this.transform.rotation = new Quaternion(0, 0, 0, 0);
+
+
 		RaycastHit hit;
 
 		Vector3 rayOffset = new Vector3(0f, 0.5f, 0f);
@@ -287,7 +297,7 @@ public class Item : MonoBehaviour
 		playersForward.Normalize();
 
 		// Refer to the player class to throw the item, also have no player holding the item anymore
-		m_playerHolding.ThrowItem();
+		
 
         // Begin moving towards the location
 
@@ -302,6 +312,11 @@ public class Item : MonoBehaviour
 		//	m_charges = 0;
 		//}
 	}
+
+    void ThrowTrigger()
+    {
+        this.m_playerHolding.ThrowItem();
+    }
 
 	// @brief Handles moving along a line towards the hitLocation retrieved above via
 	//        the raycast. Also rotates the item whilst it is moving

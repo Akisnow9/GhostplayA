@@ -29,14 +29,15 @@ public enum Mixer
 public enum SoundToPlay
 {
     None,
-    Footstep,
-    Throw,
-    Boing,
     Burning,
+    DoorSmash,
     Crumble,
-    Jaunt,
+    Falliung,
+    AbientSwordFight,
+    WaterSplash,
     MenuMusic,
     LevelMusic,
+    WinMusic,
     FailMusic
 };
 
@@ -60,5 +61,6 @@ public enum WhenToPlaySound
     Success,
     Menu,
     LevelStart,
-    LoseGame
+    LoseGame,
+    Test
 };

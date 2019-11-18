@@ -216,6 +216,7 @@ public class Problem : MonoBehaviour
                 for (int i = 0; i < m_currentProblem.GetWhileBrokenParticle().Count; i++)
                 {
                     ParticleSystem t = Instantiate<ParticleSystem>(particles[i]);
+                    t.transform.SetParent(this.transform, false); // EXPERIMENT
                     t.transform.position = t.transform.position + m_particleOffset;
                     t.Play();
                     t.transform.position = this.transform.position;
@@ -223,7 +224,7 @@ public class Problem : MonoBehaviour
                 }
             }
 
-        //SoundManager.PlaySound(m_sounds, Sound.Active);
+        Timer.SoundMangerGet().Play(m_currentProblem.GetSounds(), WhenToPlaySound.Active);
 
 
         m_buttonPresses = 0;// This sets m_buttonpresses to 0.
@@ -268,6 +269,7 @@ public class Problem : MonoBehaviour
                     foreach (ParticleSystem particle in particles)
                     {
                         ParticleSystem t = Instantiate<ParticleSystem>(particle);
+                        t.transform.SetParent(this.transform); // EXPERIMENT
                         t.transform.position = t.transform.position + m_particleOffset;
                         t.Play();
                         t.transform.position = this.transform.position;
@@ -284,8 +286,8 @@ public class Problem : MonoBehaviour
                 List<ParticleSystem> particles = m_currentProblem.GetFailedParticle();
                 foreach (ParticleSystem particle in particles)
                 {
-
                     ParticleSystem t = Instantiate<ParticleSystem>(particle);
+                    t.transform.SetParent(this.transform); // EXPERIMENT
                     t.transform.position = t.transform.position + m_particleOffset;
                     t.Play();
                     t.transform.position = this.transform.position;
@@ -350,16 +352,13 @@ public class Problem : MonoBehaviour
                                 if (item.GetCharges() > 0)
                                 {
                                     m_buttonPresses++; // this has to be 
-                                    player.GetAnimator().SetTrigger("Fix");
-                                }
-                                else
-                                {
-                                    // Can play an animation on the player to indicate that it's empty.
+                                    player.FixProblem();
                                 }
                             }
                             else
                             {
                                 m_buttonPresses++; // This needs to increment.
+                                player.FixProblem();
                             }
                             // Get forward vector of player dot product against postion of problem? 
                             // Check if it is within the active 
@@ -396,16 +395,13 @@ public class Problem : MonoBehaviour
                                 if (item.GetCharges() > 0)
                                 {
                                     m_buttonPresses++; // this has to be 
-
-                                }
-                                else
-                                {
-                                    // Can play an animation on the player to indicate that it's empty.
+                                    player.FixProblem();
                                 }
                             }
                             else
                             {
                                 m_buttonPresses++; // This needs to increment.
+                                player.FixProblem();
                             }
                             // Get forward vector of player dot product against postion of problem? 
                             // Check if it is within the active 
@@ -421,7 +417,8 @@ public class Problem : MonoBehaviour
                                 else if (item.IsOneTimeUse())
                                 {
                                     item.GetSpawner().m_spawnedItemList.Remove(item);
-                                    player.DropItem();                                     // Detaches the item from the palyer and vice versa
+                                    player.GetAnimator().SetTrigger("Fixed");
+                                    player.DropComplete();                                     // Detaches the item from the palyer and vice versa
                                     item.enabled = false;
                                     Destroy(item.gameObject);                              // Destroys the item.
                                 }

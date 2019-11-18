@@ -36,7 +36,8 @@ public class Source : MonoBehaviour
                     {
                         if (!m_spawnsItem)
                         {
-                            foreach (E_Quality quality in playerItem.m_fixableQuality)
+                            if (player.GetItem() != null)
+                                foreach (E_Quality quality in playerItem.m_fixableQuality)
                             {
                                 if (quality == m_willRefill)
                                 {

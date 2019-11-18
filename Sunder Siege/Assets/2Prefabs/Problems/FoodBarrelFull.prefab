@@ -1,7 +1,7 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!65 &7343233211343100943
-BoxCollider:
+--- !u!136 &4381847846694764780
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -10,11 +10,12 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 126.394714, y: 122.34597, z: 126.394745}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &617742311624594090
-BoxCollider:
+  m_Radius: 73.41
+  m_Height: 218
+  m_Direction: 1
+  m_Center: {x: -0.0005950928, y: -0.0000038146973, z: 0.00024414062}
+--- !u!136 &1545806040389318263
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -23,9 +24,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 126.394714, y: 122.34597, z: 126.394745}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 73.41
+  m_Height: 218
+  m_Direction: 1
+  m_Center: {x: -0.0005950928, y: -0.0000038146973, z: 0.00024414062}
 --- !u!1 &5226929046355817289
 GameObject:
   m_ObjectHideFlags: 0
@@ -71,7 +73,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.6, y: 1, z: 1.6}
+  m_Size: {x: 2.5, y: 1, z: 2.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3528704401901620115
 MonoBehaviour:
@@ -92,6 +94,7 @@ MonoBehaviour:
   m_uiPrefab: {fileID: 7493720630696751244, guid: 2b414005ea8758443a5c3341bb380ad1,
     type: 3}
   m_uiPosition: {x: 0, y: 4, z: 0}
+  m_particleOffset: {x: 2, y: 0, z: 0}
   m_inactiveState: {fileID: 5007990487096449430}
   m_problemList:
   - m_name: Break
@@ -146,10 +149,6 @@ PrefabInstance:
     - target: {fileID: 100000, guid: d73756f148a0226468ea5717c33a194e, type: 3}
       propertyPath: m_Name
       value: Active
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: d73756f148a0226468ea5717c33a194e, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d73756f148a0226468ea5717c33a194e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -661,10 +660,6 @@ PrefabInstance:
     - target: {fileID: 100000, guid: d73756f148a0226468ea5717c33a194e, type: 3}
       propertyPath: m_Name
       value: Inactive
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: d73756f148a0226468ea5717c33a194e, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d73756f148a0226468ea5717c33a194e, type: 3}
       propertyPath: m_LocalPosition.x

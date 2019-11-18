@@ -206,14 +206,29 @@ public class Player : MonoBehaviour
 
     public void DropItem()
     {
-        m_heldItem = null; // "drops" the item allowing the player to pick up another by setting the held to null
         m_animator.SetTrigger("Drop");
+    }
+
+    public void DropComplete()
+    {
+        m_heldItem.Drop();
+        m_heldItem = null; // "drops" the item allowing the player to pick up another by setting the held to null
     }
 
     public void ThrowItem()
     {
-        m_heldItem = null; // "throws" the item and allows player to pick up a new item by setting to null
         m_animator.SetTrigger("Throw");
+    }
+
+    public void ThrowComplete()
+    {
+        m_heldItem.Throw();
+        m_heldItem = null; // "throws" the item and allows player to pick up a new item by setting to null
+    }
+
+    public void FixProblem()
+    {
+        m_animator.SetTrigger("Fix");
     }
 
     public Item GetItem()
