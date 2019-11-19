@@ -353,6 +353,7 @@ public class Problem : MonoBehaviour
                                 {
                                     m_buttonPresses++; // this has to be 
                                     player.FixProblem();
+                                    Timer.SoundMangerGet().Play(item.GetSound(), WhenToPlaySound.Fix);
                                 }
                             }
                             else

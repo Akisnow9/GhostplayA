@@ -38,7 +38,9 @@ public enum SoundToPlay
     MenuMusic,
     LevelMusic,
     WinMusic,
-    FailMusic
+    FailMusic,
+    Soldier,
+    Apple
 };
 
 // The 'Triggers'.
@@ -62,5 +64,6 @@ public enum WhenToPlaySound
     Menu,
     LevelStart,
     LoseGame,
-    Test
+    Test,
+    Fix
 };

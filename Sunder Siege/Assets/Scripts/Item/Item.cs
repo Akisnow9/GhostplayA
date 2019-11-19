@@ -59,19 +59,32 @@ public class Item : MonoBehaviour
 	[Header("What the actual item is, bucket, hammer, etc.")]
 	public List<E_Quality> m_fixableQuality; // Holds what the item can fix and if it can fix more then 1 type of problem eg; it is both a hammer and a bucket.
 
+    [Header("Sounds for pending, active, fail and success for this problem.")]
+    [SerializeField] private List<SoundRequester> m_sounds;
 
-	//*************************************************************************************
-	// Base class functions
-	//*************************************************************************************
-	// @brief Runs at the start of the games launch
-	//		  Sets details about the rigidbody variable and the charges count
-	private void Start()
-	{
-		m_rigidbody = GetComponent<Rigidbody>();
-		m_charges = m_maxCharges;
-		m_levelCount = m_filledLevels.Count;
-		m_startingPos = transform.position;
-	}
+
+    //*************************************************************************************
+    // Base class functions
+    //*************************************************************************************
+    // @brief Runs at the start of the games launch
+    //		  Sets details about the rigidbody variable and the charges count
+    private void Start()
+    {
+        m_rigidbody = GetComponent<Rigidbody>();
+        m_charges = m_maxCharges;
+        m_levelCount = m_filledLevels.Count;
+        m_startingPos = transform.position;
+
+
+        if (m_sounds != null)
+            if (m_sounds.Count != 0)
+            {
+                foreach (SoundRequester sounds in m_sounds)
+                {
+                    sounds.SetupSound(this.gameObject);
+                }
+            }
+    }
 
 	// @brief Update is called once per frame
 	//		  Handles moving the item when it is thrown
@@ -107,9 +120,12 @@ public class Item : MonoBehaviour
 				Actions();
 			}
 		}
-
-		// Item was no longer refilled at the end of a frame
-		m_wasRefilled = false;
+        SoundManager s = Timer.SoundMangerGet();
+        // Sounds for problem would go here.
+        if (m_sounds != null)
+            s.CheckAudio(m_sounds); // The problems for the specified problem occuring
+                                                        // Item was no longer refilled at the end of a frame
+        m_wasRefilled = false;
 	}
 
 	//*************************************************************************************
@@ -613,4 +629,10 @@ public class Item : MonoBehaviour
             Physics.IgnoreCollision(Collider, a_player.gameObject.GetComponent<Collider>(), true);
         }
     }
+
+    public List<SoundRequester> GetSound()
+    {
+        return m_sounds;
+    }
+
 }

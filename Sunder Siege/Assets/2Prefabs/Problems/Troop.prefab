@@ -203,7 +203,7 @@ MonoBehaviour:
   m_particleOffset: {x: 2, y: 0, z: 0}
   m_inactiveState: {fileID: 8449635625608384332}
   m_problemList:
-  - m_name: 
+  - m_name: Wave
     m_uiElement: {fileID: 3750699538719667555, guid: d490359937920104db013cf78ddd7466,
       type: 3}
     m_activeState: {fileID: 7305110498566285643}
@@ -221,7 +221,29 @@ MonoBehaviour:
     - {fileID: 3244365351854202973, guid: 9c0050426abbb4044adee23b4b2357fc, type: 3}
     - {fileID: 3792599640936278634, guid: 30d4ceea0dd6b694f8bc16269357d4f1, type: 3}
     - {fileID: 711217586589158238, guid: 1e54e1341cec86d409dd57bf4e91afe3, type: 3}
-    m_sounds: []
+    m_sounds:
+    - m_name: Yell
+      m_trigger: 7
+      m_requestedSounds: 0b000000
+      m_soundBank: []
+      m_enableDelay: 0
+      m_delay: 0
+      m_clipLength: 3
+      m_loop: 0
+      m_fadeIn: 0
+      m_startVolume: 1
+      m_maxVolume: 1
+      m_increaseRate: 0
+      m_sequence: 0
+      m_fadeOut: 0
+      m_minVolume: 0
+      m_reductionRate: 0
+      m_timeTillFade: 20
+      m_spatialBlend: 0
+      m_lastPlayed: 0
+      m_isActive: 0
+      m_fadeOutStart: 0
+      m_delayOffset: 0
 --- !u!1001 &2090470012173398999
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -387,6 +409,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Troop arm - no animation
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: f08da877c89f72244a27262a08c6cff5, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 6805a6cbed466dd43b06824a2b3cf203, type: 2}
     - target: {fileID: 400012, guid: f08da877c89f72244a27262a08c6cff5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.025523335
@@ -431,6 +457,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2300004, guid: f08da877c89f72244a27262a08c6cff5, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ec5c263f9cdab3b40a3f5e4eb3e49545, type: 2}
     - target: {fileID: 2300000, guid: f08da877c89f72244a27262a08c6cff5, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -439,14 +469,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ec5c263f9cdab3b40a3f5e4eb3e49545, type: 2}
-    - target: {fileID: 2300004, guid: f08da877c89f72244a27262a08c6cff5, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: ec5c263f9cdab3b40a3f5e4eb3e49545, type: 2}
-    - target: {fileID: 9500000, guid: f08da877c89f72244a27262a08c6cff5, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 6805a6cbed466dd43b06824a2b3cf203, type: 2}
     - target: {fileID: 13700000, guid: f08da877c89f72244a27262a08c6cff5, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
