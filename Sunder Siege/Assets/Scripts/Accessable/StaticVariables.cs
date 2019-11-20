@@ -19,6 +19,8 @@ public class StaticVariables
 	private GameObject m_hat;			   // Store the actual hat game object
 	private e_Hats m_hatID;                // Store the hats ID number to know which hat the player is wearing
 	private Material m_playerMat;		   // Store the players colour
+    private Material m_hatMat;             // Store the player hat material 
+
 
 	//*************************************************************************************
 	// Properties functionality
@@ -67,4 +69,11 @@ public class StaticVariables
 		get { return m_playerMat; }
 		set { m_playerMat = value; }
 	}
+
+    public Material HatMaterial
+    {
+        get { return m_hatMat; }
+        set { m_hatMat = value; }
+    }
+
 }

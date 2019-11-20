@@ -32,8 +32,9 @@ public class Timer : MonoBehaviour
     [SerializeField] private float m_timeLimit = 60; // The timer will count down from this point. Set from Unity Editor.
     [SerializeField] private float m_timeBeforeFail = 15; // Once a problem has activated how long before the player loses a life.
     [SerializeField] private int m_numberofLives = 5; // How many times items from the active list can expire.
-    [SerializeField] private float m_minRangeOfProblem = 3; // Minus this from max. Then add to repeat every. Only for problems.
-    [SerializeField] private float m_maxRangeOfProblem = 15; // This minus min. Then add to repeat every. Only for problems
+
+    //[SerializeField] private float m_minRangeOfProblem = 3; // Minus this from max. Then add to repeat every. Only for problems.
+    //[SerializeField] private float m_maxRangeOfProblem = 15; // This minus min. Then add to repeat every. Only for problems
 
     private float m_timeScale = 1; // This can be used to modify the rate of seconds passing also movement speed and animation. Useful if people want to include a slowdown effect but needs to be included in everything that is effected. Eg movement/ animation will need to be multiplied by this all the time.
 
@@ -61,6 +62,7 @@ public class Timer : MonoBehaviour
 		{
 			// Create the players an attach their controllers
 			playerClone = Instantiate(m_playerToSpawn);
+            m_playerList.Insert(i, playerClone);
 			StaticVariables holder = Menus.GetPlayerInformation(i);
 			playerClone.controller = holder.Controller;
 
@@ -70,12 +72,27 @@ public class Timer : MonoBehaviour
 			// Set the players index
 			playerClone.SetPlayerIndex(holder.Player);
 
-			// Set player details
-			//playerClone.PlayerHat = m_hats[(int)holder.HatID];
-			playerClone.HatID = holder.HatID;
+            // Set player details
+            if (holder.HatID != e_Hats.NONE)
+            {
+                playerClone.PlayerHat = m_hats[(int)holder.HatID];
+                playerClone.HatID = holder.HatID;
 
+                // Creates player hat
+
+                playerClone.PlayerHat = Instantiate(Timer.Hat[(int)playerClone.HatID]);
+                playerClone.PlayerHat.transform.SetParent(playerClone.HatattachPoint.transform);
+                playerClone.PlayerHat.transform.ResetTransform();
+
+                Material newMat = Instantiate(holder.HatMaterial);
+                newMat.SetColor(holder.HatMaterial.name, holder.HatMaterial.color);
+
+                GameObject m = playerClone.PlayerHat.GetComponent<Reference>().m_reference;
+                MeshRenderer a = m.GetComponent<MeshRenderer>();
+                //MeshRenderer hatRenderer = m_playerList[i].PlayerHat.GetComponent<Reference>().gameObject.GetComponent<MeshRenderer>();
+                a.material = newMat;
+            }
 			// Add the players to the playerList
-			m_playerList.Insert(i, playerClone);
 
 			// Set the shirts material
 			Material newMaterial = Instantiate(holder.PlayerMaterial);
@@ -85,14 +102,16 @@ public class Timer : MonoBehaviour
 			thisRenderer.material = newMaterial;
 		}
 
-		//GameObject newObject = Instantiate();
-		//GameObject.AddComponent<Events>();
-
-	}
+    }
+    //GameObject newObject = Instantiate();
+    //GameObject.AddComponent<Events>();
 
     // Start is called before the first frame update
     void Start()
     {
+
+
+
         if (m_sounds != null)
             if (m_sounds.Count != 0)
             {
@@ -103,8 +122,7 @@ public class Timer : MonoBehaviour
             }
         m_numOfInactiveProblems = m_problemList.Count;
         //Needs safety here.
-        Timer.SoundMangerGet().Play(m_sounds, WhenToPlaySound.LevelStart);
-        //Timer.SoundMangerGet().Play(m_sounds, WhenToPlaySound.Test);
+        Timer.SoundMangerGet().Play(m_sounds, WhenToPlaySound.Menu);
     }
 
     // Update is called once per frame
@@ -125,7 +143,6 @@ public class Timer : MonoBehaviour
         {
             Application.Quit();
         }
-        
     }
 
 

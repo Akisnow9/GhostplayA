@@ -62,6 +62,8 @@ public class Item : MonoBehaviour
     [Header("Sounds for pending, active, fail and success for this problem.")]
     [SerializeField] private List<SoundRequester> m_sounds;
 
+    [HideInInspector]
+    public bool m_inputSelected = false;
 
     //*************************************************************************************
     // Base class functions
@@ -260,7 +262,7 @@ public class Item : MonoBehaviour
 
     void DropTrigger()
     {
-        this.m_playerHolding.DropItem();
+        this.m_playerHolding.DropItem(this);
     }
 
 
@@ -331,7 +333,7 @@ public class Item : MonoBehaviour
 
     void ThrowTrigger()
     {
-        this.m_playerHolding.ThrowItem();
+        this.m_playerHolding.ThrowItem(this);
     }
 
 	// @brief Handles moving along a line towards the hitLocation retrieved above via

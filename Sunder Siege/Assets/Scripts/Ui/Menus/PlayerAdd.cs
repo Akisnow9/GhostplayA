@@ -27,9 +27,9 @@ public class PlayerAdd : MonoBehaviour
 
 	/*** Variables that store Player base data ***/
 	/*********************************************/
-	[Header("Drag each player material to this list")]
+	[Header("Drag each material to this list")]
 	[SerializeField] private List<Material> m_playerMats;			// Store the different player colours
-
+    [SerializeField] private List<Material> m_hatMaterials;         // Store the different player hats
 	[Header("Drag each unready player, attach point, and shirt within 'Characters' to this list")]
 	[SerializeField] private List<GameObject> m_unreadyPlayers;	    // Store the gameObjects that will display the player once pressed
 	[SerializeField] private List<Transform> m_unreadyAttachPoints; // Store the location of each players 'hat' attach point
@@ -48,16 +48,16 @@ public class PlayerAdd : MonoBehaviour
 	[SerializeField] private List<GameObject> m_hats;               // Store each hat prefab for the players to pick from
 	private GameObject m_currentHat;
 	private bool m_wasChanged;										// Store if the hat was changed last update frame
-
+    [SerializeField] private float m_delayBetweentHatChanges = 1.0f;
 	/*** Other required variables ***/
 	/************************************************************************/
 	[HideInInspector] public List<GameObject> m_listOfUI;
+    private float m_nextChange;
+    //*************************************************************************************
+    // Base class functionality
+    //*************************************************************************************
 
-	//*************************************************************************************
-	// Base class functionality
-	//*************************************************************************************
-
-	private void Start()
+    private void Start()
 	{
 		for (int i = 0; i < Menus.GetMaxNumOfPlayers(); i++)
 		{
@@ -158,8 +158,8 @@ public class PlayerAdd : MonoBehaviour
 						StaticVariables newPlayer = new StaticVariables();
 						newPlayer.Controller = controller;
 						newPlayer.Player = m_playersAdded;
-						newPlayer.Hat = m_hats[((int)e_Hats.NONE + m_playersAdded)];
-						newPlayer.HatID = (e_Hats.NONE + m_playersAdded);
+						newPlayer.Hat = m_hats[(int)e_Hats.NONE];
+						newPlayer.HatID = (e_Hats.NONE);
 						newPlayer.PlayerMaterial = m_playerMats[m_playersAdded];
 						Menus.AddToPlayerList(newPlayer, m_playersAdded);
 
@@ -170,7 +170,7 @@ public class PlayerAdd : MonoBehaviour
 						m_joinPanel[m_playersAdded].SetActive(false);
 
 						// Display some dope hats
-						newPlayer.Hat = Instantiate(m_hats[(int)newPlayer.HatID]);
+						newPlayer.Hat = Instantiate(m_hats[(int)e_Hats.NONE]);
 						newPlayer.Hat.transform.SetParent(m_unreadyAttachPoints[m_playersAdded]);
 						newPlayer.Hat.transform.ResetTransform();
 
@@ -193,10 +193,23 @@ public class PlayerAdd : MonoBehaviour
 						StaticVariables newPlayer = new StaticVariables();
 						newPlayer.Controller = controller;
 						newPlayer.Player = m_playersAdded;
-						newPlayer.Hat = m_hats[((int)e_Hats.NONE + m_playersAdded)];
-						newPlayer.HatID = (e_Hats.NONE + m_playersAdded);
+						newPlayer.Hat = m_hats[((int)e_Hats.NONE)];
+						newPlayer.HatID = (e_Hats.NONE);
+                        //if(m_playersAdded == 0 && )
+
+                        //Need to look at colour assaignment here.
 						newPlayer.PlayerMaterial = m_playerMats[m_playersAdded];
-						Menus.AddToPlayerList(newPlayer, m_playersAdded);
+
+
+                        //if (m_playersAdded == 0)// Means it's blue. 0123
+                        //{
+                        //    newPlayer.HatMaterial = m_hatMaterials[((int)newPlayer.HatID)];
+                        //}
+                        //else
+                        //{
+                        //    newPlayer.HatMaterial = m_hatMaterials[(m_playersAdded * 4) + (int)newPlayer.HatID]; // Do cool math here
+                        //}
+                        Menus.AddToPlayerList(newPlayer, m_playersAdded);
 
 						// Enable the panel to occupy the index position by a controller
 						m_unreadyPlayers[m_playersAdded].SetActive(true);
@@ -216,11 +229,17 @@ public class PlayerAdd : MonoBehaviour
 						Material newMat = Instantiate(newPlayer.PlayerMaterial);
 						newMat.SetColor(newPlayer.PlayerMaterial.name, newPlayer.PlayerMaterial.color);
 
-						SkinnedMeshRenderer thisRenderer = m_unreadyShirt[m_playersAdded].GetComponent<SkinnedMeshRenderer>();
-						thisRenderer.material = newMat;
+                        SkinnedMeshRenderer thisRenderer = m_unreadyShirt[newPlayer.Player].GetComponent<SkinnedMeshRenderer>();
+                        thisRenderer.material = newMat;
 
-						// Increase the amount of players added
-						m_playersAdded++;
+                        //Material newHat = Instantiate(newPlayer.HatMaterial);
+                        //newHat.SetColor(newPlayer.HatMaterial.name, newPlayer.HatMaterial.color);
+
+                        //MeshRenderer hatRenderer = newPlayer.Hat.GetComponent<Reference>().m_reference.GetComponent<MeshRenderer>();
+                        //hatRenderer.material = newHat;
+
+                        // Increase the amount of players added
+                        m_playersAdded++;
 					}
 				}
 			}
@@ -241,30 +260,32 @@ public class PlayerAdd : MonoBehaviour
 			}
 
 			// Dont allow 'double' updates... Skipping over hats
-			if (!m_wasChanged)
-			{
-				if (XCI.GetButtonDown(XboxButton.DPadRight, controller))
-				{
-					if (holder.Hat != null)
-					{
-						Destroy(holder.Hat);
-					}
+			if (Time.time > m_nextChange) // Removed !m_wasChanged &&
+            {
 
-					ApplyModificationUp(holder);
-					break;
-				}
-				else if (XCI.GetButtonDown(XboxButton.DPadLeft, controller))
-				{
-					if (holder.Hat != null)
-					{
-						Destroy(holder.Hat);
-					}
-
-					ApplyModificationDown(holder);
-					break;
-				}
-			}
-		}
+                float axisX = XCI.GetAxis(XboxAxis.LeftStickX, controller);
+                if (axisX > 0)
+                {
+                    if (holder.Hat != null)
+                    {
+                        Destroy(holder.Hat);
+                    }
+                    m_nextChange = Time.time + m_delayBetweentHatChanges;
+                    ApplyModificationUp(holder);
+                    break;
+                }
+                else if (axisX < 0)
+                {
+                    if (holder.Hat != null)
+                    {
+                        Destroy(holder.Hat);
+                    }
+                    m_nextChange = Time.time + m_delayBetweentHatChanges;
+                    ApplyModificationDown(holder);
+                    break;
+                }
+            }
+        }
 	}
 
 	private void ApplyModificationUp(StaticVariables a_holder)
@@ -285,31 +306,37 @@ public class PlayerAdd : MonoBehaviour
 			StaticVariables otherPlayers = Menus.GetPlayerInformation(i);
 
 			// Only have this affect players who have not readied-up
-			if (otherPlayers.IsReady)
-			{
-				// Make sure we are not checking the player who is adjusting the hat to themself, only to other players
-				if (otherPlayers.Player != a_holder.Player)
-				{
-					// Check if they are wearing the same hat
-					if ((int)otherPlayers.HatID == (int)a_holder.HatID)
-					{
-						if (((int)a_holder.HatID) < m_hats.Count - 1)
-						{
-							a_holder.HatID++;
-						}
-						else
-						{
-							a_holder.HatID = e_Hats.NONE;
-						}
-					}
-				}
-			}
+			//if (otherPlayers.IsReady)
+			//{
+			//	// Make sure we are not checking the player who is adjusting the hat to themself, only to other players
+			//	if (otherPlayers.Player != a_holder.Player)
+			//	{
+			//		// Check if they are wearing the same hat
+			//		if ((int)otherPlayers.HatID == (int)a_holder.HatID)
+			//		{
+			//			if (((int)a_holder.HatID) < m_hats.Count - 1)
+			//			{
+			//				a_holder.HatID++;
+			//			}
+			//			else
+			//			{
+			//				a_holder.HatID = e_Hats.NONE;
+			//			}
+			//		}
+			//	}
+			//}
 		}
 
 		a_holder.Hat = Instantiate(m_hats[(int)a_holder.HatID]);
 		a_holder.Hat.transform.SetParent(m_unreadyAttachPoints[a_holder.Player]);
 		a_holder.Hat.transform.ResetTransform();
-		m_wasChanged = true;
+
+        a_holder.HatMaterial = GetNewHatMaterial(a_holder.Player, a_holder.HatID);
+        if (a_holder.HatMaterial != null)
+        {
+            a_holder.Hat.GetComponent<Reference>().m_reference.GetComponent<MeshRenderer>().material = a_holder.HatMaterial;
+        }
+        m_wasChanged = true;
 	}
 
 	private void ApplyModificationDown(StaticVariables a_holder)
@@ -330,31 +357,38 @@ public class PlayerAdd : MonoBehaviour
 			StaticVariables otherPlayers = Menus.GetPlayerInformation(i);
 
 			// Only have this affect players who have not readied-up
-			if (otherPlayers.IsReady)
-			{
-				// Make sure we are not checking the player who is adjusting the hat to themself, only to other players
-				if (otherPlayers.Player != a_holder.Player)
-				{
-					// Check if they are wearing the same hat
-					if ((int)otherPlayers.HatID == (int)a_holder.HatID)
-					{
-						if (((int)a_holder.HatID) > 0)
-						{
-							a_holder.HatID--;
-						}
-						else
-						{
-							a_holder.HatID = e_Hats.PAPERBOAT;
-						}
-					}
-				}
-			}
+			//if (otherPlayers.IsReady)
+			//{
+			//	// Make sure we are not checking the player who is adjusting the hat to themself, only to other players
+			//	if (otherPlayers.Player != a_holder.Player)
+			//	{
+			//		// Check if they are wearing the same hat
+			//		if ((int)otherPlayers.HatID == (int)a_holder.HatID)
+			//		{
+			//			if (((int)a_holder.HatID) > 0)
+			//			{
+			//				a_holder.HatID--;
+			//			}
+			//			else
+			//			{
+			//				a_holder.HatID = e_Hats.PAPERBOAT;
+			//			}
+			//		}
+			//	}
+			//}
 		}
 
 		a_holder.Hat = Instantiate(m_hats[(int)a_holder.HatID]);
 		a_holder.Hat.transform.SetParent(m_unreadyAttachPoints[a_holder.Player]);
 		a_holder.Hat.transform.ResetTransform();
-		m_wasChanged = true;
+        // Gets the material
+        a_holder.HatMaterial = GetNewHatMaterial(a_holder.Player, a_holder.HatID);
+        // Material needs to be applied to model
+        if (a_holder.HatMaterial != null)
+        {
+            a_holder.Hat.GetComponent<Reference>().m_reference.GetComponent<MeshRenderer>().material = a_holder.HatMaterial;
+        }
+        m_wasChanged = true;
 	}
 
 	private void ReadyUp()
@@ -387,7 +421,9 @@ public class PlayerAdd : MonoBehaviour
 		Material newMat = Instantiate(a_holder.PlayerMaterial);
 		newMat.SetColor(a_holder.PlayerMaterial.name, a_holder.PlayerMaterial.color);
 
-		SkinnedMeshRenderer thisRenderer = m_readyShirt[a_holder.Player].GetComponent<SkinnedMeshRenderer>();
+        a_holder.Hat.GetComponent<Reference>().m_reference.GetComponent<MeshRenderer>().material = a_holder.HatMaterial;
+
+        SkinnedMeshRenderer thisRenderer = m_readyShirt[a_holder.Player].GetComponent<SkinnedMeshRenderer>();
 		thisRenderer.material = newMat;
 	}
 
@@ -403,4 +439,23 @@ public class PlayerAdd : MonoBehaviour
 		//	XCI.StopVibration(a_holder.Controller);
 		//}
 	}
+
+    private Material GetNewHatMaterial(int a_playerNumber, e_Hats a_hatId)
+    {
+        if(a_playerNumber == 0)
+        {
+            if (a_hatId != e_Hats.NONE)
+                return m_hatMaterials[(int)a_hatId - 1];
+            else
+                return null;
+        }
+        else
+        {
+            if (a_hatId != e_Hats.NONE)
+                return m_hatMaterials[a_playerNumber * 4 + (int)a_hatId - 1];
+            else
+                return null;
+        }
+    }
+
 }

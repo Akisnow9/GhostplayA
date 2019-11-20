@@ -48,9 +48,9 @@ public class Player : MonoBehaviour
         m_startingPos = transform.position;
 
         // Set the hat
-        m_hat = Instantiate(Timer.Hat[(int)m_hatID]);
-        m_hat.transform.SetParent(m_attachPoint.transform);
-        m_hat.transform.ResetTransform();
+        //m_hat = Instantiate(Timer.Hat[(int)m_hatID]);
+        //m_hat.transform.SetParent(m_attachPoint.transform);
+        //m_hat.transform.ResetTransform();
     }
 
     // Update is called once per frame
@@ -66,6 +66,8 @@ public class Player : MonoBehaviour
         // Check the players direction
         //direction = transform.position - lastPosition;
         //localDirection = transform.InverseTransformDirection(direction);
+
+
 
 
         // Remember the lastPosition the Player was
@@ -204,24 +206,34 @@ public class Player : MonoBehaviour
         m_animator.SetTrigger("Pickup");
     }
 
-    public void DropItem()
+    public void DropItem(Item a_item)
     {
-        m_animator.SetTrigger("Drop");
+        if (a_item.m_inputSelected == false)
+        {
+            a_item.m_inputSelected = true;
+            m_animator.SetTrigger("Drop");
+        }
     }
 
     public void DropComplete()
     {
+        m_heldItem.m_inputSelected = false;
         m_heldItem.Drop();
         m_heldItem = null; // "drops" the item allowing the player to pick up another by setting the held to null
     }
 
-    public void ThrowItem()
+    public void ThrowItem(Item a_item)
     {
-        m_animator.SetTrigger("Throw");
+        if (a_item.m_inputSelected == false)
+        {
+            a_item.m_inputSelected = true;
+            m_animator.SetTrigger("Throw");
+        }
     }
 
     public void ThrowComplete()
     {
+        m_heldItem.m_inputSelected = false;
         m_heldItem.Throw();
         m_heldItem = null; // "throws" the item and allows player to pick up a new item by setting to null
     }
@@ -273,5 +285,10 @@ public class Player : MonoBehaviour
 		transform.position = m_startingPos;
 		rb.velocity = Vector3.zero;
 	}
+
+    public GameObject HatattachPoint
+    {
+        get { return m_attachPoint; }
+    }
 
 }

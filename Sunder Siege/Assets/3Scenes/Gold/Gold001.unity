@@ -89,7 +89,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -867,7 +867,7 @@ MonoBehaviour:
     m_source: {fileID: 0}
   - m_name: Level Music
     m_Identifier: 8
-    m_soundClip: {fileID: 8300000, guid: 1e040152fdd4e504e8974473d8ded538, type: 3}
+    m_soundClip: {fileID: 8300000, guid: a6a2773f306df8e48ae599000dc9fb81, type: 3}
     m_pitch: 1
     m_volume: 1
     m_mixer: 2
@@ -891,7 +891,7 @@ MonoBehaviour:
     m_soundClip: {fileID: 8300000, guid: 7eccc6905a0c652438a09ceac08bdfeb, type: 3}
     m_pitch: 1
     m_volume: 1
-    m_mixer: 3
+    m_mixer: 4
     m_source: {fileID: 0}
   - m_name: Sword Fight
     m_Identifier: 5
@@ -1060,8 +1060,6 @@ MonoBehaviour:
   m_timeLimit: 180
   m_timeBeforeFail: 15
   m_numberofLives: 10
-  m_minRangeOfProblem: 2
-  m_maxRangeOfProblem: 15
   m_numOfInactiveProblems: 10
   m_pendingEventList:
   - m_event: 2

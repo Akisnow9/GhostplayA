@@ -352,8 +352,8 @@ public class Problem : MonoBehaviour
                                 if (item.GetCharges() > 0)
                                 {
                                     m_buttonPresses++; // this has to be 
-                                    player.FixProblem();
                                     Timer.SoundMangerGet().Play(item.GetSound(), WhenToPlaySound.Fix);
+                                    player.FixProblem();
                                 }
                             }
                             else
@@ -370,12 +370,14 @@ public class Problem : MonoBehaviour
                                 if (item.IsRefillable())
                                 {
                                     item.UseCharge();
+                                    Timer.SoundMangerGet().Play(item.GetSound(), WhenToPlaySound.Fix);
                                     //Does math to see what plane to display.
                                 }
                                 else if (item.IsOneTimeUse())
                                 {
+                                    Timer.SoundMangerGet().Play(item.GetSound(), WhenToPlaySound.Fix);
                                     item.GetSpawner().m_spawnedItemList.Remove(item);
-                                    player.DropItem();                                     // Detaches the item from the palyer and vice versa
+                                    player.DropItem(item);                                     // Detaches the item from the palyer and vice versa
                                     item.enabled = false;
                                     Destroy(item.gameObject);                              // Destroys the item.
                                 }
@@ -412,11 +414,13 @@ public class Problem : MonoBehaviour
                             {
                                 if (item.IsRefillable())
                                 {
+                                    Timer.SoundMangerGet().Play(item.GetSound(), WhenToPlaySound.Fix);
                                     item.UseCharge();
                                     //Does math to see what plane to display.
                                 }
                                 else if (item.IsOneTimeUse())
                                 {
+                                    Timer.SoundMangerGet().Play(item.GetSound(), WhenToPlaySound.Fix);
                                     item.GetSpawner().m_spawnedItemList.Remove(item);
                                     player.GetAnimator().SetTrigger("Fixed");
                                     player.DropComplete();                                     // Detaches the item from the palyer and vice versa
