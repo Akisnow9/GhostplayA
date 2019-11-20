@@ -60,7 +60,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0.54}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.4600067, y: 0, z: 10.000001}
+  m_ConnectedAnchor: {x: 0, y: 0, z: 0.54}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -249,11 +249,11 @@ MonoBehaviour:
       m_maxVolume: 1
       m_increaseRate: 0.00328
       m_sequence: 0
-      m_fadeOut: 1
-      m_minVolume: 0.217
-      m_reductionRate: 0.001
-      m_timeTillFade: 10
-      m_spatialBlend: 0
+      m_fadeOut: 0
+      m_minVolume: 0
+      m_reductionRate: 0.01
+      m_timeTillFade: 0
+      m_spatialBlend: 0.9
       m_lastPlayed: 0
       m_isActive: 0
       m_fadeOutStart: 0
@@ -295,10 +295,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall_SmallDoor_Greybox
       objectReference: {fileID: 0}
-    - target: {fileID: 2300004, guid: fcbedd909f156f142ad020764eb0881b, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 548fbcc58b715cf47b753a2cbf77ae48, type: 2}
     - target: {fileID: 400004, guid: fcbedd909f156f142ad020764eb0881b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -343,14 +339,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2300008, guid: fcbedd909f156f142ad020764eb0881b, type: 3}
+    - target: {fileID: 2300004, guid: fcbedd909f156f142ad020764eb0881b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 054584ff294012f47afc0a6ca588835a, type: 2}
+      objectReference: {fileID: 2100000, guid: 548fbcc58b715cf47b753a2cbf77ae48, type: 2}
     - target: {fileID: 2300006, guid: fcbedd909f156f142ad020764eb0881b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 548fbcc58b715cf47b753a2cbf77ae48, type: 2}
+    - target: {fileID: 2300008, guid: fcbedd909f156f142ad020764eb0881b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 054584ff294012f47afc0a6ca588835a, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fcbedd909f156f142ad020764eb0881b, type: 3}
 --- !u!1 &1981637222384558781 stripped
@@ -388,10 +388,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall_SmallDoor_Greybox
       objectReference: {fileID: 0}
-    - target: {fileID: 2300004, guid: fcbedd909f156f142ad020764eb0881b, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 548fbcc58b715cf47b753a2cbf77ae48, type: 2}
     - target: {fileID: 400004, guid: fcbedd909f156f142ad020764eb0881b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -436,14 +432,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2300008, guid: fcbedd909f156f142ad020764eb0881b, type: 3}
+    - target: {fileID: 2300004, guid: fcbedd909f156f142ad020764eb0881b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 054584ff294012f47afc0a6ca588835a, type: 2}
+      objectReference: {fileID: 2100000, guid: 548fbcc58b715cf47b753a2cbf77ae48, type: 2}
     - target: {fileID: 2300006, guid: fcbedd909f156f142ad020764eb0881b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 548fbcc58b715cf47b753a2cbf77ae48, type: 2}
+    - target: {fileID: 2300008, guid: fcbedd909f156f142ad020764eb0881b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 054584ff294012f47afc0a6ca588835a, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fcbedd909f156f142ad020764eb0881b, type: 3}
 --- !u!1 &7654335998423014511 stripped

@@ -101,6 +101,7 @@ public class SoundRequester
     // can pass through the whole list and have that stored
     public void Play()
     {
+
         if(m_fadeOut)
         {
             m_fadeOutStart = Time.time + (float)m_timeTillFade;
@@ -180,9 +181,9 @@ public class SoundRequester
             foreach (Sound s in m_soundBank)
             {
                 s.m_source.volume = s.m_source.volume + m_increaseRate; // This is wrong but eh
-                if (s.m_source.volume > m_maxVolume)
+                if (s.m_source.volume > m_maxVolume * s.m_volume)
                 {
-                    s.m_source.volume = m_maxVolume;
+                    s.m_source.volume = m_maxVolume * s.m_volume;
                 }
             }
       }

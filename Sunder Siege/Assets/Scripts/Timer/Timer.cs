@@ -122,7 +122,7 @@ public class Timer : MonoBehaviour
             }
         m_numOfInactiveProblems = m_problemList.Count;
         //Needs safety here.
-        Timer.SoundMangerGet().Play(m_sounds, WhenToPlaySound.Menu);
+        Timer.SoundMangerGet().Play(m_sounds, WhenToPlaySound.LevelStart);
     }
 
     // Update is called once per frame

@@ -456,10 +456,10 @@ MonoBehaviour:
       m_increaseRate: 0
       m_sequence: 0
       m_fadeOut: 1
-      m_minVolume: 0.122
-      m_reductionRate: 0.00164
+      m_minVolume: 0.021
+      m_reductionRate: 0.0021
       m_timeTillFade: 0
-      m_spatialBlend: 0
+      m_spatialBlend: 1
       m_lastPlayed: 0
       m_isActive: 0
       m_fadeOutStart: 0
@@ -495,15 +495,15 @@ MonoBehaviour:
       m_clipLength: 0
       m_loop: 0
       m_fadeIn: 1
-      m_startVolume: 0.307
-      m_maxVolume: 1
-      m_increaseRate: 0.00244
+      m_startVolume: 0.077
+      m_maxVolume: 0.311
+      m_increaseRate: 0.0049
       m_sequence: 0
       m_fadeOut: 1
-      m_minVolume: 0.16
-      m_reductionRate: 0.00106
-      m_timeTillFade: 3
-      m_spatialBlend: 0
+      m_minVolume: 0
+      m_reductionRate: 0.00449
+      m_timeTillFade: 2
+      m_spatialBlend: 0.9
       m_lastPlayed: 0
       m_isActive: 0
       m_fadeOutStart: 0
@@ -612,6 +612,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6737344128030687853}
     m_Modifications:
+    - target: {fileID: 978899318292335778, guid: eba121382c9199a429c2eaf70561cb26,
+        type: 3}
+      propertyPath: m_timeBeforeDissapear
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 978899318292335778, guid: eba121382c9199a429c2eaf70561cb26,
+        type: 3}
+      propertyPath: m_scaleSpeedOfChildren
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 978899318292335778, guid: eba121382c9199a429c2eaf70561cb26,
+        type: 3}
+      propertyPath: m_dissapear
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6339576659496767907, guid: eba121382c9199a429c2eaf70561cb26,
         type: 3}
       propertyPath: m_Name
@@ -671,21 +686,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 978899318292335778, guid: eba121382c9199a429c2eaf70561cb26,
-        type: 3}
-      propertyPath: m_timeBeforeDissapear
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 978899318292335778, guid: eba121382c9199a429c2eaf70561cb26,
-        type: 3}
-      propertyPath: m_scaleSpeedOfChildren
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 978899318292335778, guid: eba121382c9199a429c2eaf70561cb26,
-        type: 3}
-      propertyPath: m_dissapear
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2131482022061317167, guid: eba121382c9199a429c2eaf70561cb26,
         type: 3}

@@ -407,22 +407,24 @@ public class PlayerAdd : MonoBehaviour
 		}
 	}
 
-	private void LockedIn(StaticVariables a_holder)
-	{
-		// Enable the readied-up playe model
-		m_unreadyPlayers[a_holder.Player].SetActive(false);
-		m_readyPlayers[a_holder.Player].SetActive(true);
+    private void LockedIn(StaticVariables a_holder)
+    {
+        // Enable the readied-up playe model
+        m_unreadyPlayers[a_holder.Player].SetActive(false);
+        m_readyPlayers[a_holder.Player].SetActive(true);
 
-		// Set the hat to the new model
-		a_holder.Hat.transform.SetParent(m_readyAttachPoints[a_holder.Player]);
-		a_holder.Hat.transform.ResetTransform();
+        // Set the hat to the new model
+        a_holder.Hat.transform.SetParent(m_readyAttachPoints[a_holder.Player]);
+        a_holder.Hat.transform.ResetTransform();
 
-		// Set the material
-		Material newMat = Instantiate(a_holder.PlayerMaterial);
-		newMat.SetColor(a_holder.PlayerMaterial.name, a_holder.PlayerMaterial.color);
+        // Set the material
+        Material newMat = Instantiate(a_holder.PlayerMaterial);
+        newMat.SetColor(a_holder.PlayerMaterial.name, a_holder.PlayerMaterial.color);
 
-        a_holder.Hat.GetComponent<Reference>().m_reference.GetComponent<MeshRenderer>().material = a_holder.HatMaterial;
-
+        if (a_holder.HatID != e_Hats.NONE)
+        {
+            a_holder.Hat.GetComponent<Reference>().m_reference.GetComponent<MeshRenderer>().material = a_holder.HatMaterial;
+        }
         SkinnedMeshRenderer thisRenderer = m_readyShirt[a_holder.Player].GetComponent<SkinnedMeshRenderer>();
 		thisRenderer.material = newMat;
 	}

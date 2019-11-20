@@ -32,7 +32,7 @@ public enum SoundToPlay
     Burning,
     DoorSmash,
     Crumble,
-    Falliung,
+    Falling,
     AbientSwordFight,
     WaterSplash,
     MenuMusic,
@@ -65,5 +65,6 @@ public enum WhenToPlaySound
     LevelStart,
     LoseGame,
     Test,
-    Fix
+    Fix,
+    Fall
 };

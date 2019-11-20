@@ -17,6 +17,9 @@ public class Sound
     public float m_volume = 1.0f;
     public Mixer m_mixer = Mixer.None;
 
+    [Range(0f,1f)]
+    public float m_volumeScaler = 1.0f;
+
     [HideInInspector]
     public AudioSource m_source;
     //private bool m_diagetic; // Might not need.
@@ -33,10 +36,11 @@ public class Sound
 
         this.m_source = a_soundCopy.m_source;
         this.m_name = a_soundCopy.m_name;
+        this.m_volumeScaler = a_soundCopy.m_volumeScaler;
+        this.m_volume = a_soundCopy.m_volume * a_soundCopy.m_volumeScaler;
         this.m_Identifier = a_soundCopy.m_Identifier;
         this.m_soundClip = a_soundCopy.m_soundClip;
         this.m_pitch = a_soundCopy.m_pitch;
-        this.m_volume = a_soundCopy.m_volume;
         this.m_mixer = a_soundCopy.m_mixer;
     }
 
