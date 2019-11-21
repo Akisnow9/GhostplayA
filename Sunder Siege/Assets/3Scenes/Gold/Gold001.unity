@@ -89,7 +89,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -769,81 +769,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3528704401901620115, guid: a545d872d7a06b7478e7668a0bd4b3c7,
-        type: 3}
-      propertyPath: m_problemList.Array.data[0].m_sounds.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3528704401901620115, guid: a545d872d7a06b7478e7668a0bd4b3c7,
-        type: 3}
-      propertyPath: m_problemList.Array.data[0].m_sounds.Array.data[0].m_requestedSounds.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3528704401901620115, guid: a545d872d7a06b7478e7668a0bd4b3c7,
-        type: 3}
-      propertyPath: m_problemList.Array.data[0].m_fixableProblem
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3528704401901620115, guid: a545d872d7a06b7478e7668a0bd4b3c7,
-        type: 3}
-      propertyPath: m_problemList.Array.data[0].m_sounds.Array.data[0].m_name
-      value: Apple
-      objectReference: {fileID: 0}
-    - target: {fileID: 3528704401901620115, guid: a545d872d7a06b7478e7668a0bd4b3c7,
-        type: 3}
-      propertyPath: m_problemList.Array.data[0].m_sounds.Array.data[0].m_trigger
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 3528704401901620115, guid: a545d872d7a06b7478e7668a0bd4b3c7,
-        type: 3}
-      propertyPath: m_problemList.Array.data[0].m_sounds.Array.data[0].m_clipLength
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3528704401901620115, guid: a545d872d7a06b7478e7668a0bd4b3c7,
-        type: 3}
-      propertyPath: m_problemList.Array.data[0].m_sounds.Array.data[0].m_startVolume
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3528704401901620115, guid: a545d872d7a06b7478e7668a0bd4b3c7,
-        type: 3}
-      propertyPath: m_problemList.Array.data[0].m_sounds.Array.data[0].m_maxVolume
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3528704401901620115, guid: a545d872d7a06b7478e7668a0bd4b3c7,
-        type: 3}
-      propertyPath: m_problemList.Array.data[0].m_sounds.Array.data[0].m_increaseRate
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3528704401901620115, guid: a545d872d7a06b7478e7668a0bd4b3c7,
-        type: 3}
-      propertyPath: m_problemList.Array.data[0].m_sounds.Array.data[0].m_fadeOut
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3528704401901620115, guid: a545d872d7a06b7478e7668a0bd4b3c7,
-        type: 3}
-      propertyPath: m_problemList.Array.data[0].m_sounds.Array.data[0].m_minVolume
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3528704401901620115, guid: a545d872d7a06b7478e7668a0bd4b3c7,
-        type: 3}
-      propertyPath: m_problemList.Array.data[0].m_sounds.Array.data[0].m_reductionRate
-      value: 0.0031
-      objectReference: {fileID: 0}
-    - target: {fileID: 3528704401901620115, guid: a545d872d7a06b7478e7668a0bd4b3c7,
-        type: 3}
-      propertyPath: m_problemList.Array.data[0].m_sounds.Array.data[0].m_timeTillFade
-      value: 29
-      objectReference: {fileID: 0}
-    - target: {fileID: 3528704401901620115, guid: a545d872d7a06b7478e7668a0bd4b3c7,
-        type: 3}
-      propertyPath: m_problemList.Array.data[0].m_sounds.Array.data[0].m_spatialBlend
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3528704401901620115, guid: a545d872d7a06b7478e7668a0bd4b3c7,
-        type: 3}
-      propertyPath: m_problemList.Array.data[0].m_sounds.Array.data[0].m_requestedSounds.Array.data[0]
-      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a545d872d7a06b7478e7668a0bd4b3c7, type: 3}
@@ -9647,6 +9572,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 631767599682799284, guid: f857cdd312bba0344819d3eb13a670f5,
+        type: 3}
+      propertyPath: m_itemOffset.y
+      value: 2.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f857cdd312bba0344819d3eb13a670f5, type: 3}
 --- !u!4 &1737248624 stripped
@@ -9852,7 +9782,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 72198e9c4be22dc41a825417bd3e3dc6, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.008
+  m_Volume: 0.0025
   m_Pitch: 1.3
   Loop: 1
   Mute: 0
@@ -9896,7 +9826,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.9
       inSlope: 0
       outSlope: 0
       tangentMode: 0
