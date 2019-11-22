@@ -214,13 +214,24 @@ public class Player : MonoBehaviour
             m_animator.SetTrigger("Drop");
         }
     }
-
     public void DropComplete()
     {
         m_heldItem.m_inputSelected = false;
         m_heldItem.Drop();
         m_heldItem = null; // "drops" the item allowing the player to pick up another by setting the held to null
     }
+
+    public void OneTimeUseFix(Item a_item)
+    {
+        a_item.m_inputSelected = true;
+        m_animator.SetTrigger("Fixed");
+    }
+
+    public void OneTimeUseFixComplete()
+    {
+        Destroy(this.m_heldItem.gameObject);
+    }
+
 
     public void ThrowItem(Item a_item)
     {

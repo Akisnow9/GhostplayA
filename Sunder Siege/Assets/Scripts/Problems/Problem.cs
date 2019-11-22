@@ -20,6 +20,9 @@ public class Problem : MonoBehaviour
     // be placed in the game world on top of each other.
     //*************************************************************************************
     
+
+        // Serisously looking back this is now a giant clusterfuck.
+        // I blame the keyboard controls for it mostly.
     
     
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -51,11 +54,6 @@ public class Problem : MonoBehaviour
     private float m_timeBeforeFail; // Once this value is reached the problem will be expired and health will be lost.
 
     private int m_buttonPresses; // The counter for button presses.
-
-
-    //[SerializeField] private List<SoundRequester> m_sounds;            
-    
- 
 
     void Start()
     {
@@ -353,13 +351,16 @@ public class Problem : MonoBehaviour
                                 {
                                     m_buttonPresses++; // this has to be 
                                     Timer.SoundMangerGet().Play(item.GetSound(), WhenToPlaySound.Fix);
-                                    player.FixProblem();
+                                    if (!item.IsOneTimeUse() || m_buttonPresses < GetButtonPressesMax())
+                                        player.FixProblem();
                                 }
                             }
                             else
                             {
                                 m_buttonPresses++; // This needs to increment.
-                                player.FixProblem();
+                                Timer.SoundMangerGet().Play(item.GetSound(), WhenToPlaySound.Fix);
+                                if (!item.IsOneTimeUse() || m_buttonPresses < GetButtonPressesMax())
+                                    player.FixProblem();
                             }
                             // Get forward vector of player dot product against postion of problem? 
                             // Check if it is within the active 
@@ -370,16 +371,16 @@ public class Problem : MonoBehaviour
                                 if (item.IsRefillable())
                                 {
                                     item.UseCharge();
-                                    Timer.SoundMangerGet().Play(item.GetSound(), WhenToPlaySound.Fix);
+                                    //Timer.SoundMangerGet().Play(item.GetSound(), WhenToPlaySound.Fix);
                                     //Does math to see what plane to display.
                                 }
                                 else if (item.IsOneTimeUse())
                                 {
-                                    Timer.SoundMangerGet().Play(item.GetSound(), WhenToPlaySound.Fix);
+                                    //Timer.SoundMangerGet().Play(item.GetSound(), WhenToPlaySound.Fix);
                                     item.GetSpawner().m_spawnedItemList.Remove(item);
-                                    player.DropItem(item);                                     // Detaches the item from the palyer and vice versa
-                                    item.enabled = false;
-                                    Destroy(item.gameObject);                              // Destroys the item.
+                                    player.OneTimeUseFix(item);                               // Detaches the item from the palyer and vice versa
+                                    //item.enabled = false;
+                                    //Destroy(item.gameObject);                              // Destroys the item.
                                 }
                                 Deactivate();
                                 Timer.SolvedProblem();
@@ -398,13 +399,18 @@ public class Problem : MonoBehaviour
                                 if (item.GetCharges() > 0)
                                 {
                                     m_buttonPresses++; // this has to be 
-                                    player.FixProblem();
+                                    Timer.SoundMangerGet().Play(item.GetSound(), WhenToPlaySound.Fix);
+                                    // One time use items need to not swing on final button press.
+                                    if (!item.IsOneTimeUse() || m_buttonPresses < GetButtonPressesMax())
+                                        player.FixProblem();
                                 }
                             }
                             else
                             {
-                                m_buttonPresses++; // This needs to increment.
-                                player.FixProblem();
+                                m_buttonPresses++; // this has to be 
+                                Timer.SoundMangerGet().Play(item.GetSound(), WhenToPlaySound.Fix);
+                                if (!item.IsOneTimeUse() || m_buttonPresses < GetButtonPressesMax())
+                                    player.FixProblem();
                             }
                             // Get forward vector of player dot product against postion of problem? 
                             // Check if it is within the active 
@@ -413,19 +419,15 @@ public class Problem : MonoBehaviour
                             if (m_buttonPresses >= this.GetButtonPressesMax())
                             {
                                 if (item.IsRefillable())
-                                {
-                                    Timer.SoundMangerGet().Play(item.GetSound(), WhenToPlaySound.Fix);
+                                { 
                                     item.UseCharge();
-                                    //Does math to see what plane to display.
                                 }
                                 else if (item.IsOneTimeUse())
                                 {
-                                    Timer.SoundMangerGet().Play(item.GetSound(), WhenToPlaySound.Fix);
                                     item.GetSpawner().m_spawnedItemList.Remove(item);
-                                    player.GetAnimator().SetTrigger("Fixed");
-                                    player.DropComplete();                                     // Detaches the item from the palyer and vice versa
-                                    item.enabled = false;
-                                    Destroy(item.gameObject);                              // Destroys the item.
+                                    player.OneTimeUseFix(item);                                     // Detaches the item from the palyer and vice versa
+                                    //item.enabled = false;
+                                    //Destroy(item.gameObject);                              // Destroys the item.
                                 }
                                 Deactivate();
                                 Timer.SolvedProblem();

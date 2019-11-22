@@ -11,7 +11,10 @@ public enum E_Event
 {
     SetNumberOfLives,
     SetTimeBeforeFail,
-    TriggerProblem
+    TriggerProblem1PlayerUp,
+    TriggerProblem2PlayerUp,
+    TriggerProblem3PlayerUp,
+    TriggerProblem4PlayerUp,
 };
 
 

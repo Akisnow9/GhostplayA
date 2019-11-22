@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
+
 public class Timer : MonoBehaviour
 {
     //*************************************************************************************
@@ -54,8 +55,7 @@ public class Timer : MonoBehaviour
     private void Awake()
     {
         instance = this;
-
-
+   
 		// This needs to be re-enabled
 		Player playerClone;
 		for (int i = 0; i < Menus.GetActivatedPlayerAmount(); i++)
@@ -101,7 +101,6 @@ public class Timer : MonoBehaviour
 			SkinnedMeshRenderer thisRenderer = m_playerList[i].GetPlayerShirt().GetComponent<SkinnedMeshRenderer>();
 			thisRenderer.material = newMaterial;
 		}
-
     }
     //GameObject newObject = Instantiate();
     //GameObject.AddComponent<Events>();
@@ -109,9 +108,18 @@ public class Timer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // THIS IS WHERE I AM BRo!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //int maxNumberOfPlayers = 4; // Should be passed from the menu
+        //for (int i = maxNumberOfPlayers; i < Timer.PlayerAmountGet(); i--)
+        //{
+        //    string enm = "TriggerProblem" + i + "PlayerUp";
+        //    E_Event eve = (E_Event)E_Event.Parse(typeof(E_Event), enm, true);
 
-
-
+        //    m_pendingEventList.RemoveAll(eve);
+        //            // Need to remove events labeld TriggerProblem"i"PlayerUp
+             
+            
+        //}
         if (m_sounds != null)
             if (m_sounds.Count != 0)
             {
@@ -216,7 +224,10 @@ public class Timer : MonoBehaviour
                         case E_Event.SetTimeBeforeFail:
                             SetTimeBeforeFail(m_pendingEventList[i].m_dataToModify);
                             break;
-                        case E_Event.TriggerProblem:
+                        case E_Event.TriggerProblem1PlayerUp:
+                        case E_Event.TriggerProblem2PlayerUp:
+                        case E_Event.TriggerProblem3PlayerUp:
+                        case E_Event.TriggerProblem4PlayerUp:
                             TriggerProblem(m_pendingEventList[i]);
                             break;
                     }
