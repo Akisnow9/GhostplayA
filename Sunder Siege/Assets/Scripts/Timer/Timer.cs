@@ -108,19 +108,27 @@ public class Timer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // THIS IS WHERE I AM BRo!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        //int maxNumberOfPlayers = 4; // Should be passed from the menu
-        //for (int i = maxNumberOfPlayers; i < Timer.PlayerAmountGet(); i--)
-        //{
-        //    string enm = "TriggerProblem" + i + "PlayerUp";
-        //    E_Event eve = (E_Event)E_Event.Parse(typeof(E_Event), enm, true);
+        
+        for (int i = Menus.GetMaxNumOfPlayers() - 1; i  >= Menus.GetActivatedPlayerAmount(); i--)
+        {
+            string enm = "TriggerProblem" + (i+1) + "PlayerUp";
+            E_Event eve = (E_Event)E_Event.Parse(typeof(E_Event), enm, true);
+            for(int j = 0; j < m_pendingEventList.Count; j++)
+            {
+                if(m_pendingEventList[j].m_event == eve)
+                {
+                    m_pendingEventList.RemoveAt(j);
+                    j--;
+                }
+            }
+           
 
-        //    m_pendingEventList.RemoveAll(eve);
-        //            // Need to remove events labeld TriggerProblem"i"PlayerUp
-             
-            
-        //}
-        if (m_sounds != null)
+            //m_pendingEventList.RemoveAll(eve);
+            // Need to remove events labeld TriggerProblem"i"PlayerUp
+
+
+        }
+            if (m_sounds != null)
             if (m_sounds.Count != 0)
             {
                 foreach (SoundRequester sounds in m_sounds)

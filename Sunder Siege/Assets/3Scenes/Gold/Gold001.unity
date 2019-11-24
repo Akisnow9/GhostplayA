@@ -1272,7 +1272,7 @@ MonoBehaviour:
   m_numberofLives: 10
   m_numOfInactiveProblems: 10
   m_pendingEventList:
-  - m_event: 2
+  - m_event: 5
     m_eventTriggerTime: 177
     m_dataToModify: 0
     m_repeatable: 1
@@ -1280,6 +1280,20 @@ MonoBehaviour:
     m_minRange: 0
     m_maxRange: 0
   - m_event: 2
+    m_eventTriggerTime: 50
+    m_dataToModify: 0
+    m_repeatable: 1
+    m_repeatEvery: 8
+    m_minRange: 2
+    m_maxRange: 7
+  - m_event: 4
+    m_eventTriggerTime: 50
+    m_dataToModify: 0
+    m_repeatable: 1
+    m_repeatEvery: 8
+    m_minRange: 2
+    m_maxRange: 7
+  - m_event: 3
     m_eventTriggerTime: 50
     m_dataToModify: 0
     m_repeatable: 1
