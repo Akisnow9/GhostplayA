@@ -24,6 +24,10 @@ public class PlayerAdd : MonoBehaviour
 
 	[Header("Drag the UI that will appear once a player joins here")]
 	[SerializeField] private GameObject m_confirmUI;                // Store the confirmation text as a game object
+	public GameObject m_PlayerAddMenu;                 // GameObject storing the Player Add Menu for deactiving/activating
+	public GameObject m_loadingMenu;                      // GameObject storing the Main Menu for deactiving/activating
+
+	private bool m_isLoading = false;
 
 	/*** Variables that store Player base data ***/
 	/*********************************************/
@@ -76,6 +80,11 @@ public class PlayerAdd : MonoBehaviour
 	//		  Handles adding players to the game and starting the game
 	private void Update()
 	{
+		if (m_isLoading)
+		{
+			return;
+		}
+
 		// Add players to the game
 		AddPlayer();
 
@@ -106,7 +115,16 @@ public class PlayerAdd : MonoBehaviour
 					// Check for the players input
 					if (XCI.GetButtonDown(XboxButton.Start, controller))
 					{
-						Menus.StartGame();
+						m_PlayerAddMenu.SetActive(false);
+						m_loadingMenu.SetActive(true);
+
+						for (int j = 0; j < m_listOfUI.Count; j++)
+						{
+							Destroy(m_listOfUI[j]);
+							Destroy(m_readyPlayers[j]);
+						}
+
+						gameObject.GetComponent<PlayerAdd>().enabled = false;
 					}
 				}
 
