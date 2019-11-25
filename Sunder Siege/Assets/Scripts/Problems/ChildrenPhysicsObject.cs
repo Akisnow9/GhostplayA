@@ -15,7 +15,7 @@ public class ChildrenPhysicsObject : MonoBehaviour
     {
         if (m_active) // Safety in case not assagined before 1st update
             if (m_timeToDissapear > Timer.TimeGet())
-                if (this.transform.localScale.x >= 0) // Compares time
+                if (this.transform.localScale.x >= 0.1f) // Compares time
                 {
                     // Every frame shrink if 0 destroy object
                     this.transform.localScale -= new Vector3(m_scaleSpeed, m_scaleSpeed, m_scaleSpeed);

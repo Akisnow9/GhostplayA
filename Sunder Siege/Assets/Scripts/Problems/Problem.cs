@@ -53,6 +53,8 @@ public class Problem : MonoBehaviour
     private bool m_isActive = false; // Is the problem active or inactive. Can be used to trigger other events like ui or particle effects.
     private float m_timeBeforeFail; // Once this value is reached the problem will be expired and health will be lost.
 
+    private float m_lastActice;
+
     private int m_buttonPresses; // The counter for button presses.
 
     void Start()
@@ -113,6 +115,11 @@ public class Problem : MonoBehaviour
     {
         // Returns if the problem is active or not.
         return m_isActive;
+    }
+
+    public void SetActive(bool a_bool)
+    {
+        m_isActive = false;
     }
 
     public bool GetPending()
@@ -242,6 +249,10 @@ public class Problem : MonoBehaviour
 
     public void Deactivate()
     {
+        if (m_indicator != null)
+            Destroy(m_indicator.gameObject);
+        else
+            Debug.Log("This dude is having trouble yo " + this.m_currentProblem.GetName() + " on " + this.name.ToString());
         if (m_currentProblem.GetPhsyicsObject() != null)
         {
             m_currentProblem.GetPhsyicsObject().ResetToStartPosition();
@@ -256,7 +267,9 @@ public class Problem : MonoBehaviour
                 }
                 m_currentParticle.Clear();
             }
-
+        
+        m_ui.gameObject.SetActive(false);
+        m_ui.ResetSprites();
         // Success case
         if (m_buttonPresses >= m_currentProblem.GetMaxButtonPresses())
         {
@@ -294,17 +307,10 @@ public class Problem : MonoBehaviour
                 }
                 m_currentParticle.Clear();
             }
-            m_ui.gameObject.SetActive(false);
-            m_ui.ResetSprites();
-            m_isActive = false;
-        if (m_currentProblem.GetProblemIndicator() != null)
-        {
-            Destroy(m_indicator.gameObject);
-        }
-        else
-        {
-            Debug.Log("Problem named " + m_currentProblem.GetName() + " has not been asaigned a ui element. Can be found in problem list of " + this.name);
-        }
+        //if (m_currentProblem.GetProblemIndicator() != null)
+        //{
+        //}
+        
         if (m_currentProblem.GetAnimationController() == null)
         {
             ModelSwap();
@@ -313,6 +319,8 @@ public class Problem : MonoBehaviour
         {
             m_currentProblem.GetAnimationController().SetTrigger("EndAnimation");
         }
+           
+            m_isActive = false;
         
     }
 

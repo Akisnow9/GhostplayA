@@ -39,7 +39,7 @@ public class Timer : MonoBehaviour
 
     private float m_timeScale = 1; // This can be used to modify the rate of seconds passing also movement speed and animation. Useful if people want to include a slowdown effect but needs to be included in everything that is effected. Eg movement/ animation will need to be multiplied by this all the time.
 
-    [HideInInspector]
+    //[HideInInspector]
     [SerializeField] private int m_numOfInactiveProblems; // The amount of problems in the list that are inactive. Easier then checking every inactive amounts in list.
 
     //[HideInInspector]
@@ -142,7 +142,7 @@ public class Timer : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         CheckEventsLists();
         if (CheckProblems()) // Returns true if fail state reached. Either timer hit 0 or lives hit 0.
@@ -297,15 +297,18 @@ public class Timer : MonoBehaviour
 
     void TriggerProblem(Events a_events)
     {
-        if (m_numOfInactiveProblems > 0)
+        if (m_numOfInactiveProblems != 0)
         {
             int position = Random.Range(0, m_numOfInactiveProblems);
-            m_numOfInactiveProblems--;                                                  // Variable keeping track of inactive problems is adjusted.
-            m_problemList[position].Pending();
-            // m_problemList[position].Activate(m_timeLimit - m_timeBeforeFail);           // May need to be changed to pending -- The rest just makes sure it is not rolled again.
-            Problem addtoback = m_problemList[position];                                // Copies what is in the now activated location.
-            m_problemList.Remove(m_problemList[position]);                              // Removes the original problem from the list.
-            m_problemList.Insert(m_problemList.Count, addtoback);
+            if (!m_problemList[position].GetActive())
+            {
+                m_numOfInactiveProblems--;                                                  // Variable keeping track of inactive problems is adjusted.
+                m_problemList[position].Pending();
+                // m_problemList[position].Activate(m_timeLimit - m_timeBeforeFail);           // May need to be changed to pending -- The rest just makes sure it is not rolled again.
+                Problem addtoback = m_problemList[position];                                // Copies what is in the now activated location.
+                m_problemList.Remove(m_problemList[position]);                              // Removes the original problem from the list.
+                m_problemList.Insert(m_problemList.Count, addtoback);
+            }
         }                                                                               // Adds the copied data to the end of the list.
     }
 

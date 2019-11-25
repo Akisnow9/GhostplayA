@@ -27,7 +27,7 @@ public class ProblemIndicator : MonoBehaviour
     {
         m_startScale = this.transform.localScale.x;
     }
-    void Update()
+    void LateUpdate()
     {
         this.transform.LookAt(Camera.main.transform);
 

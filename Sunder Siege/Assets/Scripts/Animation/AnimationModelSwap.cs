@@ -8,5 +8,6 @@ public class AnimationModelSwap : StateMachineBehaviour
     {
         Debug.Log("Anim exit");
         animator.gameObject.GetComponent<Reference>().m_reference.GetComponent<Problem>().ModelSwap(); // What the fuck is this shit seriously.
+        //animator.gameObject.GetComponent<Reference>().m_reference.GetComponent<Problem>().SetActive(false);
     }
 }

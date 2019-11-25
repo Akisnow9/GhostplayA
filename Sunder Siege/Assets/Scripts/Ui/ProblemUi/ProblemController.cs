@@ -44,7 +44,7 @@ public class ProblemController : MonoBehaviour
         ResetSprites();   // Activate and deactivate all peices of ui
     }
    
-    void Update()
+    void LateUpdate()
     {
         this.transform.LookAt(Camera.main.transform); // Currently shows back of sprite rather then front
         this.transform.Rotate(0, 180, 0); // Look at seems to look exactley away. Could be a problem with the prefab.
