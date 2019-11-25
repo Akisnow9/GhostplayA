@@ -1276,28 +1276,28 @@ MonoBehaviour:
     m_eventTriggerTime: 177
     m_dataToModify: 0
     m_repeatable: 1
-    m_repeatEvery: 4
+    m_repeatEvery: 2
     m_minRange: 0
     m_maxRange: 0
   - m_event: 4
     m_eventTriggerTime: 177
     m_dataToModify: 0
     m_repeatable: 1
-    m_repeatEvery: 6
+    m_repeatEvery: 4
     m_minRange: 2
     m_maxRange: 7
   - m_event: 3
     m_eventTriggerTime: 177
     m_dataToModify: 0
     m_repeatable: 1
-    m_repeatEvery: 8
+    m_repeatEvery: 6
     m_minRange: 2
     m_maxRange: 8
   - m_event: 2
     m_eventTriggerTime: 177
     m_dataToModify: 0
     m_repeatable: 1
-    m_repeatEvery: 8
+    m_repeatEvery: 6
     m_minRange: 2
     m_maxRange: 8
   m_problemList:
