@@ -14,7 +14,7 @@ public class ProblemIndicator : MonoBehaviour
     private float m_lastPulse;
 
     private float m_max = 0.030f;
-    private float m_steps = 0.001f;
+    private float m_steps = 0.1f;
 
     private float m_startScale;
 
@@ -53,7 +53,7 @@ public class ProblemIndicator : MonoBehaviour
         if(m_maxReached)
         {
             // Scales Vector down.
-            this.transform.localScale = this.transform.localScale - new Vector3(m_steps, m_steps, m_steps);
+            this.transform.localScale = this.transform.localScale - new Vector3(m_steps * Time.deltaTime, m_steps * Time.deltaTime, m_steps * Time.deltaTime);
             if(this.transform.localScale.x <= m_startScale)
             {
                 this.transform.localScale = new Vector3(m_startScale, m_startScale, m_startScale);
@@ -65,7 +65,7 @@ public class ProblemIndicator : MonoBehaviour
         }
         else
         {
-            this.transform.localScale = this.transform.localScale + new Vector3(m_steps, m_steps, m_steps);
+            this.transform.localScale = this.transform.localScale + new Vector3(m_steps * Time.deltaTime, m_steps * Time.deltaTime, m_steps * Time.deltaTime);
              if(this.transform.localScale.x >= m_max)
             {
                 m_maxReached = true;

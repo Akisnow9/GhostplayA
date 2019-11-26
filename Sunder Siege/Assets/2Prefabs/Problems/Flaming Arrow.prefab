@@ -105,7 +105,7 @@ MonoBehaviour:
     m_maxVolume: 0.214
     m_increaseRate: 0.0027
     m_sequence: 0
-    m_fadeOut: 1
+    m_fadeOut: 0
     m_minVolume: 0
     m_reductionRate: 0.00256
     m_timeTillFade: 1
@@ -125,6 +125,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Fire
+      objectReference: {fileID: 0}
+    - target: {fileID: 9162334828772078918, guid: 96fbe875704130c49b4ab39fa4f63a0b,
+        type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 0.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 9162334828772078918, guid: 96fbe875704130c49b4ab39fa4f63a0b,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 2.59
       objectReference: {fileID: 0}
     - target: {fileID: 9162334828772078919, guid: 96fbe875704130c49b4ab39fa4f63a0b,
         type: 3}
@@ -180,16 +190,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9162334828772078918, guid: 96fbe875704130c49b4ab39fa4f63a0b,
-        type: 3}
-      propertyPath: InitialModule.startSize.minScalar
-      value: 0.11
-      objectReference: {fileID: 0}
-    - target: {fileID: 9162334828772078918, guid: 96fbe875704130c49b4ab39fa4f63a0b,
-        type: 3}
-      propertyPath: InitialModule.startSize.scalar
-      value: 2.59
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96fbe875704130c49b4ab39fa4f63a0b, type: 3}

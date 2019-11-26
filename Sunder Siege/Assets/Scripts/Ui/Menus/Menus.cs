@@ -22,6 +22,7 @@ public class Menus : MonoBehaviour
 													   // modify difficulty
 
 	public GameObject m_MainMenu;					   // GameObject storing the Main Menu for deactiving/activating
+    public GameObject m_creditsMenu;
 	public GameObject m_PlayerAddMenu;                 // GameObject storing the Player Add Menu for deactiving/activating
 
 	private static bool didQueryNumOfCtrlrs = false;   // Used for querying the number of controllers are plugged into the system
@@ -86,6 +87,8 @@ public class Menus : MonoBehaviour
 		{
 			QuitGame();
 		}
+
+        ReturnToMenu();
 	}
 
 	//*************************************************************************************
@@ -96,6 +99,28 @@ public class Menus : MonoBehaviour
 	{
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 	}
+
+    public void CreditsDisplay()
+    {
+        m_MainMenu.SetActive(false);
+        m_creditsMenu.SetActive(true);
+    }
+
+    public void ReturnToMenu()
+    {
+        XboxController controller = XboxController.First;
+        for (int i = 0; i < Menus.GetMaxNumOfPlayers(); i++)
+        {
+            if (XCI.GetButtonDown(XboxButton.Back, controller) || XCI.GetButtonDown(XboxButton.B, controller))
+            {
+                m_creditsMenu.SetActive(false);
+                m_MainMenu.SetActive(true);
+            }
+
+            controller++;
+        }
+
+    }
 
 	// @brief When called, the application will quit
 	public void QuitGame()

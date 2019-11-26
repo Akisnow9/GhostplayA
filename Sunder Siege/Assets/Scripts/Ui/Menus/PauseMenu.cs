@@ -7,6 +7,7 @@ using XboxCtrlrInput;
 public class PauseMenu : MonoBehaviour
 {
 	private bool m_gameIsPaused;
+    private XboxController m_playerWhoPaused;
 	[SerializeField] private GameObject m_pauseMenuUI;
 	[SerializeField] private List<GameObject> m_playerPaused;
 
@@ -19,12 +20,13 @@ public class PauseMenu : MonoBehaviour
 
 			if (XCI.GetButtonDown(XboxButton.Start, player.Controller))
 			{
-				if (m_gameIsPaused)
+				if (m_gameIsPaused && m_playerWhoPaused == player.Controller)
 				{
 					Resume();
 				}
-				else
+				else if (!m_gameIsPaused)
 				{
+                    m_playerWhoPaused = player.Controller;
 					Pause(player.Player);
 				}
 			}

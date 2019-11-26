@@ -20,8 +20,8 @@ public class SceneLoader : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		Debug.Log("Waiting " + m_waiting);
-		Debug.Log("Time " + Time.time);
+		//Debug.Log("Waiting " + m_waiting);
+		//Debug.Log("Time " + Time.time);
 		if (m_waiting < Time.time)
 		{
 			m_imageToDisplay.SetActive(true);

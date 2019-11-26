@@ -25,7 +25,7 @@ public class Projectile : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         if (m_sounds.Count != 0)
             Timer.SoundMangerGet().CheckAudio(m_sounds);

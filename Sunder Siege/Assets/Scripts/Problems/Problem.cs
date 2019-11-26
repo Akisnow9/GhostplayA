@@ -165,7 +165,7 @@ public class Problem : MonoBehaviour
     {
         // Will need a complete revamp due to animator and coutines.
 
-
+        if(m_currentProblem != null)
         if (m_currentProblem.GetBreakParticleEffect() != null)
         {
             if (m_currentProblem.GetBreakParticleEffect().Count != 0)
@@ -346,6 +346,8 @@ public class Problem : MonoBehaviour
             if (player.GetItem() != null)
             {
                 Item item = player.GetItem();
+                if (item == null)
+                    Debug.Log("Break");
                 //XboxController controller = m_playerList[i].controller;
                 if(Timer.GetKeyBoard())
                 {

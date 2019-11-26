@@ -109,10 +109,13 @@ public class Timer : MonoBehaviour
     void Start()
     {
         
-        for (int i = Menus.GetMaxNumOfPlayers() - 1; i  >= Menus.GetActivatedPlayerAmount(); i--)
+        for (int i = 0;  i  < Menus.GetMaxNumOfPlayers(); i++)
         {
+            // Checsk if one player first.
             string enm = "TriggerProblem" + (i+1) + "PlayerUp";
+            // Turn into an enum
             E_Event eve = (E_Event)E_Event.Parse(typeof(E_Event), enm, true);
+            if(Menus.GetActivatedPlayerAmount() != i + 1)
             for(int j = 0; j < m_pendingEventList.Count; j++)
             {
                 if(m_pendingEventList[j].m_event == eve)

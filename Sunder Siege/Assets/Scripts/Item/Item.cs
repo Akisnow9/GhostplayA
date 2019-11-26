@@ -284,8 +284,8 @@ public class Item : MonoBehaviour
 		if (Physics.Raycast(forwardRay, out hit))
 		{
 			// Under 1.0 is generally too close to the wall
-			Debug.DrawRay(rayPosition, transform.forward, Color.black, 10f);
-			Debug.Log("Hit distance: " + hit.distance);
+			//Debug.DrawRay(rayPosition, transform.forward, Color.black, 10f);
+			// Debug.Log("Hit distance: " + hit.distance);
 
 			if (hit.distance < 1.0)
 			{
